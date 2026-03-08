@@ -4,18 +4,34 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Générateur de Fiches Pédagogiques</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-  body {
-    background: #faf7f2;
-    font-family: Georgia, serif;
-    min-height: 100vh;
+  :root {
+    --vert: #1a6b3c;
+    --vert-fonce: #0f4a2a;
+    --vert-clair: #e8f5ee;
+    --or: #c9922a;
+    --or-clair: #fef3e0;
+    --rouge: #c0392b;
+    --texte: #1a1a1a;
+    --gris: #6b7280;
+    --bord: #e5e0d8;
+    --bg: #faf7f2;
   }
 
+  body {
+    background: var(--bg);
+    font-family: 'Source Serif 4', Georgia, serif;
+    min-height: 100vh;
+    color: var(--texte);
+  }
+
+  /* ── HEADER ── */
   .header {
-    background: linear-gradient(135deg, #1a6b3c 0%, #0f4a2a 100%);
-    padding: 28px 20px 24px;
+    background: linear-gradient(135deg, var(--vert) 0%, var(--vert-fonce) 100%);
+    padding: 32px 20px 28px;
     text-align: center;
     position: relative;
     overflow: hidden;
@@ -24,164 +40,315 @@
     content: '';
     position: absolute;
     inset: 0;
-    opacity: 0.06;
-    background: repeating-linear-gradient(90deg,#1a6b3c 0%,#1a6b3c 33%,#ffd700 33%,#ffd700 66%,#c0392b 66%,#c0392b 100%);
+    opacity: 0.07;
+    background: repeating-linear-gradient(90deg,
+      #1a6b3c 0%, #1a6b3c 33.33%,
+      #ffd700 33.33%, #ffd700 66.66%,
+      #c0392b 66.66%, #c0392b 100%
+    );
   }
   .badge {
     display: inline-block;
-    background: #c9922a;
+    background: var(--or);
     color: #fff;
-    font-size: 11px;
-    padding: 3px 14px;
+    font-size: 10px;
+    padding: 4px 16px;
     border-radius: 20px;
-    margin-bottom: 10px;
-    letter-spacing: 1px;
+    margin-bottom: 12px;
+    letter-spacing: 1.5px;
     text-transform: uppercase;
+    font-family: 'Source Serif 4', serif;
     position: relative;
   }
   .header h1 {
+    font-family: 'Playfair Display', serif;
     color: #fff;
-    font-size: clamp(18px, 5vw, 30px);
+    font-size: clamp(20px, 5vw, 32px);
     font-weight: 700;
-    margin-bottom: 6px;
+    margin-bottom: 8px;
     position: relative;
+    letter-spacing: -0.3px;
   }
   .header p {
-    color: rgba(255,255,255,0.75);
+    color: rgba(255,255,255,0.72);
     font-size: 13px;
     font-style: italic;
     position: relative;
+    font-weight: 300;
   }
 
-  .container { max-width: 720px; margin: 0 auto; padding: 24px 16px 60px; }
+  /* ── LAYOUT ── */
+  .container { max-width: 740px; margin: 0 auto; padding: 28px 16px 80px; }
 
   .card {
     background: #fff;
-    border: 1px solid #e5e0d8;
-    border-radius: 12px;
-    padding: 22px;
+    border: 1px solid var(--bord);
+    border-radius: 14px;
+    padding: 24px;
     margin-bottom: 18px;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    animation: fadeUp 0.3s ease both;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
   }
 
   .step-header {
     display: flex;
     align-items: center;
-    gap: 12px;
-    margin-bottom: 16px;
+    gap: 14px;
+    margin-bottom: 18px;
   }
   .step-num {
-    width: 30px; height: 30px;
+    width: 32px; height: 32px;
     border-radius: 50%;
-    background: #1a6b3c;
+    background: var(--vert);
     color: #fff;
     display: flex; align-items: center; justify-content: center;
-    font-weight: 700; font-size: 14px;
+    font-family: 'Playfair Display', serif;
+    font-weight: 700; font-size: 15px;
     flex-shrink: 0;
   }
-  .step-title { font-size: 16px; font-weight: 700; color: #1a1a1a; }
+  .step-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--texte);
+  }
 
-  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+  /* ── GRILLES DE BOUTONS ── */
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 10px; }
 
   .opt-btn {
-    padding: 12px 12px;
-    border-radius: 8px;
-    border: 2px solid #e5e0d8;
+    padding: 13px 14px;
+    border-radius: 10px;
+    border: 2px solid var(--bord);
     background: #fff;
     cursor: pointer;
     text-align: left;
     font-size: 13px;
-    font-family: Georgia, serif;
-    color: #6b7280;
-    font-weight: 500;
+    font-family: 'Source Serif 4', Georgia, serif;
+    color: var(--gris);
+    font-weight: 400;
     transition: all 0.15s;
     width: 100%;
+    line-height: 1.4;
   }
+  .opt-btn:hover { border-color: #aaa; color: var(--texte); }
   .opt-btn.active-green {
-    border-color: #1a6b3c;
-    background: #e8f5ee;
-    color: #1a6b3c;
-    font-weight: 700;
+    border-color: var(--vert);
+    background: var(--vert-clair);
+    color: var(--vert);
+    font-weight: 600;
   }
   .opt-btn.active-gold {
-    border-color: #c9922a;
-    background: #fef3e0;
-    color: #c9922a;
-    font-weight: 700;
+    border-color: var(--or);
+    background: var(--or-clair);
+    color: var(--or);
+    font-weight: 600;
   }
-  .opt-btn:hover { border-color: #aaa; }
-  .opt-sub { font-size: 11px; margin-top: 3px; opacity: 0.7; }
+  .opt-sub { font-size: 11px; margin-top: 3px; opacity: 0.65; font-style: italic; }
 
-  .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
-  label.lbl { font-size: 11px; font-weight: 700; color: #6b7280; display: block; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
-  select {
-    width: 100%; padding: 10px 12px;
-    border-radius: 8px; border: 1px solid #e5e0d8;
-    font-size: 14px; font-family: Georgia, serif;
-    outline: none; background: #fff; color: #1a1a1a;
+  /* ── PARAMS ── */
+  .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 16px; }
+  @media (max-width: 480px) { .row2 { grid-template-columns: 1fr; } }
+
+  label.lbl {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--gris);
+    display: block;
+    margin-bottom: 7px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
   }
+  select {
+    width: 100%; padding: 11px 12px;
+    border-radius: 8px; border: 1px solid var(--bord);
+    font-size: 14px; font-family: 'Source Serif 4', Georgia, serif;
+    outline: none; background: #fff; color: var(--texte);
+    transition: border-color 0.15s;
+  }
+  select:focus { border-color: var(--vert); }
 
   .info-box {
-    background: #e8f5ee;
+    background: var(--vert-clair);
+    border-left: 3px solid var(--vert);
     border-radius: 8px;
-    padding: 14px;
+    padding: 14px 16px;
     font-size: 13px;
-    color: #1a6b3c;
-    margin-bottom: 14px;
-    line-height: 1.6;
+    color: var(--vert-fonce);
+    margin-bottom: 18px;
+    line-height: 1.65;
   }
-  .info-box strong { display: block; margin-bottom: 4px; }
+  .info-box strong { display: block; margin-bottom: 5px; font-family: 'Playfair Display', serif; font-size: 14px; }
 
+  /* ── BOUTON GÉNÉRER ── */
   .btn-generate {
     width: 100%; padding: 16px;
     border-radius: 10px; border: none;
-    background: linear-gradient(135deg, #1a6b3c, #0f4a2a);
-    color: #fff; font-size: 16px; font-weight: 700;
-    cursor: pointer; font-family: Georgia, serif;
-    letter-spacing: 0.5px;
-    transition: opacity 0.2s;
+    background: linear-gradient(135deg, var(--vert), var(--vert-fonce));
+    color: #fff; font-size: 15px; font-weight: 600;
+    cursor: pointer; font-family: 'Playfair Display', serif;
+    letter-spacing: 0.3px;
+    transition: opacity 0.2s, transform 0.1s;
   }
-  .btn-generate:disabled { background: #aaa; cursor: not-allowed; }
-  .btn-generate:hover:not(:disabled) { opacity: 0.9; }
+  .btn-generate:hover { opacity: 0.9; transform: translateY(-1px); }
+  .btn-generate:active { transform: translateY(0); }
+  .btn-generate:disabled { background: #aaa; cursor: not-allowed; transform: none; }
 
-  .result-box {
-    background: #f9fffe;
-    border: 1px solid #b8e0cc;
-    border-radius: 10px;
-    padding: 20px;
-    white-space: pre-wrap;
-    line-height: 1.8;
-    font-size: 14px;
-    color: #1a1a1a;
-    max-height: 500px;
-    overflow-y: auto;
-    margin-top: 14px;
-  }
-
-  .btn-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 14px; }
-  .btn-small {
-    padding: 8px 16px;
-    border-radius: 6px;
-    border: 1px solid #e5e0d8;
+  /* ── RÉSULTAT ── */
+  .result-card {
     background: #fff;
-    cursor: pointer;
-    font-size: 13px;
-    font-family: Georgia, serif;
+    border: 1px solid var(--bord);
+    border-radius: 14px;
+    padding: 0;
+    margin-bottom: 18px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    overflow: hidden;
+    animation: fadeUp 0.4s ease both;
   }
-  .btn-small:hover { background: #f5f5f5; }
-
-  .hidden { display: none; }
-
-  .loader {
-    text-align: center;
-    padding: 40px 0;
-    color: #1a6b3c;
+  .result-header {
+    background: linear-gradient(135deg, var(--vert), var(--vert-fonce));
+    padding: 18px 24px;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 12px;
+  }
+  .result-title {
+    font-family: 'Playfair Display', serif;
+    color: #fff;
     font-size: 16px;
-    font-weight: 700;
+    font-weight: 600;
   }
-  .loader-sub { color: #6b7280; font-size: 13px; margin-top: 6px; }
+  .btn-row { display: flex; gap: 8px; flex-wrap: wrap; }
+  .btn-small {
+    padding: 7px 14px;
+    border-radius: 6px;
+    border: 1px solid rgba(255,255,255,0.4);
+    background: rgba(255,255,255,0.15);
+    color: #fff;
+    cursor: pointer;
+    font-size: 12px;
+    font-family: 'Source Serif 4', serif;
+    transition: background 0.15s;
+  }
+  .btn-small:hover { background: rgba(255,255,255,0.25); }
 
-  #step2-card, #step3-card, #result-card { display: none; }
+  .fiche-content {
+    padding: 28px;
+    line-height: 1.85;
+    font-size: 14px;
+    color: var(--texte);
+    max-height: 600px;
+    overflow-y: auto;
+  }
+  .fiche-content h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    color: var(--vert-fonce);
+    border-bottom: 2px solid var(--vert-clair);
+    padding-bottom: 8px;
+    margin-bottom: 16px;
+  }
+  .fiche-content h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 14px;
+    color: var(--or);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 20px 0 8px;
+  }
+  .fiche-content .meta-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+  .fiche-content .meta-item {
+    background: var(--bg);
+    border: 1px solid var(--bord);
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 12px;
+  }
+  .fiche-content .meta-item span {
+    display: block;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--gris);
+    margin-bottom: 3px;
+  }
+  .fiche-content .meta-item strong { font-size: 13px; color: var(--texte); }
+
+  .phase-block {
+    border: 1px solid var(--bord);
+    border-radius: 10px;
+    margin-bottom: 14px;
+    overflow: hidden;
+  }
+  .phase-title {
+    background: var(--vert-clair);
+    padding: 10px 16px;
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--vert-fonce);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .phase-body { padding: 14px 16px; font-size: 13px; line-height: 1.8; }
+
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border-top: 1px solid var(--bord);
+  }
+  .two-col > div { padding: 12px 14px; font-size: 12px; line-height: 1.7; }
+  .two-col > div:first-child { border-right: 1px solid var(--bord); }
+  .two-col .col-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--gris);
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+
+  .qcm-item {
+    border: 1px solid var(--bord);
+    border-radius: 8px;
+    padding: 14px;
+    margin-bottom: 10px;
+  }
+  .qcm-item .q { font-weight: 600; margin-bottom: 8px; color: var(--vert-fonce); }
+  .qcm-item .opts label { display: block; padding: 4px 0; font-size: 13px; }
+  .qcm-item .reponse {
+    margin-top: 8px;
+    font-size: 12px;
+    color: var(--vert);
+    font-style: italic;
+    padding-top: 8px;
+    border-top: 1px dashed var(--bord);
+  }
+
+  .exo-item {
+    border-left: 3px solid var(--or);
+    padding: 10px 14px;
+    margin-bottom: 12px;
+    background: var(--or-clair);
+    border-radius: 0 8px 8px 0;
+    font-size: 13px;
+    line-height: 1.7;
+  }
+  .exo-num { font-weight: 700; color: var(--or); margin-bottom: 4px; }
+
+  .hidden { display: none !important; }
+
+  .loader { text-align: center; padding: 40px 0; color: var(--vert); }
+  .loader-text { font-family: 'Playfair Display', serif; font-size: 17px; margin-bottom: 8px; }
+  .loader-sub { color: var(--gris); font-size: 13px; font-style: italic; }
 </style>
 </head>
 <body>
@@ -197,7 +364,7 @@
   <!-- Chargement -->
   <div id="loading-card" class="card">
     <div class="loader">
-      📚 Chargement du Miroir…
+      <div class="loader-text">📚 Chargement du Miroir…</div>
       <div class="loader-sub">Connexion à GitHub en cours</div>
     </div>
   </div>
@@ -212,7 +379,7 @@
   </div>
 
   <!-- Étape 2 : Discipline -->
-  <div id="step2-card" class="card">
+  <div id="step2-card" class="card hidden">
     <div class="step-header">
       <div class="step-num">2</div>
       <div class="step-title">Choisir la discipline</div>
@@ -221,11 +388,26 @@
   </div>
 
   <!-- Étape 3 : Paramètres -->
-  <div id="step3-card" class="card">
+  <div id="step3-card" class="card hidden">
     <div class="step-header">
       <div class="step-num">3</div>
-      <div class="step-title">Paramètres</div>
+      <div class="step-title">Paramètres de la fiche</div>
     </div>
+
+    <div style="margin-bottom:14px">
+      <label class="lbl">Titre de la leçon <span style="color:var(--rouge)">*</span></label>
+      <input type="text" id="lecon-input"
+        placeholder="Ex : Complément d'objet direct, Addition avec retenue, La phrase…"
+        style="width:100%;padding:12px 14px;border-radius:8px;border:2px solid var(--bord);
+               font-size:14px;font-family:'Source Serif 4',Georgia,serif;outline:none;
+               transition:border-color 0.15s;color:var(--texte);background:#fff"
+        oninput="this.style.borderColor = this.value.trim() ? 'var(--vert)' : 'var(--bord)'"
+      />
+      <div style="font-size:11px;color:var(--gris);margin-top:5px;font-style:italic">
+        Tapez le nom exact de la leçon que vous souhaitez — Gemini générera une fiche spécifique.
+      </div>
+    </div>
+
     <div class="row2">
       <div>
         <label class="lbl">Niveau</label>
@@ -252,45 +434,50 @@
   </div>
 
   <!-- Résultat -->
-  <div id="result-card" class="card">
-    <div class="step-header">
-      <div class="step-num">✓</div>
-      <div class="step-title">Fiche générée</div>
+  <div id="result-card" class="result-card hidden">
+    <div class="result-header">
+      <div class="result-title">✓ Fiche générée</div>
+      <div class="btn-row">
+        <button class="btn-small" onclick="copyResult()">📋 Copier le texte</button>
+        <button class="btn-small" onclick="printResult()">🖨️ Imprimer</button>
+        <button class="btn-small" onclick="resetAll()">🔄 Nouvelle fiche</button>
+      </div>
     </div>
-    <div class="btn-row">
-      <button class="btn-small" onclick="copyResult()">📋 Copier</button>
-      <button class="btn-small" onclick="resetAll()">🔄 Nouvelle fiche</button>
-    </div>
-    <div id="result-content" class="result-box"></div>
+    <div id="result-content" class="fiche-content"></div>
   </div>
 
 </div>
 
 <script>
 const JSON_URL = "https://raw.githubusercontent.com/ndiayejoseph123-code/Mirass/main/miroir_assane_ndiaye.json";
+const GEMINI_KEY = "AIzaSyBn_TTzyGnw38BZEBU0pp0wp-4IMFBF3kk";
+const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_KEY}`;
 const ICONS = { langue_communication: "📖", mathematiques: "🔢", esvs: "🌍", epsa: "🎨" };
 
 let mirData = null;
 let selectedDomaine = null;
 let selectedDiscipline = null;
+let ficheTexte = "";
 
-// Chargement du JSON
+// ── Chargement JSON ──
 fetch(JSON_URL)
-  .then(r => r.json())
+  .then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
   .then(d => {
     mirData = d;
     document.getElementById("loading-card").classList.add("hidden");
     buildDomainesGrid();
     document.getElementById("step1-card").classList.remove("hidden");
   })
-  .catch(() => {
+  .catch(err => {
     document.getElementById("loading-card").innerHTML = `
       <div style="text-align:center;color:#b03020;padding:30px">
-        ⚠️ Impossible de charger les données depuis GitHub.<br>
-        <small style="color:#888">Vérifiez votre connexion internet.</small>
+        <div style="font-size:32px;margin-bottom:12px">⚠️</div>
+        <div style="font-family:'Playfair Display',serif;font-size:16px;margin-bottom:8px">Impossible de charger les données</div>
+        <small style="color:#888">Vérifiez votre connexion internet et rechargez la page.</small>
       </div>`;
   });
 
+// ── Grille domaines ──
 function buildDomainesGrid() {
   const grid = document.getElementById("domaines-grid");
   grid.innerHTML = "";
@@ -315,14 +502,14 @@ function selectDomaine(id, btn) {
   domaine.disciplines.forEach(d => {
     const b = document.createElement("button");
     b.className = "opt-btn";
-    b.innerHTML = d.nom + (d.duree ? `<div class="opt-sub">${d.duree}</div>` : "");
+    b.innerHTML = d.nom + (d.duree ? `<div class="opt-sub">⏱ ${d.duree}</div>` : "");
     b.onclick = () => selectDiscipline(d.id, b);
     grid.appendChild(b);
   });
 
-  document.getElementById("step2-card").style.display = "block";
-  document.getElementById("step3-card").style.display = "none";
-  document.getElementById("result-card").style.display = "none";
+  document.getElementById("step2-card").classList.remove("hidden");
+  document.getElementById("step3-card").classList.add("hidden");
+  document.getElementById("result-card").classList.add("hidden");
   document.getElementById("disc-info").classList.add("hidden");
 }
 
@@ -336,14 +523,18 @@ function selectDiscipline(id, btn) {
 
   const infoBox = document.getElementById("disc-info");
   let html = `<strong>📋 ${disc.nom}</strong>`;
-  if (disc.phases) html += `<div style="margin-top:4px;opacity:0.8">Phases : ${disc.phases.join(" → ")}</div>`;
-  if (disc.CB) html += `<div style="margin-top:4px;opacity:0.7;font-size:12px">CB : ${disc.CB.substring(0, 130)}…</div>`;
+  if (disc.phases) html += `<div style="margin-top:5px;opacity:0.85">Phases : <em>${disc.phases.join(" → ")}</em></div>`;
+  if (disc.CB) html += `<div style="margin-top:5px;opacity:0.75;font-size:12px">CB : ${disc.CB.substring(0, 150)}…</div>`;
   infoBox.innerHTML = html;
   infoBox.classList.remove("hidden");
 
-  document.getElementById("step3-card").style.display = "block";
-  document.getElementById("result-card").style.display = "none";
+  document.getElementById("step3-card").classList.remove("hidden");
+  document.getElementById("result-card").classList.add("hidden");
 }
+
+// ═══════════════════════════════════════════════════════
+// ── GÉNÉRATION VIA GEMINI ──
+// ═══════════════════════════════════════════════════════
 
 async function generateFiche() {
   if (!selectedDomaine || !selectedDiscipline) return;
@@ -353,86 +544,152 @@ async function generateFiche() {
   btn.textContent = "⏳ Génération en cours…";
 
   const domaine = mirData.domaines.find(d => d.id === selectedDomaine);
-  const disc = domaine.disciplines.find(d => d.id === selectedDiscipline);
-  const niveau = document.getElementById("niveau-select").value;
+  const disc    = domaine.disciplines.find(d => d.id === selectedDiscipline);
+  const niveau  = document.getElementById("niveau-select").value;
   const typeVal = document.getElementById("type-select").value;
+  const leconSaisie = document.getElementById("lecon-input").value.trim();
+
+  if (!leconSaisie) {
+    const inp = document.getElementById("lecon-input");
+    inp.style.borderColor = "var(--rouge)";
+    inp.focus();
+    btn.disabled = false;
+    btn.textContent = "✨ Générer la fiche pédagogique";
+    return;
+  }
+
   const typeLabels = {
-    fiche_complete: "Fiche de leçon complète",
-    resume: "Résumé pour élèves",
-    qcm: "QCM d'évaluation (10 questions)",
-    exercices: "Exercices pratiques",
-    plan_cours: "Plan de cours simplifié"
+    fiche_complete: "Fiche de leçon complète (avec tableau Part du Maître / Activités des Élèves pour chaque phase)",
+    resume: "Résumé structuré pour les élèves",
+    qcm: "QCM d'évaluation de 10 questions avec réponses",
+    exercices: "5 exercices pratiques progressifs",
+    plan_cours: "Plan de cours simplifié avec timing"
   };
 
-  const prompt = `Tu es un expert en pédagogie sénégalaise, spécialiste du CEB selon les programmes officiels du Ministère de l'Éducation Nationale du Sénégal.
+  const prompt = `Tu es un expert en pédagogie sénégalaise, spécialiste du CEB selon les programmes officiels du Ministère de l'Éducation Nationale du Sénégal (IDEN Mbacké).
 
-Informations extraites du guide "Le Miroir" d'Assane Ndiaye :
+Contexte extrait du guide "Le Miroir" d'Assane Ndiaye :
 - Domaine : ${domaine.nom}
 - Discipline : ${disc.nom}
+- Leçon précise : ${leconSaisie}
 - Niveau : ${niveau}
-- Durée : ${disc.duree || "30mn"}
+- Durée : ${disc.duree || "45mn"}
 - Phases officielles : ${(disc.phases || disc.seances || []).join(", ")}
-- Description : ${disc.description || ""}
 - CB : ${disc.CB || ""}
 - OA : ${disc.OA || ""}
-${disc.exemple_lecon ? `- Contenu exemple : ${JSON.stringify(disc.exemple_lecon)}` : ""}
 
-Génère maintenant : ${typeLabels[typeVal]}
+Génère maintenant : ${typeLabels[typeVal]} sur la leçon "${leconSaisie}" pour le niveau ${niveau}.
 
 Règles importantes :
-- Respecte strictement la démarche pédagogique sénégalaise officielle avec toutes les phases
-- Utilise des exemples du contexte sénégalais (prénoms locaux, lieux du Sénégal, situations du quotidien sénégalais)
+- La fiche doit être SPÉCIFIQUE à "${leconSaisie}" — contenu réel, exemples concrets liés à ce sujet précis
+- Respecte strictement la démarche pédagogique sénégalaise officielle avec TOUTES les phases listées
+- Utilise des prénoms sénégalais (Fatou, Mamadou, Aïssatou...) et des lieux du Sénégal
 - Format des objectifs : "Au terme de la leçon, l'élève devra être capable de..."
-- Structure avec un titre clair pour chaque phase
-- Colonne Part du Maître / Activités des élèves / Justifications si c'est une fiche complète
-- Sois pratique et directement utilisable par un enseignant
+- Sois précis, concret et directement utilisable par un enseignant sénégalais
 - Réponds uniquement en français`;
 
+  const container = document.getElementById("result-content");
+  container.innerHTML = `<div style="text-align:center;padding:40px;color:var(--vert)">
+    <div style="font-size:28px;margin-bottom:12px">✨</div>
+    <div style="font-family:'Playfair Display',serif;font-size:16px">Génération en cours…</div>
+    <div style="color:var(--gris);font-size:13px;margin-top:6px;font-style:italic">Cela prend quelques secondes</div>
+  </div>`;
+  document.getElementById("result-card").classList.remove("hidden");
+  document.getElementById("result-card").scrollIntoView({ behavior: "smooth" });
+
   try {
-    const res = await fetch("https://api.anthropic.com/v1/messages", {
+    const res = await fetch(GEMINI_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        model: "claude-sonnet-4-20250514",
-        max_tokens: 1000,
-        messages: [{ role: "user", content: prompt }]
+        contents: [{ parts: [{ text: prompt }] }],
+        generationConfig: { maxOutputTokens: 2048, temperature: 0.7 }
       })
     });
     const json = await res.json();
-    const text = json.content?.map(b => b.text || "").join("\n") || "Erreur de génération.";
-    document.getElementById("result-content").textContent = text;
-    document.getElementById("result-card").style.display = "block";
-    document.getElementById("result-card").scrollIntoView({ behavior: "smooth" });
+    const text = json.candidates?.[0]?.content?.parts?.[0]?.text || "Erreur de génération.";
+
+    // Convertir le markdown en HTML simple
+    const html = text
+      .replace(/^### (.+)$/gm, '<h3>$1</h3>')
+      .replace(/^## (.+)$/gm, '<h2>$1</h2>')
+      .replace(/^# (.+)$/gm, '<h2>$1</h2>')
+      .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\*(.+?)\*/g, '<em>$1</em>')
+      .replace(/^- (.+)$/gm, '<li>$1</li>')
+      .replace(/(<li>.*<\/li>)/gs, '<ul>$1</ul>')
+      .replace(/\n\n/g, '</p><p>')
+      .replace(/^(?!<[hul])/gm, '')
+      .trim();
+
+    container.innerHTML = `<div style="white-space:pre-wrap;line-height:1.85">${html || text}</div>`;
+    ficheTexte = container.innerText;
+
   } catch(e) {
-    document.getElementById("result-content").textContent = "Erreur : " + e.message;
-    document.getElementById("result-card").style.display = "block";
+    container.innerHTML = `<div style="color:#b03020;padding:20px">⚠️ Erreur : ${e.message}</div>`;
   }
 
   btn.disabled = false;
   btn.textContent = "✨ Générer la fiche pédagogique";
 }
 
+
+
+// ── Copier ──
 function copyResult() {
-  const text = document.getElementById("result-content").textContent;
-  navigator.clipboard.writeText(text).then(() => alert("Copié !")).catch(() => {
-    // fallback
-    const ta = document.createElement("textarea");
-    ta.value = text;
-    document.body.appendChild(ta);
-    ta.select();
-    document.execCommand("copy");
-    document.body.removeChild(ta);
-    alert("Copié !");
-  });
+  const text = document.getElementById("result-content").innerText;
+  navigator.clipboard.writeText(text)
+    .then(() => alert("✅ Contenu copié dans le presse-papiers !"))
+    .catch(() => {
+      const ta = document.createElement("textarea");
+      ta.value = text;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand("copy");
+      document.body.removeChild(ta);
+      alert("✅ Copié !");
+    });
 }
 
+// ── Imprimer ──
+function printResult() {
+  const content = document.getElementById("result-content").innerHTML;
+  const w = window.open("", "_blank");
+  w.document.write(`<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8">
+    <title>Fiche Pédagogique</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Source+Serif+4:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+      body { font-family: 'Source Serif 4', Georgia, serif; padding: 30px; max-width: 800px; margin: 0 auto; color: #1a1a1a; }
+      h2 { font-family: 'Playfair Display', serif; color: #0f4a2a; border-bottom: 2px solid #e8f5ee; padding-bottom: 8px; margin-bottom: 16px; }
+      h3 { font-family: 'Playfair Display', serif; color: #c9922a; text-transform: uppercase; font-size: 13px; margin: 16px 0 8px; }
+      .meta-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+      .meta-item { border: 1px solid #e5e0d8; border-radius: 6px; padding: 8px 12px; font-size: 12px; }
+      .meta-item span { display: block; font-size: 10px; text-transform: uppercase; color: #6b7280; margin-bottom: 2px; }
+      .phase-block { border: 1px solid #e5e0d8; border-radius: 8px; margin-bottom: 12px; page-break-inside: avoid; }
+      .phase-title { background: #e8f5ee; padding: 8px 14px; font-weight: 700; font-size: 13px; color: #0f4a2a; }
+      .two-col { display: grid; grid-template-columns: 1fr 1fr; }
+      .two-col > div { padding: 10px 14px; font-size: 12px; line-height: 1.7; }
+      .two-col > div:first-child { border-right: 1px solid #e5e0d8; }
+      .col-label { font-size: 10px; text-transform: uppercase; color: #6b7280; margin-bottom: 6px; font-weight: 600; }
+      .qcm-item { border: 1px solid #e5e0d8; border-radius: 6px; padding: 12px; margin-bottom: 8px; page-break-inside: avoid; }
+      .exo-item { border-left: 3px solid #c9922a; padding: 10px 14px; margin-bottom: 10px; background: #fef3e0; font-size: 13px; }
+      @media print { body { padding: 15px; } }
+    </style>
+    </head><body>${content}</body></html>`);
+  w.document.close();
+  w.focus();
+  setTimeout(() => w.print(), 600);
+}
+
+// ── Reset ──
 function resetAll() {
   selectedDomaine = null;
   selectedDiscipline = null;
   document.querySelectorAll(".opt-btn").forEach(b => b.className = "opt-btn");
-  document.getElementById("step2-card").style.display = "none";
-  document.getElementById("step3-card").style.display = "none";
-  document.getElementById("result-card").style.display = "none";
+  document.getElementById("step2-card").classList.add("hidden");
+  document.getElementById("step3-card").classList.add("hidden");
+  document.getElementById("result-card").classList.add("hidden");
+  document.getElementById("disc-info").classList.add("hidden");
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 </script>

@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Générateur de Fiches Pédagogiques</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #faf7f2;
+    font-family: Georgia, serif;
+    min-height: 100vh;
+  }
+
+  .header {
+    background: linear-gradient(135deg, #1a6b3c 0%, #0f4a2a 100%);
+    padding: 28px 20px 24px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.06;
+    background: repeating-linear-gradient(90deg,#1a6b3c 0%,#1a6b3c 33%,#ffd700 33%,#ffd700 66%,#c0392b 66%,#c0392b 100%);
+  }
+  .badge {
+    display: inline-block;
+    background: #c9922a;
+    color: #fff;
+    font-size: 11px;
+    padding: 3px 14px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    position: relative;
+  }
+  .header h1 {
+    color: #fff;
+    font-size: clamp(18px, 5vw, 30px);
+    font-weight: 700;
+    margin-bottom: 6px;
+    position: relative;
+  }
+  .header p {
+    color: rgba(255,255,255,0.75);
+    font-size: 13px;
+    font-style: italic;
+    position: relative;
+  }
+
+  .container { max-width: 720px; margin: 0 auto; padding: 24px 16px 60px; }
+
+  .card {
+    background: #fff;
+    border: 1px solid #e5e0d8;
+    border-radius: 12px;
+    padding: 22px;
+    margin-bottom: 18px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  }
+
+  .step-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .step-num {
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    background: #1a6b3c;
+    color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 14px;
+    flex-shrink: 0;
+  }
+  .step-title { font-size: 16px; font-weight: 700; color: #1a1a1a; }
+
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+
+  .opt-btn {
+    padding: 12px 12px;
+    border-radius: 8px;
+    border: 2px solid #e5e0d8;
+    background: #fff;
+    cursor: pointer;
+    text-align: left;
+    font-size: 13px;
+    font-family: Georgia, serif;
+    color: #6b7280;
+    font-weight: 500;
+    transition: all 0.15s;
+    width: 100%;
+  }
+  .opt-btn.active-green {
+    border-color: #1a6b3c;
+    background: #e8f5ee;
+    color: #1a6b3c;
+    font-weight: 700;
+  }
+  .opt-btn.active-gold {
+    border-color: #c9922a;
+    background: #fef3e0;
+    color: #c9922a;
+    font-weight: 700;
+  }
+  .opt-btn:hover { border-color: #aaa; }
+  .opt-sub { font-size: 11px; margin-top: 3px; opacity: 0.7; }
+
+  .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+  label.lbl { font-size: 11px; font-weight: 700; color: #6b7280; display: block; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+  select {
+    width: 100%; padding: 10px 12px;
+    border-radius: 8px; border: 1px solid #e5e0d8;
+    font-size: 14px; font-family: Georgia, serif;
+    outline: none; background: #fff; color: #1a1a1a;
+  }
+
+  .info-box {
+    background: #e8f5ee;
+    border-radius: 8px;
+    padding: 14px;
+    font-size: 13px;
+    color: #1a6b3c;
+    margin-bottom: 14px;
+    line-height: 1.6;
+  }
+  .info-box strong { display: block; margin-bottom: 4px; }
+
+  .btn-generate {
+    width: 100%; padding: 16px;
+    border-radius: 10px; border: none;
+    background: linear-gradient(135deg, #1a6b3c, #0f4a2a);
+    color: #fff; font-size: 16px; font-weight: 700;
+    cursor: pointer; font-family: Georgia, serif;
+    letter-spacing: 0.5px;
+    transition: opacity 0.2s;
+  }
+  .btn-generate:disabled { background: #aaa; cursor: not-allowed; }
+  .btn-generate:hover:not(:disabled) { opacity: 0.9; }
+
+  .result-box {
+    background: #f9fffe;
+    border: 1px solid #b8e0cc;
+    border-radius: 10px;
+    padding: 20px;
+    white-space: pre-wrap;
+    line-height: 1.8;
+    font-size: 14px;
+    color: #1a1a1a;
+    max-height: 500px;
+    overflow-y: auto;
+    margin-top: 14px;
+  }
+
+  .btn-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 14px; }
+  .btn-small {
+    padding: 8px 16px;
+    border-radius: 6px;
+    border: 1px solid #e5e0d8;
+    background: #fff;
+    cursor: pointer;
+    font-size: 13px;
+    font-family: Georgia, serif;
+  }
+  .btn-small:hover { background: #f5f5f5; }
+
+  .hidden { display: none; }
+
+  .loader {
+    text-align: center;
+    padding: 40px 0;
+    color: #1a6b3c;
+    font-size: 16px;
+    font-weight: 700;
+  }
+  .loader-sub { color: #6b7280; font-size: 13px; margin-top: 6px; }
+
+  #step2-card, #step3-card, #result-card { display: none; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="badge">République du Sénégal · MEN</div>
+  <h1>🎓 Générateur de Fiches Pédagogiques</h1>
+  <p>Basé sur « Le Miroir » d'Assane Ndiaye — IDEN Mbacké</p>
+</div>
+
+<div class="container">
+
+  <!-- Chargement -->
+  <div id="loading-card" class="card">
+    <div class="loader">
+      📚 Chargement du Miroir…
+      <div class="loader-sub">Connexion à GitHub en cours</div>
+    </div>
+  </div>
+
+  <!-- Étape 1 : Domaine -->
+  <div id="step1-card" class="card hidden">
+    <div class="step-header">
+      <div class="step-num">1</div>
+      <div class="step-title">Choisir le domaine</div>
+    </div>
+    <div id="domaines-grid" class="grid"></div>
+  </div>
+
+  <!-- Étape 2 : Discipline -->
+  <div id="step2-card" class="card">
+    <div class="step-header">
+      <div class="step-num">2</div>
+      <div class="step-title">Choisir la discipline</div>
+    </div>
+    <div id="disciplines-grid" class="grid"></div>
+  </div>
+
+  <!-- Étape 3 : Paramètres -->
+  <div id="step3-card" class="card">
+    <div class="step-header">
+      <div class="step-num">3</div>
+      <div class="step-title">Paramètres</div>
+    </div>
+    <div class="row2">
+      <div>
+        <label class="lbl">Niveau</label>
+        <select id="niveau-select">
+          <option>CI</option><option>CP</option><option>CE1</option>
+          <option selected>CE2</option><option>CM1</option><option>CM2</option>
+        </select>
+      </div>
+      <div>
+        <label class="lbl">Type de fiche</label>
+        <select id="type-select">
+          <option value="fiche_complete">Fiche de leçon complète</option>
+          <option value="resume">Résumé pour élèves</option>
+          <option value="qcm">QCM d'évaluation</option>
+          <option value="exercices">Exercices pratiques</option>
+          <option value="plan_cours">Plan de cours simplifié</option>
+        </select>
+      </div>
+    </div>
+    <div id="disc-info" class="info-box hidden"></div>
+    <button class="btn-generate" id="btn-generate" onclick="generateFiche()">
+      ✨ Générer la fiche pédagogique
+    </button>
+  </div>
+
+  <!-- Résultat -->
+  <div id="result-card" class="card">
+    <div class="step-header">
+      <div class="step-num">✓</div>
+      <div class="step-title">Fiche générée</div>
+    </div>
+    <div class="btn-row">
+      <button class="btn-small" onclick="copyResult()">📋 Copier</button>
+      <button class="btn-small" onclick="resetAll()">🔄 Nouvelle fiche</button>
+    </div>
+    <div id="result-content" class="result-box"></div>
+  </div>
+
+</div>
+
+<script>
+const JSON_URL = "https://raw.githubusercontent.com/ndiayejoseph123-code/Mirass/main/miroir_assane_ndiaye.json";
+const ICONS = { langue_communication: "📖", mathematiques: "🔢", esvs: "🌍", epsa: "🎨" };
+
+let mirData = null;
+let selectedDomaine = null;
+let selectedDiscipline = null;
+
+// Chargement du JSON
+fetch(JSON_URL)
+  .then(r => r.json())
+  .then(d => {
+    mirData = d;
+    document.getElementById("loading-card").classList.add("hidden");
+    buildDomainesGrid();
+    document.getElementById("step1-card").classList.remove("hidden");
+  })
+  .catch(() => {
+    document.getElementById("loading-card").innerHTML = `
+      <div style="text-align:center;color:#b03020;padding:30px">
+        ⚠️ Impossible de charger les données depuis GitHub.<br>
+        <small style="color:#888">Vérifiez votre connexion internet.</small>
+      </div>`;
+  });
+
+function buildDomainesGrid() {
+  const grid = document.getElementById("domaines-grid");
+  grid.innerHTML = "";
+  mirData.domaines.forEach(d => {
+    const btn = document.createElement("button");
+    btn.className = "opt-btn";
+    btn.innerHTML = `${ICONS[d.id] || "📘"} ${d.nom}`;
+    btn.onclick = () => selectDomaine(d.id, btn);
+    grid.appendChild(btn);
+  });
+}
+
+function selectDomaine(id, btn) {
+  selectedDomaine = id;
+  selectedDiscipline = null;
+  document.querySelectorAll("#domaines-grid .opt-btn").forEach(b => b.className = "opt-btn");
+  btn.className = "opt-btn active-green";
+
+  const domaine = mirData.domaines.find(d => d.id === id);
+  const grid = document.getElementById("disciplines-grid");
+  grid.innerHTML = "";
+  domaine.disciplines.forEach(d => {
+    const b = document.createElement("button");
+    b.className = "opt-btn";
+    b.innerHTML = d.nom + (d.duree ? `<div class="opt-sub">${d.duree}</div>` : "");
+    b.onclick = () => selectDiscipline(d.id, b);
+    grid.appendChild(b);
+  });
+
+  document.getElementById("step2-card").style.display = "block";
+  document.getElementById("step3-card").style.display = "none";
+  document.getElementById("result-card").style.display = "none";
+  document.getElementById("disc-info").classList.add("hidden");
+}
+
+function selectDiscipline(id, btn) {
+  selectedDiscipline = id;
+  document.querySelectorAll("#disciplines-grid .opt-btn").forEach(b => b.className = "opt-btn");
+  btn.className = "opt-btn active-gold";
+
+  const domaine = mirData.domaines.find(d => d.id === selectedDomaine);
+  const disc = domaine.disciplines.find(d => d.id === id);
+
+  const infoBox = document.getElementById("disc-info");
+  let html = `<strong>📋 ${disc.nom}</strong>`;
+  if (disc.phases) html += `<div style="margin-top:4px;opacity:0.8">Phases : ${disc.phases.join(" → ")}</div>`;
+  if (disc.CB) html += `<div style="margin-top:4px;opacity:0.7;font-size:12px">CB : ${disc.CB.substring(0, 130)}…</div>`;
+  infoBox.innerHTML = html;
+  infoBox.classList.remove("hidden");
+
+  document.getElementById("step3-card").style.display = "block";
+  document.getElementById("result-card").style.display = "none";
+}
+
+async function generateFiche() {
+  if (!selectedDomaine || !selectedDiscipline) return;
+
+  const btn = document.getElementById("btn-generate");
+  btn.disabled = true;
+  btn.textContent = "⏳ Génération en cours…";
+
+  const domaine = mirData.domaines.find(d => d.id === selectedDomaine);
+  const disc = domaine.disciplines.find(d => d.id === selectedDiscipline);
+  const niveau = document.getElementById("niveau-select").value;
+  const typeVal = document.getElementById("type-select").value;
+  const typeLabels = {
+    fiche_complete: "Fiche de leçon complète",
+    resume: "Résumé pour élèves",
+    qcm: "QCM d'évaluation (10 questions)",
+    exercices: "Exercices pratiques",
+    plan_cours: "Plan de cours simplifié"
+  };
+
+  const prompt = `Tu es un expert en pédagogie sénégalaise, spécialiste du CEB selon les programmes officiels du Ministère de l'Éducation Nationale du Sénégal.
+
+Informations extraites du guide "Le Miroir" d'Assane Ndiaye :
+- Domaine : ${domaine.nom}
+- Discipline : ${disc.nom}
+- Niveau : ${niveau}
+- Durée : ${disc.duree || "30mn"}
+- Phases officielles : ${(disc.phases || disc.seances || []).join(", ")}
+- Description : ${disc.description || ""}
+- CB : ${disc.CB || ""}
+- OA : ${disc.OA || ""}
+${disc.exemple_lecon ? `- Contenu exemple : ${JSON.stringify(disc.exemple_lecon)}` : ""}
+
+Génère maintenant : ${typeLabels[typeVal]}
+
+Règles importantes :
+- Respecte strictement la démarche pédagogique sénégalaise officielle avec toutes les phases
+- Utilise des exemples du contexte sénégalais (prénoms locaux, lieux du Sénégal, situations du quotidien sénégalais)
+- Format des objectifs : "Au terme de la leçon, l'élève devra être capable de..."
+- Structure avec un titre clair pour chaque phase
+- Colonne Part du Maître / Activités des élèves / Justifications si c'est une fiche complète
+- Sois pratique et directement utilisable par un enseignant
+- Réponds uniquement en français`;
+
+  try {
+    const res = await fetch("https://api.anthropic.com/v1/messages", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        model: "claude-sonnet-4-20250514",
+        max_tokens: 1000,
+        messages: [{ role: "user", content: prompt }]
+      })
+    });
+    const json = await res.json();
+    const text = json.content?.map(b => b.text || "").join("\n") || "Erreur de génération.";
+    document.getElementById("result-content").textContent = text;
+    document.getElementById("result-card").style.display = "block";
+    document.getElementById("result-card").scrollIntoView({ behavior: "smooth" });
+  } catch(e) {
+    document.getElementById("result-content").textContent = "Erreur : " + e.message;
+    document.getElementById("result-card").style.display = "block";
+  }
+
+  btn.disabled = false;
+  btn.textContent = "✨ Générer la fiche pédagogique";
+}
+
+function copyResult() {
+  const text = document.getElementById("result-content").textContent;
+  navigator.clipboard.writeText(text).then(() => alert("Copié !")).catch(() => {
+    // fallback
+    const ta = document.createElement("textarea");
+    ta.value = text;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand("copy");
+    document.body.removeChild(ta);
+    alert("Copié !");
+  });
+}
+
+function resetAll() {
+  selectedDomaine = null;
+  selectedDiscipline = null;
+  document.querySelectorAll(".opt-btn").forEach(b => b.className = "opt-btn");
+  document.getElementById("step2-card").style.display = "none";
+  document.getElementById("step3-card").style.display = "none";
+  document.getElementById("result-card").style.display = "none";
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+</script>
+</body>
+</html>

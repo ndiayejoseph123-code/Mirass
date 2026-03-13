@@ -1,0 +1,158 @@
+{
+  "manuel": "Éducation au développement durable C.E.2",
+  "classe": "CE2",
+  "discipline": "EDD",
+  "etape": "Étape 2 - Niveau 2",
+  "syntheses_je_retiens": [
+    {
+      "palier": 3,
+      "semaine": 1,
+      "titre": "Causes du paludisme",
+      "contenu": "Le paludisme est une maladie causée par la piqûre de l'anophèle femelle infecté. L'anophèle femelle pique d'abord une personne atteinte du paludisme, puis pique une personne bien portante et lui transmet la maladie."
+    },
+    {
+      "palier": 3,
+      "semaine": 2,
+      "titre": "Facteurs favorisants du paludisme",
+      "contenu": "La présence d'eaux stagnantes ainsi que le manque d'assainissement favorisent le développement des moustiques. Ce sont des facteurs favorisants du paludisme."
+    },
+    {
+      "palier": 3,
+      "semaine": 2,
+      "titre": "Mes devoirs à la maison, dans le quartier ou dans le village",
+      "contenu": "À la maison, dans le quartier ou dans le village, j'ai des devoirs : de discrétion, d'implication, de solidarité, d'assistance, d'hospitalité, de sens de la dignité de l'autre, de respect du bien public, de patriotisme, de participation à la prise en charge des problèmes."
+    },
+    {
+      "palier": 3,
+      "semaine": 3,
+      "titre": "Manifestations du paludisme",
+      "contenu": "Le paludisme se manifeste par de la fièvre, des maux de tête, des frissons, des vomissements, des douleurs musculaires, de la fatigue, etc. Le test de diagnostic rapide (TDR) permet de confirmer ou non la présence du paludisme."
+    },
+    {
+      "palier": 3,
+      "semaine": 4,
+      "titre": "Devoirs de solidarité à l'école",
+      "contenu": "Je m'implique pour trouver des solutions aux problèmes de mon école. J'accomplis aussi des actes de solidarité pour des camarades dans le besoin."
+    },
+    {
+      "palier": 3,
+      "semaine": 4,
+      "titre": "Mesures préventives contre le paludisme",
+      "contenu": "Pour prévenir le paludisme, il faut : dormir sous une moustiquaire imprégnée à longue durée d'action (MILDA) ; tuer les moustiques avec des insecticides ; détruire les gîtes larvaires ; lutter contre les eaux stagnantes. Avant de se soigner, il faut toujours faire le test de diagnostic rapide (TDR) dès les premières manifestations de la maladie."
+    },
+    {
+      "palier": 3,
+      "semaine": 5,
+      "titre": "Causes et facteurs favorisants du SIDA",
+      "contenu": "Le SIDA est causé par le VIH, un virus qui peut être transmis à la suite d'une blessure par un objet pointu ou tranchant souillé par le sang d'un sidéen. Le SIDA est favorisé par le partage d'objets pointus ou tranchants souillés lors d'un tatouage, d'une injection, de la circoncision, de l'excision, du rasage, du brossage des dents."
+    },
+    {
+      "palier": 3,
+      "semaine": 5,
+      "titre": "Les dix principaux droits de l'enfant",
+      "contenu": "Les dix principaux droits de l'enfant sont : 1. le droit d'être protégé(e) ; 2. le droit d'avoir un nom et une nationalité ; 3. le droit à une alimentation suffisante et saine ; 4. le droit d'être soigné ; 5. le droit à l'éducation ; 6. le droit d'être nourri, logé et de grandir dans de bonnes conditions ; 7. le droit de jouer, de rire, de rêver ; 8. le droit d'accéder à l'information ; 9. le droit d'être protégé(e) de la violence et de l'exploitation ; 10. le droit à une protection spéciale pour tous les enfants réfugiés ou handicapés."
+    },
+    {
+      "palier": 3,
+      "semaine": 6,
+      "titre": "Manifestations du SIDA",
+      "contenu": "Le SIDA se manifeste par : une diarrhée prolongée, une perte de poids accentuée et des boutons sur le corps... Un sidéen qui ne manifeste pas de symptômes est appelé porteur sain."
+    },
+    {
+      "palier": 3,
+      "semaine": 7,
+      "titre": "Prévention contre les IST et le SIDA (Objets)",
+      "contenu": "Pour éviter le SIDA, il ne faut pas toucher à mains nues du sang. On ne doit pas ramasser des objets pointus ou tranchants comme des lames, des aiguilles, des seringues, des brosses à dents... On ne doit pas jouer avec ces objets ou les partager."
+    },
+    {
+      "palier": 3,
+      "semaine": 8,
+      "titre": "Prévention contre les IST et le SIDA (Petit linge)",
+      "contenu": "Pour éviter les IST et le VIH/SIDA, le petit linge et les serviettes de bain ne doivent pas être partagés. En plus, le petit linge doit être changé tous les jours. Le petit linge sale doit être lavé, séché au soleil et repassé avant d'être réutilisé."
+    },
+    {
+      "palier": 3,
+      "semaine": 8,
+      "titre": "Toilette intime et hygiène",
+      "contenu": "Pour éviter les IST, on doit respecter la technique de la toilette intime en lavant d'abord les parties intimes avant l'anus. On doit aussi porter des petits linges en coton et toujours les faire sécher au soleil et les repasser."
+    },
+    {
+      "palier": 4,
+      "semaine": 10,
+      "titre": "Formes de dégradation de l'environnement",
+      "contenu": "La dégradation de l'environnement est l'ensemble des dégâts causés à l'environnement. La désertification, l'érosion éolienne ou hydrique, les feux de brousse, la déforestation, le braconnage... sont des formes de dégradation de l'environnement."
+    },
+    {
+      "palier": 4,
+      "semaine": 11,
+      "titre": "La pollution",
+      "contenu": "La pollution est une forme de dégradation de l'environnement. Les ordures, le péril fécal, les eaux usées, les bruits, la fumée des voitures et celle des usines polluent l'environnement."
+    },
+    {
+      "palier": 4,
+      "semaine": 11,
+      "titre": "Facteurs et idéaux de paix",
+      "contenu": "La démocratie, la liberté, l'égalité, le droit, le sens de l'intérêt général, le fair-play, etc. sont des facteurs et des idéaux de paix."
+    },
+    {
+      "palier": 4,
+      "semaine": 12,
+      "titre": "Causes et conséquences des dégradations",
+      "contenu": "L'érosion éolienne est causée par le vent et l'érosion hydrique par l'eau. Elles ont pour conséquences la pauvreté des sols et la diminution des ressources vivrières. La désertification causée par les changements climatiques et la déforestation faite par l'homme ont pour conséquences la raréfaction des pluies, la pauvreté des sols et la diminution des ressources vivrières."
+    },
+    {
+      "palier": 4,
+      "semaine": 13,
+      "titre": "Causes et conséquences de la pollution",
+      "contenu": "La pollution par les ordures, le péril fécal, les eaux usées, les bruits, la fumée des voitures et des usines est causée par l'homme. Cela a pour conséquence la prolifération des maladies et la mauvaise qualité du cadre de vie. Les feux de brousse ont pour conséquence la disparition d'espèces animales et végétales."
+    },
+    {
+      "palier": 4,
+      "semaine": 13,
+      "titre": "Vulgarisation des idéaux de paix",
+      "contenu": "La liberté, la démocratie, l'égalité, le droit, le sens de l'intérêt général, le fair-play, etc. sont des idéaux de paix. Nous devons les vulgariser."
+    },
+    {
+      "palier": 4,
+      "semaine": 14,
+      "titre": "Solutions à la dégradation de l'environnement",
+      "contenu": "Les solutions aux formes de dégradation de l'environnement sont variées. Des actions de sensibilisation peuvent être menées. Selon le cas, on peut aussi appliquer des solutions : utiliser des bacs à ordures et des poubelles, aménager des puisards et des vidoirs pour évacuer les eaux usées, utiliser aussi des toilettes pour lutter contre le péril fécal."
+    },
+    {
+      "palier": 4,
+      "semaine": 15,
+      "titre": "Lutte contre les formes de dégradation spécifiques",
+      "contenu": "Pour lutter contre les feux de brousse, il faut aménager des pare-feux. Le brise-vent permet de lutter contre l'érosion éolienne en ralentissant la vitesse du vent. Les diguettes de protection permettent de lutter contre l'érosion hydrique. Le reboisement permet de lutter contre la désertification et la déforestation."
+    },
+    {
+      "palier": 4,
+      "semaine": 16,
+      "titre": "La famille nombreuse",
+      "contenu": "Une famille nombreuse n'a pas assez de ressources pour la nourriture, le logement, la santé et l'éducation de ses enfants."
+    },
+    {
+      "palier": 4,
+      "semaine": 17,
+      "titre": "Comportements conformes aux valeurs du milieu",
+      "contenu": "Pour vivre ensemble, nous devons manifester dans notre milieu des comportements comme l'humilité, le sens de la mesure, le courage, l'abnégation, le respect des anciens, le respect des règles, etc."
+    },
+    {
+      "palier": 4,
+      "semaine": 18,
+      "titre": "Origine des problèmes de population",
+      "contenu": "La pauvreté, le poids de la tradition et un choix de vie mal éclairé sont à l'origine de problèmes de population comme la promiscuité, l'insuffisance des ressources, l'inadaptation de l'habitat et une famille nombreuse."
+    },
+    {
+      "palier": 4,
+      "semaine": 18,
+      "titre": "Conséquences des problèmes de population",
+      "contenu": "Le manque d'hygiène, la malnutrition, les maladies, l'échec et la déperdition scolaires et l'analphabétisme sont les conséquences des problèmes de population."
+    },
+    {
+      "palier": 4,
+      "semaine": 19,
+      "titre": "Solutions aux problèmes de population",
+      "contenu": "L'information et la sensibilisation permettent de trouver des solutions à des problèmes de population. Elles permettent de faire des choix éclairés pour avoir de bonnes conditions de vie."
+    }
+  ]
+}

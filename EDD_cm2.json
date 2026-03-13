@@ -1,0 +1,84 @@
+{
+  "manuel": "Éducation au Développement Durable - CM2",
+  "classe": "CM2",
+  "discipline": "EDD",
+  "etape": "Étape 3 - Niveau 2",
+  "syntheses_je_retiens": [
+    {
+      "theme": "L'environnement et sa dégradation",
+      "contenu": "L'environnement, c'est tout ce qui nous entoure. Il subit des agressions dues à l'homme et à la nature. Il en résulte la dégradation des ressources qui se présente sous diverses formes : le déboisement, la surexploitation des ressources du sol, l'érosion éolienne, l'érosion hydrique, l'érosion côtière, les feux de brousse et la pollution des sols, de l'eau et de l'air."
+    },
+    {
+      "theme": "Les organisations communautaires",
+      "contenu": "Une organisation communautaire est un regroupement de personnes qui intervient dans des collectivités pour susciter leur mobilisation et leur insertion dans des processus de réalisation de changements sociaux. Elles peuvent être formées selon l'ethnie, la confrérie, les activités socioprofessionnelles ou l'origine géographique."
+    },
+    {
+      "theme": "Conséquences de la dégradation des ressources",
+      "contenu": "La dégradation des ressources a des conséquences sur la vie des populations : baisse du niveau de vie (paupérisation), difficultés pour satisfaire les besoins vitaux (nourriture, santé, logement, éducation), exode rural vers les villes pour trouver du travail."
+    },
+    {
+      "theme": "Mesures de gestion des ressources",
+      "contenu": "Pour lutter contre la dégradation des ressources, il faut : une exploitation rationnelle tenant compte de la capacité de renouvellement, aménager des pare-feu contre les feux de brousse, construire des digues contre l'avancée de la mer, pratiquer le reboisement et respecter le repos biologique."
+    },
+    {
+      "theme": "Organisations ouest-africaines",
+      "contenu": "Les pays de l'Afrique de l'Ouest ont créé des organisations pour prendre en charge leurs problèmes politiques, économiques, socioculturels et environnementaux. Exemple : l'OMVS (1972) pour la mise en valeur du fleuve Sénégal, le CILSS pour la lutte contre la sécheresse au Sahel, la CEDEAO pour l'intégration économique, et l'UEMOA."
+    },
+    {
+      "theme": "Maladies bucco-dentaires",
+      "contenu": "Une maladie bucco-dentaire (carie, gingivite) est causée par une mauvaise hygiène et un manque de suivi médical. Sans soins, la carie peut évoluer en rage de dent ou cancer buccal. La gingivite non traitée peut entraîner le déchaussement des dents."
+    },
+    {
+      "theme": "Santé et alimentation",
+      "contenu": "Pour lutter contre les maladies nutritionnelles, il faut : une alimentation suffisante et équilibrée, des suppléments en vitamines, boire assez d'eau, réduire le sucre, faire du sport et un suivi sanitaire."
+    },
+    {
+      "theme": "Hygiène bucco-dentaire",
+      "contenu": "Pour éviter les maladies, il faut : utiliser le cure-dent et le fil dentaire, se brosser les dents après chaque repas, éviter l'excès d'aliments sucrés, ne pas casser d'objets durs avec les dents, ne pas fumer/boire d'alcool et consulter régulièrement un dentiste."
+    },
+    {
+      "theme": "La famille nombreuse",
+      "contenu": "Une famille nombreuse peut engendrer des problèmes de santé (malnutrition des enfants, épuisement de la mère), de logement et de stress pour les parents préoccupés par l'entretien de leurs enfants."
+    },
+    {
+      "theme": "La Nation et l'État",
+      "contenu": "Une nation est un groupe humain habitant un territoire déterminé, caractérisé par une conscience d'unité et la volonté de vivre en commun. L'État est une société politique regroupant des individus soumis à une autorité publique commune. Le Sénégal est un État-nation."
+    },
+    {
+      "theme": "Santé de la mère et de l'enfant",
+      "contenu": "Pour bien grandir, un enfant a besoin d'une alimentation équilibrée, d'un allaitement maternel exclusif jusqu'à 6 mois et d'être vacciné régulièrement. La mère doit bénéficier d'un suivi prénatal et postnatal et respecter l'espacement des naissances."
+    },
+    {
+      "theme": "La Constitution et la République",
+      "contenu": "La Constitution est la Charte fondamentale qui définit le régime et les institutions d'un État. Dans une République, la souveraineté nationale appartient au peuple qui l'exerce par ses représentants ou par référendum."
+    },
+    {
+      "theme": "Les symboles de la Nation",
+      "contenu": "Le drapeau national (Vert, Jaune, Rouge avec une étoile verte) symbolise l'indépendance. Le Sceau est le cachet officiel de la République (Lion et Baobab). La devise est : « Un Peuple – Un But – Une Foi »."
+    },
+    {
+      "theme": "Le VIH/SIDA et la transmission mère-enfant",
+      "contenu": "L'infection au VIH affaiblit l'organisme. Pour éviter la transmission à l'enfant, il faut : un dépistage volontaire, un suivi de la femme enceinte avec mise sous ARV, un accouchement assisté et un allaitement artificiel si nécessaire."
+    },
+    {
+      "theme": "Les pouvoirs de l'État",
+      "contenu": "Le pouvoir exécutif est exercé par le Président et le Gouvernement. Le pouvoir législatif est exercé par l'Assemblée nationale (vote des lois). Le pouvoir judiciaire (indépendant) est exercé par les Cours et Tribunaux pour garantir les droits et libertés."
+    },
+    {
+      "theme": "La COVID-19",
+      "contenu": "Maladie respiratoire causée par un coronavirus se transmettant par des gouttelettes infectieuses (toux, éternuements) ou contact avec des surfaces contaminées. Prévention : lavage des mains, masque, distanciation."
+    },
+    {
+      "theme": "Institutions internationales (ONU, UNICEF, UNESCO)",
+      "contenu": "L'ONU (1945) maintient la paix et développe la coopération. L'UNICEF améliore la vie des enfants. L'UNESCO contribue à la paix par l'éducation, la science et la culture."
+    },
+    {
+      "theme": "Droits de l'Homme et Solidarité",
+      "contenu": "La DUDH (10 décembre 1948) protège les droits de chaque personne. Le CICR (1863) est une institution d'aide humanitaire intervenant en temps de paix comme de guerre."
+    },
+    {
+      "theme": "Forces de défense et de sécurité",
+      "contenu": "L'armée nationale assure l'intégrité territoriale. La police administrative et la gendarmerie sont chargées de la protection des personnes, des biens et du maintien de l'ordre."
+    }
+  ]
+}

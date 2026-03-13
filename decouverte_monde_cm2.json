@@ -1,0 +1,70 @@
+{
+  "titre": "DÉCOUVERTE DU MONDE C.M.2 - Cours Moyen",
+  "etape": "Étape 3 - Niveau 2",
+  "edition": "2022",
+  "editeur": "Didaktikos Éditions",
+  "classe": "CM2",
+  "disciplines": ["Histoire", "Géographie", "IST", "Biologie"],
+  "organisation_pedagogique": {
+    "palier_3": {
+      "titre": "Découvrir les interrelations entre les activités économiques, sociales et les ressources du milieu",
+      "semaines": {
+        "semaine_1": {
+          "histoire": "L'empire du Ghana (Ouagadou) : origines, apogée et déclin",
+          "geographie": "L'agriculture au Sénégal : types de cultures (vivrières, industrielles) et potentialités",
+          "ist": "Outils technologiques simples : truelle, ciseaux, pinceau, scie",
+          "geographie_bis": "L'élevage au Sénégal : extensif, intensif et espèces élevées"
+        },
+        "semaine_2": {
+          "histoire": "L'empire du Mali : de Soundjata Keïta à l'apogée sous Kankan Moussa",
+          "geographie": "La pêche au Sénégal : artisanale, industrielle et fluviale",
+          "ist": "Outils technologiques simples : pince universelle, marteau, tenailles",
+          "geographie_bis": "L'industrie, l'artisanat et les mines au Sénégal"
+        },
+        "semaine_3": {
+          "histoire": "L'empire du Gao (Songhoï) : Soni Ali Ber et Askia Mouhamed",
+          "geographie": "Le commerce au Sénégal : intérieur, extérieur et balance commerciale",
+          "ist": "Appareils simples : téléphone, ordinateur, téléviseur",
+          "geographie_bis": "Le tourisme au Sénégal : sites principaux et impact économique"
+        },
+        "semaine_4": {
+          "histoire": "Premiers contacts avec les Arabes : islamisation et commerce transsaharien",
+          "geographie": "Interrelations entre activités économiques et ressources du milieu",
+          "ist": "Appareils simples : réchaud à gaz, réfrigérateur"
+        },
+        "semaine_5_a_7": [
+          "Cérémonies familiales, religieuses et coutumières",
+          "Risques liés au manque d'entretien des objets technologiques",
+          "Maintenance : dépoussiérage, graissage, lavage",
+          "Évaluations formatives et intégration"
+        ]
+      }
+    },
+    "palier_4": {
+      "titre": "Découvrir le mode d'adaptation des êtres au milieu et l'évolution scientifique et technologique",
+      "contenus_cles": {
+        "histoire": [
+          "Grandes inventions du XVe siècle (boussole, caravelle, imprimerie)",
+          "Expansion européenne et Traite des Nègres",
+          "Progrès scientifiques du XIXe et XXe siècles (électricité, vaccin, radioactivité)",
+          "Conséquences de la révolution industrielle"
+        ],
+        "ist_biologie": [
+          "Adaptation des êtres en milieu aquatique (poissons, crocodiles, baleines)",
+          "Adaptation des êtres en milieu terrestre (mammifères, reptiles, oiseaux)",
+          "Modes de locomotion, de respiration, de nutrition et de reproduction"
+        ],
+        "geographie": [
+          "Caractéristiques de la population (pyramide des âges, parité)",
+          "Moyens de communication (routes, voies ferrées, maritimes, aériennes)"
+        ]
+      }
+    }
+  },
+  "lexique": {
+    "almoravides": "Dynastie musulmane berbère qui répandit l'Islam en Afrique occidentale",
+    "exode_rural": "Déplacement en masse des populations des campagnes vers les villes",
+    "traite_negriere": "Commerce d'esclaves exercé par l'Europe au profit des plantations américaines",
+    "promiscuite": "Situation de voisinage trop étroite favorisant le manque d'hygiène"
+  }
+}

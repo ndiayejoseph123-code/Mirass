@@ -1,0 +1,419 @@
+{
+  "metadata": {
+    "titre": "Le Miroir Adapté au CEB",
+    "auteur": "Assane Ndiaye",
+    "institution": "IDEN / Mbacké",
+    "pays": "Sénégal",
+    "niveau": "CEB (Cours Élémentaire de Base)",
+    "description": "Guide pédagogique complet pour l'enseignement à l'école élémentaire au Sénégal"
+  },
+  "instructions_generation": "Pour chaque fiche, respecter EXACTEMENT la démarche de la discipline concernée. Chaque étape doit contenir des actions concrètes, des exemples de questions réelles, des phrases types et des exercices précis adaptés au niveau de la classe.",
+  "domaines": [
+    {
+      "id": "langue_communication",
+      "nom": "Langue et Communication",
+      "disciplines": [
+        {
+          "id": "grammaire",
+          "nom": "Grammaire",
+          "duree": "30mn",
+          "approche": "Approche fonctionnelle - partir de phrases tirées de textes connus",
+          "CB": "Intégrer le vocabulaire adéquat, les indices significatifs et des règles syntaxiques dans des situations de compréhension et de production de textes.",
+          "demarche_detaillee": {
+            "etape1": {
+              "titre": "Révision",
+              "part_maitre": "Fait rappeler la leçon précédente en posant des questions précises sur la notion étudiée. Exemple : 'Qu'est-ce qu'un nom ?' / 'Donnez-moi un exemple de déterminant dans cette phrase : Le chien aboie.' / 'Identifiez le sujet dans cette phrase : Aminata mange une mangue.' Écrit 2 ou 3 phrases au tableau et demande aux élèves d'identifier les éléments déjà étudiés.",
+              "part_eleves": "Répondent aux questions du maître. Identifient les éléments grammaticaux demandés dans les phrases au tableau. Corrigent mutuellement leurs réponses."
+            },
+            "etape2": {
+              "titre": "Présentation / Imprégnation",
+              "part_maitre": "Écrit au tableau 3 phrases contenant la notion à étudier. Exemple pour le COD : 'Sidi mange une mangue. / Rama lit son livre. / Le maître corrige les cahiers.' Lit les phrases à voix haute. Pose des questions de compréhension : 'Que fait Sidi ?' / 'Qu'est-ce que Rama lit ?' / 'Qu'est-ce que le maître corrige ?' Souligne les mots répondant à la question.",
+              "part_eleves": "Écoutent et observent les phrases au tableau. Répondent aux questions de compréhension. Observent les mots soulignés et essaient de trouver ce qu'ils ont en commun."
+            },
+            "etape3": {
+              "titre": "Analyse",
+              "part_maitre": "Guide l'analyse en posant des questions précises : 'Posez la question QUOI après le verbe manger : Sidi mange QUOI ? - une mangue.' / 'Ce mot peut-il se déplacer en début de phrase ?' Fait découvrir la règle par les élèves à travers les exemples. Écrit la règle au tableau après que les élèves l'ont formulée.",
+              "part_eleves": "Analysent chaque phrase selon les questions du maître. Répondent : 'Sidi mange quoi ? → une mangue. C'est le COD.' Formulent eux-mêmes la règle : 'Le COD répond à la question qui ou quoi après le verbe.' Copient la règle dans leur cahier."
+            },
+            "etape4": {
+              "titre": "Synthèse / Évaluation",
+              "part_maitre": "Donne des phrases d'application au tableau ou sur des fiches. Exemple : 'Le berger garde les moutons. / Fatou prépare le repas. / Les enfants jouent au football.' Demande d'identifier et de souligner le COD dans chaque phrase. Corrige collectivement au tableau en expliquant chaque erreur. Donne un exercice individuel de transformation : 'Remplacez le COD par un pronom.'",
+              "part_eleves": "Lisent les phrases d'application. Identifient et soulignent le COD dans chaque phrase. Participent à la correction collective. Réalisent l'exercice individuel dans le cahier de devoirs."
+            }
+          }
+        },
+        {
+          "id": "conjugaison",
+          "nom": "Conjugaison",
+          "duree": "30mn",
+          "CB": "Intégrer le vocabulaire adéquat, les indices significatifs et des règles syntaxiques dans des situations de compréhension et de production de textes.",
+          "demarche_detaillee": {
+            "etape1": {
+              "titre": "Révision",
+              "part_maitre": "Rappelle la leçon précédente. Pose des questions : 'Qu'est-ce qu'un verbe ?' / 'Conjuguez le verbe CHANTER au présent.' / 'Quelle est la terminaison à la 1ère personne du pluriel ?' Écrit un verbe au tableau et demande sa conjugaison à différentes personnes.",
+              "part_eleves": "Répondent aux questions. Conjuguent le verbe demandé. Corrigent au tableau si nécessaire."
+            },
+            "etape2": {
+              "titre": "Présentation / Imprégnation",
+              "part_maitre": "Présente la nouvelle notion avec des phrases exemples au tableau. Pour le passé composé : 'Hier, Sidi a mangé du riz. / Ce matin, Rama est allée à l'école. / Les élèves ont bien travaillé.' Lit les phrases et attire l'attention sur les formes verbales. Demande : 'À quel moment ces actions ont-elles eu lieu ?'",
+              "part_eleves": "Écoutent et observent les phrases. Répondent : 'Ces actions ont eu lieu hier, dans le passé.' Soulignent les formes verbales dans les phrases."
+            },
+            "etape3": {
+              "titre": "Analyse",
+              "part_maitre": "Analyse les formes verbales avec les élèves : 'Dans a mangé, combien de mots ?' / 'Quel est l'auxiliaire ?' / 'Comment appelle-t-on le deuxième mot ?' Fait découvrir la règle de formation. Fait le tableau de conjugaison au tableau : j'ai mangé, tu as mangé, il/elle a mangé... Pose des questions sur les irréguliers.",
+              "part_eleves": "Analysent les formes verbales. Répondent : 'Il y a deux mots : l'auxiliaire AVOIR et le participe passé MANGÉ.' Complètent le tableau de conjugaison au tableau. Copient le tableau dans leur cahier."
+            },
+            "etape4": {
+              "titre": "Synthèse / Évaluation",
+              "part_maitre": "Donne des exercices d'application : 'Conjuguez au passé composé : (travailler) - Hier, nous ... bien. / (partir) - Ce matin, les élèves ... tôt.' Corrige collectivement. Donne un exercice de transformation : 'Mettez ces phrases au passé composé : Sidi mange du pain. / Rama chante une chanson.'",
+              "part_eleves": "Réalisent les exercices dans leur cahier. Participent à la correction collective. Corrigent leurs erreurs. Transforment les phrases selon la consigne."
+            }
+          }
+        },
+        {
+          "id": "orthographe",
+          "nom": "Orthographe",
+          "duree": "30mn",
+          "CB": "Intégrer le vocabulaire adéquat, les indices significatifs et des règles syntaxiques dans des situations de compréhension et de production de textes.",
+          "demarche_detaillee": {
+            "etape1": {
+              "titre": "Révision",
+              "part_maitre": "Rappelle la règle précédente. Dicte 3 mots ou une phrase courte pour vérification. Exemple : 'Écrivez ces mots : des journaux / des animaux / des chevaux.' Corrige au tableau et rappelle la règle.",
+              "part_eleves": "Écrivent les mots dictés sur l'ardoise ou dans le cahier. Vérifient et corrigent leurs réponses."
+            },
+            "etape2": {
+              "titre": "Présentation / Imprégnation",
+              "part_maitre": "Écrit des phrases ou des mots illustrant la nouvelle règle au tableau. Pour l'accord sujet-verbe : 'Le chien aboie. / Les chiens aboient. / Fatou chante. / Fatou et Rama chantent.' Lit les phrases et attire l'attention sur les variations.",
+              "part_eleves": "Lisent les phrases. Observent les variations orthographiques. Soulignent les mots qui changent."
+            },
+            "etape3": {
+              "titre": "Analyse",
+              "part_maitre": "Pose des questions d'analyse : 'Pourquoi aboie prend-il un S dans la deuxième phrase ?' / 'Quel est le sujet de aboient ?' / 'Quelle est la règle ?' Fait formuler la règle par les élèves. Écrit la règle au tableau : 'Le verbe s'accorde en nombre avec son sujet.'",
+              "part_eleves": "Analysent les phrases. Répondent aux questions. Formulent la règle. Copient la règle dans le cahier de leçons."
+            },
+            "etape4": {
+              "titre": "Synthèse / Évaluation",
+              "part_maitre": "Dicte des phrases d'application. Donne des exercices d'accord. Corrige collectivement au tableau en expliquant chaque correction. Insiste sur les erreurs fréquentes.",
+              "part_eleves": "Écrivent sous la dictée. Réalisent les exercices d'accord. Participent à la correction. Corrigent dans le cahier."
+            }
+          }
+        },
+        {
+          "id": "vocabulaire",
+          "nom": "Vocabulaire",
+          "duree": "45mn",
+          "CB": "Intégrer le vocabulaire adéquat dans des situations de compréhension et de production de messages oraux et écrits.",
+          "demarche_detaillee": {
+            "etape1": {
+              "titre": "Révision",
+              "part_maitre": "Rappelle les mots étudiés lors de la séance précédente. Pose des questions : 'Quel est le synonyme de CONTENT ?' / 'Donnez le contraire de GRAND.' / 'Employez JOYEUX dans une phrase.' Fait un jeu rapide de questions-réponses sur le vocabulaire déjà vu.",
+              "part_eleves": "Répondent rapidement aux questions. Emploient les mots dans des phrases. Corrigent mutuellement."
+            },
+            "etape2": {
+              "titre": "Présentation / Imprégnation",
+              "part_maitre": "Lit ou fait lire le texte support. Identifie les mots nouveaux à étudier. Exemple : 'Dans ce texte, nous allons étudier les mots : en file indienne, joyeux, désherber.' Explique chaque mot à travers des exemples concrets, des gestes ou des images. Pose des questions : 'Avez-vous déjà vu des gens marcher en file indienne ?'",
+              "part_eleves": "Écoutent la lecture. Suivent dans le manuel. Répondent aux questions sur les mots nouveaux. Font des liens avec leur vécu."
+            },
+            "etape3": {
+              "titre": "Étude lexicale",
+              "part_maitre": "Approfondit l'étude des mots : synonymes, antonymes, famille de mots, emploi en contexte. 'Quel est le synonyme de JOYEUX ?' / 'Comment dit-on le contraire de DÉSHERBER ?' / 'Cherchez d'autres mots de la famille de JOIE.' Fait employer chaque mot dans une phrase originale.",
+              "part_eleves": "Cherchent les synonymes et antonymes. Construisent la famille de mots. Emploient chaque mot dans une phrase. Écrivent les phrases dans le cahier."
+            },
+            "etape4": {
+              "titre": "Synthèse / Évaluation",
+              "part_maitre": "Donne des exercices d'application : compléter des phrases avec le bon mot, trouver l'intrus, relier mot et définition. Corrige collectivement. Demande à chaque élève de faire une phrase avec un mot au choix.",
+              "part_eleves": "Réalisent les exercices. Participent à la correction. Fabriquent des phrases originales avec les nouveaux mots."
+            }
+          }
+        },
+        {
+          "id": "lecture_ce_cm",
+          "nom": "Lecture au CE/CM",
+          "duree": "45mn",
+          "principe": "Lire, c'est construire du sens.",
+          "CB": "Intégrer le vocabulaire adéquat, les indices significatifs dans des situations de compréhension de textes.",
+          "demarche_detaillee": {
+            "etape1": {
+              "titre": "Imprégnation",
+              "part_maitre": "Présente le texte et son titre. Pose des questions de pré-lecture : 'D'après le titre, de quoi va parler ce texte ?' / 'Regardez l'image qui accompagne le texte, que voyez-vous ?' Fait une lecture magistrale expressive du texte entier. Pose des questions globales de compréhension : 'De quoi parle ce texte en général ?'",
+              "part_eleves": "Observent le titre et les illustrations. Formulent des hypothèses sur le contenu. Suivent la lecture du maître sur le manuel. Répondent aux questions de compréhension globale."
+            },
+            "etape2": {
+              "titre": "Lecture systématique",
+              "part_maitre": "Fait lire le texte paragraphe par paragraphe. Pose des questions de compréhension précises après chaque paragraphe : 'Qui sont les personnages ?' / 'Où se passe l'action ?' / 'Que s'est-il passé ?' Explique les mots difficiles en contexte. Fait lire des élèves différents. Corrige la prononciation et l'intonation.",
+              "part_eleves": "Lisent à tour de rôle à voix haute. Répondent aux questions de compréhension. Demandent l'explication des mots inconnus. S'efforcent de lire avec expression."
+            },
+            "etape3": {
+              "titre": "Synthèse / Évaluation",
+              "part_maitre": "Pose des questions de synthèse : 'Résumez ce texte en 3 phrases.' / 'Quel est le message de ce texte ?' / 'Qu'avez-vous appris de nouveau ?' Fait lire le texte entier de façon expressive par un bon lecteur. Donne un exercice de compréhension écrit.",
+              "part_eleves": "Répondent aux questions de synthèse. Écoutent la lecture expressive. Réalisent l'exercice de compréhension écrit dans le cahier."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "mathematiques",
+      "nom": "Mathématiques",
+      "disciplines": [
+        {
+          "id": "activite_numerique_ce_cm",
+          "nom": "Activités Numériques au CE/CM",
+          "duree": "60mn",
+          "CB": "Intégrer des concepts, des procédures de calcul et des techniques de résolution dans des situations de traitement de données numériques.",
+          "demarche_detaillee": {
+            "etape1": {
+              "titre": "Calcul mental",
+              "part_maitre": "Pose une série de 5 à 10 calculs rapides oralement ou au tableau. Exemple : '7 x 8 = ? / 56 ÷ 7 = ? / 15 + 27 = ? / 100 - 34 = ?' Donne 5 secondes par calcul. Note les résultats au tableau après chaque réponse. Corrige immédiatement.",
+              "part_eleves": "Calculent mentalement. Lèvent la main ou écrivent sur l'ardoise. Vérifient leurs réponses. Corrigent leurs erreurs."
+            },
+            "etape2": {
+              "titre": "Révision",
+              "part_maitre": "Rappelle la notion précédente avec des exercices de vérification. Pose des questions : 'Comment pose-t-on une multiplication ?' / 'Rappellez-moi la règle de la soustraction avec retenue.' Fait résoudre 1 ou 2 exercices de révision au tableau.",
+              "part_eleves": "Répondent aux questions de révision. Un élève résout l'exercice au tableau. Les autres vérifient et corrigent."
+            },
+            "etape3": {
+              "titre": "Imprégnation",
+              "part_maitre": "Présente la nouvelle notion à travers une situation concrète et réaliste. Exemple pour la division : 'Aminata a 24 bonbons à partager entre 6 amis. Combien chaque ami reçoit-il ?' Utilise du matériel concret si possible (bâtonnets, graines). Laisse les élèves chercher par eux-mêmes d'abord.",
+              "part_eleves": "Écoutent la situation problème. Cherchent une solution par tâtonnement. Proposent leurs réponses avec justification."
+            },
+            "etape4": {
+              "titre": "Analyse",
+              "part_maitre": "Guide la découverte de la technique ou de la règle. Pose des questions progressives : 'Combien de groupes de 6 peut-on faire avec 24 ?' / 'Comment écrit-on cette opération ?' Démontre la technique au tableau étape par étape. Fait reformuler la règle par les élèves.",
+              "part_eleves": "Suivent la démonstration. Répondent aux questions progressives. Formulent la règle. Copient la technique dans le cahier de leçons."
+            },
+            "etape5": {
+              "titre": "Synthèse / Évaluation",
+              "part_maitre": "Donne des exercices d'application variés : calcul posé, problème en contexte sénégalais. Exemple : 'Un marchand a 156 oranges à mettre dans des caisses de 12. Combien de caisses lui faut-il ?' Corrige collectivement au tableau. Donne un exercice individuel noté.",
+              "part_eleves": "Résolvent les exercices d'application. Participent à la correction collective. Réalisent l'exercice individuel dans le cahier de devoirs."
+            }
+          }
+        },
+        {
+          "id": "resolution_problemes",
+          "nom": "Résolution de Problèmes",
+          "duree": "60mn",
+          "CB": "Intégrer des concepts, des procédures de calcul et des techniques de résolution dans des situations de traitement de données numériques.",
+          "demarche_detaillee": {
+            "etape1": {
+              "titre": "Calcul mental",
+              "part_maitre": "Fait 5 calculs rapides liés à la notion du jour. Note les résultats et corrige immédiatement.",
+              "part_eleves": "Calculent et répondent rapidement."
+            },
+            "etape2": {
+              "titre": "Révision",
+              "part_maitre": "Rappelle les opérations nécessaires pour résoudre le problème du jour. Pose des questions de vérification.",
+              "part_eleves": "Répondent et résolvent les exercices de révision."
+            },
+            "etape3": {
+              "titre": "Imprégnation / Appropriation du problème",
+              "part_maitre": "Lit le problème à voix haute deux fois. Pose des questions de compréhension : 'De quoi parle ce problème ?' / 'Qu'est-ce qu'on nous demande de trouver ?' / 'Quelles informations avons-nous ?' Fait souligner la question et les données importantes.",
+              "part_eleves": "Écoutent attentivement. Répondent aux questions de compréhension. Soulignent la question et les données dans l'énoncé."
+            },
+            "etape4": {
+              "titre": "Analyse / Recherche",
+              "part_maitre": "Pose des questions pour guider la résolution : 'Quelle opération allons-nous utiliser ?' / 'Pourquoi une addition et pas une soustraction ?' / 'Y a-t-il des questions intermédiaires ?' Fait travailler les élèves par groupes. Circule et aide les groupes en difficulté.",
+              "part_eleves": "Travaillent en groupes. Discutent de la stratégie de résolution. Posent les opérations. Calculent et trouvent la réponse."
+            },
+            "etape5": {
+              "titre": "Synthèse / Évaluation",
+              "part_maitre": "Fait présenter les solutions des groupes au tableau. Discute des différentes méthodes. Corrige et valide la bonne démarche. Donne un problème similaire en évaluation individuelle.",
+              "part_eleves": "Présentent leur solution au tableau. Comparent avec les autres groupes. Corrigent leur résolution. Résolvent le problème d'évaluation individuelle."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "esvs",
+      "nom": "Éducation à la Science et à la Vie Sociale (ESVS)",
+      "disciplines": [
+        {
+          "id": "histoire",
+          "nom": "Histoire",
+          "duree": "30mn",
+          "CB": "Intégrer des techniques d'observation et d'enquête dans des situations de découverte de faits historiques.",
+          "demarche_detaillee": {
+            "etape1": {
+              "titre": "Révision",
+              "part_maitre": "Rappelle la leçon précédente. Pose des questions : 'De quoi avons-nous parlé la dernière fois ?' / 'Qui était le fondateur de l'empire du Ghana ?' / 'Citez deux causes du déclin de cet empire.' Fait un rappel bref et ciblé.",
+              "part_eleves": "Répondent aux questions. Rappellent les faits historiques importants. Corrigent mutuellement."
+            },
+            "etape2": {
+              "titre": "Imprégnation",
+              "part_maitre": "Présente le sujet du jour avec une carte, une image ou un document. Pose des questions de découverte : 'Regardez cette carte. Où se situe l'empire du Mali ?' / 'Qui connaît Soundjata Keïta ?' Crée un horizon d'attente chez les élèves.",
+              "part_eleves": "Observent la carte ou le document. Répondent aux questions à partir de leurs connaissances. Expriment ce qu'ils savent déjà."
+            },
+            "etape3": {
+              "titre": "Analyse / Dépouillement",
+              "part_maitre": "Guide l'étude du document ou du questionnaire d'enquête. Pose des questions précises : 'D'après ce document, quand Soundjata Keïta a-t-il fondé l'empire ?' / 'Quelles étaient les richesses de cet empire ?' / 'Quelles sont les causes de sa décadence ?' Fait dégager les faits essentiels.",
+              "part_eleves": "Lisent et analysent le document. Répondent aux questions avec des informations précises tirées du document. Notent les faits essentiels."
+            },
+            "etape4": {
+              "titre": "Synthèse",
+              "part_maitre": "Fait dégager les points essentiels à retenir. Dicte ou fait écrire la synthèse : 'L'empire du Mali a été fondé par Soundjata Keïta au XIIIe siècle. Il a atteint son apogée sous Kankan Moussa...' Fait lire la synthèse par plusieurs élèves.",
+              "part_eleves": "Participent à la formulation de la synthèse. Écrivent la synthèse dans le cahier de leçons. Lisent la synthèse à voix haute."
+            },
+            "etape5": {
+              "titre": "Évaluation",
+              "part_maitre": "Pose des questions d'évaluation : 'Citez deux rois célèbres de l'empire du Mali.' / 'Quelle était la principale richesse de cet empire ?' / 'Situez l'empire du Mali sur la carte.' Donne un exercice écrit court.",
+              "part_eleves": "Répondent aux questions d'évaluation. Situent l'empire sur la carte. Réalisent l'exercice écrit."
+            }
+          }
+        },
+        {
+          "id": "geographie",
+          "nom": "Géographie",
+          "duree": "45mn",
+          "CB": "Intégrer des techniques d'observation, de localisation et de représentation dans des situations de découverte de faits géographiques.",
+          "demarche_detaillee": {
+            "etape1": {
+              "titre": "Révision",
+              "part_maitre": "Rappelle la leçon précédente sur la carte. Pose des questions : 'Montrez-moi le fleuve Sénégal sur la carte.' / 'Citez les régions que nous avons étudiées.' / 'Quelle est la capitale du Sénégal ?'",
+              "part_eleves": "Viennent au tableau montrer les éléments demandés. Répondent aux questions géographiques."
+            },
+            "etape2": {
+              "titre": "Imprégnation",
+              "part_maitre": "Présente la leçon du jour avec la carte ou des images. Pose des questions : 'Regardez cette carte de l'agriculture au Sénégal. Quelles cultures reconnaissez-vous ?' / 'Dans votre région, quelle est la principale culture ?'",
+              "part_eleves": "Observent la carte et les images. Répondent à partir de leurs observations et de leur vécu local."
+            },
+            "etape3": {
+              "titre": "Analyse",
+              "part_maitre": "Guide l'étude systématique : 'Localisez les zones de culture de l'arachide.' / 'Pourquoi cultive-t-on plus de mil dans le nord ?' / 'Quels sont les problèmes de l'agriculture sénégalaise ?' Fait des liens avec la réalité locale.",
+              "part_eleves": "Analysent la carte. Répondent aux questions avec des informations précises. Font des liens avec leur environnement local."
+            },
+            "etape4": {
+              "titre": "Synthèse",
+              "part_maitre": "Fait dégager les éléments essentiels. Dicte la synthèse avec les informations clés. Fait localiser les éléments sur la carte muette.",
+              "part_eleves": "Participent à la synthèse. Écrivent dans le cahier. Localisent sur la carte muette."
+            },
+            "etape5": {
+              "titre": "Évaluation",
+              "part_maitre": "Distribue une carte muette. Pose des questions écrites : 'Localisez et nommez les principales zones agricoles.' / 'Citez 3 cultures industrielles du Sénégal.'",
+              "part_eleves": "Complètent la carte muette. Répondent aux questions écrites d'évaluation."
+            }
+          }
+        },
+        {
+          "id": "ist",
+          "nom": "Initiation Scientifique et Technologique (IST)",
+          "duree": "45mn",
+          "CB": "Intégrer des démarches et des techniques dans des situations de découverte scientifique et technologique du milieu proche.",
+          "demarche_detaillee": {
+            "etape1": {
+              "titre": "Révision",
+              "part_maitre": "Rappelle la leçon précédente. Pose des questions précises : 'Quelles sont les parties du corps que nous avons étudiées ?' / 'Quel est le rôle du squelette ?' / 'Citez les trois types d'os.'",
+              "part_eleves": "Répondent aux questions. Font un schéma rapide si nécessaire."
+            },
+            "etape2": {
+              "titre": "Imprégnation",
+              "part_maitre": "Présente le matériel d'observation ou le document scientifique. Pose des questions de découverte : 'Observez ce schéma. Que voyez-vous ?' / 'Avez-vous déjà observé cela dans la nature ?' / 'Que se passe-t-il selon vous ?'",
+              "part_eleves": "Observent attentivement. Décrivent ce qu'ils voient. Formulent des hypothèses."
+            },
+            "etape3": {
+              "titre": "Analyse",
+              "part_maitre": "Guide l'expérimentation ou l'observation systématique. Pose des questions précises : 'Que se passe-t-il quand on... ?' / 'Pourquoi cela se produit-il ?' / 'Quelle est votre conclusion ?' Fait vérifier les hypothèses.",
+              "part_eleves": "Réalisent l'expérience ou observent systématiquement. Vérifient leurs hypothèses. Tirent des conclusions."
+            },
+            "etape4": {
+              "titre": "Synthèse",
+              "part_maitre": "Fait formuler la loi ou le fait scientifique découvert. Dicte la synthèse. Fait légender un schéma.",
+              "part_eleves": "Formulent la loi. Écrivent la synthèse. Légendent le schéma dans le cahier."
+            },
+            "etape5": {
+              "titre": "Évaluation",
+              "part_maitre": "Pose des questions d'évaluation orale et écrite. Donne un exercice d'application avec schéma à compléter ou questions de compréhension.",
+              "part_eleves": "Répondent aux questions. Complètent le schéma. Réalisent l'exercice d'évaluation."
+            }
+          }
+        },
+        {
+          "id": "education_sanitaire",
+          "nom": "Éducation Sanitaire / EDD",
+          "duree": "30mn",
+          "CB": "Intégrer des notions de base et des techniques simples dans des situations d'analyse et de proposition de solutions à des problèmes d'environnement, de population et de santé.",
+          "demarche_detaillee": {
+            "etape1": {
+              "titre": "Révision",
+              "part_maitre": "Rappelle la leçon précédente. Pose des questions : 'Quelles sont les causes de la maladie que nous avons étudiée ?' / 'Comment peut-on la prévenir ?' / 'Que faut-il faire si on est malade ?'",
+              "part_eleves": "Répondent aux questions de révision. Font des liens avec leur quotidien."
+            },
+            "etape2": {
+              "titre": "Imprégnation",
+              "part_maitre": "Présente une situation problème réelle ou une image. Pose des questions : 'Regardez cette image. Que voyez-vous ?' / 'Est-ce une bonne pratique ou une mauvaise pratique ?' / 'Avez-vous déjà vu cela dans votre quartier ?' Crée le débat.",
+              "part_eleves": "Observent l'image ou la situation. Répondent et débattent. Expriment leur opinion basée sur leur vécu."
+            },
+            "etape3": {
+              "titre": "Analyse",
+              "part_maitre": "Guide l'analyse de la situation. Pose des questions : 'Quelles sont les causes de ce problème ?' / 'Quelles sont les conséquences sur la santé ?' / 'Qui est responsable ?' / 'Que peut-on faire pour changer cela ?'",
+              "part_eleves": "Analysent la situation. Identifient les causes et les conséquences. Proposent des solutions."
+            },
+            "etape4": {
+              "titre": "Synthèse",
+              "part_maitre": "Fait dégager les messages clés de santé ou d'environnement. Dicte la synthèse avec les bonnes pratiques à adopter. Insiste sur les comportements à changer.",
+              "part_eleves": "Participent à la formulation des messages clés. Écrivent la synthèse. S'engagent à adopter les bonnes pratiques."
+            },
+            "etape5": {
+              "titre": "Évaluation",
+              "part_maitre": "Pose des questions d'évaluation. Demande aux élèves de proposer des solutions concrètes. Donne un exercice écrit.",
+              "part_eleves": "Répondent aux questions. Proposent des solutions adaptées à leur milieu. Réalisent l'exercice écrit."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "epsa",
+      "nom": "Éducation Physique, Sportive et Artistique (EPSA)",
+      "disciplines": [
+        {
+          "id": "eps",
+          "nom": "Éducation Physique et Sportive (EPS)",
+          "duree": "60mn",
+          "dispositif": "PCME (Plateau de Compétition Multi-Épreuves)",
+          "CB": "Intégrer des habiletés motrices dans des situations de compétition sportive.",
+          "demarche_detaillee": {
+            "etape1": {
+              "titre": "Prise en main",
+              "part_maitre": "Rassemble les élèves. Fait l'appel. Annonce l'activité du jour. Rappelle les règles de sécurité : 'Aujourd'hui nous faisons du football. Règles : ne pas pousser, respecter l'arbitre, fair-play.' Vérifie la tenue des élèves.",
+              "part_eleves": "Se mettent en rang. Écoutent les consignes. Vérifient leur tenue."
+            },
+            "etape2": {
+              "titre": "Dérouillement / Échauffement",
+              "part_maitre": "Dirige l'échauffement progressif : trottinement 2 tours de terrain, exercices de mobilisation articulaire (cou, épaules, hanches, genoux), accélérations courtes. Durée : 8 à 10 minutes.",
+              "part_eleves": "Trottinent en file indienne. Réalisent les exercices de mobilisation. Font les accélérations."
+            },
+            "etape3": {
+              "titre": "Jeux ou Compétitions",
+              "part_maitre": "Organise les équipes selon le PCME. Explique les règles du jeu ou de la compétition. Arbitre les rencontres. Encourage le fair-play. Corrige les gestes techniques en situation.",
+              "part_eleves": "Jouent ou s'affrontent selon les règles. Respectent les décisions de l'arbitre. Font preuve de fair-play. Appliquent les corrections techniques."
+            },
+            "etape4": {
+              "titre": "Retour au calme",
+              "part_maitre": "Siffle la fin de la séance. Fait des exercices de récupération : marche lente, étirements. Annonce les résultats des compétitions.",
+              "part_eleves": "Marchent lentement. Font les étirements. Écoutent les résultats."
+            },
+            "etape5": {
+              "titre": "Reprise en main et Hygiène",
+              "part_maitre": "Rassemble les élèves. Fait le bilan de la séance : 'Qu'avez-vous bien fait ?' / 'Qu'est-ce qu'il faut améliorer ?' Rappelle l'importance de l'hygiène après le sport. Donne les consignes de retour en classe.",
+              "part_eleves": "Se rassemblent. Participent au bilan. Se lavent les mains et le visage. Retournent en classe en ordre."
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "cadre_fiche_raisonnee": {
+    "description": "Modèle de fiche pédagogique complète pour le CEB Sénégal",
+    "rubriques": [
+      {"rubrique": "CB", "description": "Compétence de Base - définit la compétence attendue"},
+      {"rubrique": "OA", "description": "Objectif d'Apprentissage - champ des apprentissages"},
+      {"rubrique": "OS", "description": "Objectif Spécifique - comportement précis attendu de l'élève au terme de la leçon"},
+      {"rubrique": "CONTENUS", "description": "Matière conforme au programme en vigueur"},
+      {"rubrique": "MOYENS_MATERIELS", "description": "Tableau, craie, fiches, images, objets concrets"},
+      {"rubrique": "MOYENS_PEDAGOGIQUES", "description": "Observation, questionnement, démonstration, exercices"},
+      {"rubrique": "DOCUMENTATION", "description": "IO, Décret 791165, Guide pédagogique CEB, Documents des VEN"}
+    ],
+    "consignes_generation": "Générer une fiche COMPLÈTE et RICHE. Pour chaque étape, détailler les actions concrètes du maître avec de vrais exemples de questions, phrases types, exercices précis. Les activités des élèves doivent être détaillées et variées. Utiliser des prénoms sénégalais (Aminata, Sidi, Rama, Moussa, Fatou, Ibrahima). Le contenu doit être conforme au programme CEB du Sénégal."
+  }
+}

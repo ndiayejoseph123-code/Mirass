@@ -17,7 +17,7 @@ exports.handler = async (event) => {
 
   let prompt = "";
   try {
-    prompt = String(JSON.parse(event.body || "{}").prompt || "").slice(0, 6000);
+    prompt = String(JSON.parse(event.body || "{}").prompt || "").slice(0, 20000);
   } catch (e) {
     return reply(400, { error: "Requête invalide" });
   }
@@ -37,7 +37,7 @@ exports.handler = async (event) => {
         body: JSON.stringify({
           model,
           messages: [{ role: "user", content: prompt }],
-          temperature: 0.7,
+          temperature: 0.4,
           max_tokens: 4000
         })
       });

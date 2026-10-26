@@ -1,7 +1,11 @@
 ```javascript
 const MODELS = [
   "llama-3.3-70b-versatile",
-  "llama-3.1-8b-instant"
+  "llama-3.1-8b-instant",
+  "mixtral-8x7b-32768",
+  "gemma2-9b-it",
+  "llama3-70b-8192",
+  "llama3-8b-8192"
 ];
 
 const SYSTEM_PROMPT = `Tu es un assistant pédagogique expert du Curriculum de l'Éducation de Base (CEB) du Sénégal (niveau CE2).
@@ -55,7 +59,7 @@ exports.handler = async (event) => {
   if (!userPrompt) return reply(400, { error: "Prompt vide" });
 
   const list = process.env.GROQ_MODEL ? [process.env.GROQ_MODEL, ...MODELS] : MODELS;
-  let lastError = "Aucun modèle disponible";
+  let lastError = "Aucun modèle n'a pu répondre";
 
   for (const model of list) {
     try {
@@ -75,21 +79,25 @@ exports.handler = async (event) => {
           max_tokens: 4000
         })
       });
+
       const data = await res.json();
+
       if (res.ok) {
         const text = data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content;
         if (text) return reply(200, { text, model });
-        lastError = "Réponse vide (" + model + ")";
+        lastError = "Réponse vide [" + model + "]";
         continue;
       }
-      lastError = ((data.error && data.error.message) || "Erreur Groq " + res.status) + " [" + model + "]";
-      const msg = lastError.toLowerCase();
-      if (res.status === 404 || msg.includes("model")) continue;
-      return reply(502, { error: lastError });
+
+      lastError = ((data.error && data.error.message) || "Erreur HTTP " + res.status) + " [" + model + "]";
+      // On continue systématiquement vers le modèle suivant en cas d'erreur
+      continue;
     } catch (e) {
-      lastError = e.message;
+      lastError = e.message + " [" + model + "]";
+      continue;
     }
   }
-  return reply(502, { error: lastError });
+
+  return reply(502, { error: "Échec sur tous les modèles Groq. Dernière erreur : " + lastError });
 };
 ```

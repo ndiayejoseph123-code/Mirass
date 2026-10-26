@@ -1,105 +1,170 @@
+
 exports.handler = async (event) => {
   try {
-    const { classe, niveau } = JSON.parse(event.body || '{}');
+    const body = JSON.parse(event.body || '{}');
     const GROQ_KEY = process.env.GROQ_API_KEY;
-    const discipline = classe.trim();
-    const niveauLower = niveau.toLowerCase();
-    
-    // 1. FETCH TON REPO MIRASS GITHUB
-    const repoRes = await fetch('https://api.github.com/repos/ndiayejoseph123-code/Mirass/contents', {
-      headers: { 'User-Agent': 'Mirass-CEB' }
-    });
-    if (!repoRes.ok) throw new Error('Impossible de lire ton repo Mirass 【entity-GitHub¦canonical_name=GitHub】');
-    const files = await repoRes.json();
-    
-    const jsonFiles = files.filter(f => f.name.endsWith('.json') && f.type === 'file');
-    
-    // Filtre intelligent: si tu tapes COD CE2, on prend les fichiers CE2 + Langue en priorité
-    const prioritaires = jsonFiles.filter(f => {
-      const n = f.name.toLowerCase();
-      return n.includes(niveauLower) || n.includes(discipline.toLowerCase().slice(0, 3)) || n.includes('ceb') || n.includes('langue');
-    });
-    const aCharger = (prioritaires.length > 0 ? prioritaires : jsonFiles).slice(0, 3);
-    
+
+    // 1. Correction de l'extraction des variables (Leçon vs Niveau)
+    const disc = (body.lecon || body.discipline || body.sujet || body.classe || '').trim() || 'Le COD';
+    const niv = (body.niveau || body.niveau_etude || body.classe_niveau || 'CM2').trim();
+
+    // 2. Lecture du repo GitHub Mirass
     let corpus = '';
-    for (const file of aCharger) {
-      try {
-        const rawRes = await fetch(file.download_url);
-        const content = await rawRes.text();
-        corpus += `\n--- FICHIER: ${file.name} ---\n${content.slice(0, 3000)}\n`;
-      } catch {}
+    let sources = [];
+    try {
+      const repoRes = await fetch('https://api.github.com/repos/ndiayejoseph123-code/Mirass/contents', { 
+        headers: { 'User-Agent': 'Mirass' } 
+      });
+      const files = await repoRes.json();
+      const jsonFiles = files.filter(f => f.name.endsWith('.json')).slice(0, 3);
+      for (const file of jsonFiles) {
+        const r = await fetch(file.download_url);
+        const txt = await r.text();
+        corpus += `\n--- SOURCE: ${file.name} ---\n${txt.slice(0, 3000)}\n`;
+        sources.push(file.name);
+      }
+    } catch (e) {
+      console.error("Erreur lors de la récupération des fichiers GitHub:", e);
     }
-    
-    if (!corpus) throw new Error('Aucun JSON Mirass trouvé');
-    corpus = corpus.slice(0, 12000); // Limite pour Groq
 
-    const model = 'openai/gpt-oss-120b';
+    if (!corpus) {
+      corpus = 'Guide CEB Sénégal (APC / Pédagogie de l intégration) - Langue & Communication, ESVS, Maths, EDD.';
+    }
 
-    const prompt = `
-Tu es Mirass, générateur de fiches CEB sénégalais. Tu DOIS t'appuyer sur les DOCUMENTS fournis, pas inventer.
+    // 3. Prompt optimisé avec consignes de rédaction intégrale
+    const prompt = `Tu es un expert reconnu de la pédagogie CEB (Curriculum de l'Éducation de Base) au Sénégal et de la méthode Mirass (Assane Ndiaye).
+Ta mission est de rédiger une FICHE PÉDAGOGIQUE COMPLÈTE, CONCRÈTE ET PRÊTE À L'EMPLOI pour la leçon suivante :
+- Sujet / Discipline / Leçon : "${disc}"
+- Niveau / Classe : "${niv}"
 
-DOCUMENTS MIRASS (source unique obligatoire):
-${corpus}
+S'appuyer prioritairement sur ces documents CEB du Sénégal :
+${corpus.slice(0, 8000)}
 
-MISSION:
-L'utilisateur demande: "${discipline}" niveau "${niveau}"
+DIRECTIVES IMPÉRATIVES :
+1. Rédige du contenu RÉEL ET CONCRET. Ne mets AUCUNE consigne abstraite (ne dis pas "Poser 3 questions", mais écris explicitement les questions réelles avec leurs réponses attendues).
+2. Pour la phase d'imprégnation : écris le TEXTE SUPPORT INTÉGRAL ou la situation concrète à transcrire au tableau.
+3. Pour l'analyse : pose 4 à 5 questions d'analyse précises sur le texte support avec les réponses et manipulations des élèves.
+4. Pour la synthèse : rédige le RÉSUMÉ / LA RÈGLE INTÉGRALE à retenir.
+5. Pour l'évaluation : propose au moins 2 exercices concrets avec leurs corrigés détaillés.
+6. Tous les champs du JSON doivent être renseignés de manière professionnelle, sans "undefined".
 
-REGLES STRICTES ANTI-INVENTION:
-1. CB, PALIER, OA, OS: Tu dois EXTRAIRE ou COPIER des documents ci-dessus. Si tu trouves CB2 dans CEB_etape3_langue.json, utilise CB2. Si tu trouves Palier 2 dans CE2, utilise Palier 2. N'INVENTE PAS de CB, Palier, OA, OS. Si non trouvé pour "${discipline}", prends le plus proche du même domaine (ex: Langue et Communication) et adapte le libellé mais garde la structure CEB de tes documents.
-2. CONTENU, MOYEN MATERIEL, DOCUMENTATION: Inspire-toi de la structure de tes JSON, pas d'invention hors CEB.
-3. DEMARCHE: Tu dois RESPECTER LA DEMARCHE MIRASS de tes fichiers: Révision, Motivation/Situation, Imprégnation/Analyse, Fixation/Synthèse, Evaluation. Comme dans CB_EDD_ce2.json et CEB_etape3_langue.json. 2 colonnes Part du Maître / Part des Élèves, avec consignes "Au tableau, Sur ardoise", texte support entre guillemets.
-4. DISCIPLINE SACRÉE: Si l'utilisateur tape "${discipline}", toute la fiche parle de "${discipline}". Ne mélange pas avec COD ou Empire du Mali si ce n'est pas demandé.
-5. INTELLIGENCE: Si "${discipline}" = "La pêche hier et aujourd'hui", tu crées une fiche sur l'évolution de la pêche en t'appuyant sur la démarche EDD de tes documents, mais avec contenu pêche.
+Format de réponse : Tu DOIS répondre EXCLUSIVEMENT par un objet JSON valide respectant cette structure exacte :
 
-Sors UNIQUEMENT ce JSON:
 {
-  "titre": "${discipline} - ${niveau}",
-  "cb": "Extrait de tes documents...",
-  "palier": "Extrait de tes documents...",
-  "oa": "Extrait de tes documents...",
-  "os": "Au terme... capable de... (extrait/adapté de tes documents)",
-  "contenu": "Contenu détaillé sur ${discipline} inspiré de la structure de tes JSON",
-  "moyen_materiel": "Matériel extrait de tes documents + adapté à ${discipline}",
-  "moyen_pedagogique": "Méthodes de tes documents",
-  "documentation": "IO Décret 79-1165, Guide CEB ${niveau}, Manuel... (comme dans tes JSON)",
-  "source_fichiers": "${aCharger.map(f=>f.name).join(', ')}",
+  "titre": "${disc} (${niv})",
+  "cb": "Texte exact de la Compétence de Base adaptée au sujet et au niveau ${niv}",
+  "palier": "Texte du Palier visé pour ${niv}",
+  "oa": "Objectif d'Apprentissage (OA)",
+  "os": "Au terme de la leçon, l'élève devra être capable de...",
+  "contenu": "Contenu notionnel détaillé et points clés de la leçon",
+  "objectif": "Objectif spécifique mesurable de la séance (30 à 45 min)",
+  "moyen_materiel": "Tableau noir, craie, ardoises, manuel, corpus de texte support",
+  "moyen_pedagogique": "Observation, interrogation, manipulation, travail individuel et de groupe",
+  "documentation": "IO Décret 79-1165, Guide pédagogique CEB ${niv}, Manuel ${niv}",
   "demarche": [
-    {"etape":"Révision (5min)","maitre":"...","eleves":"...","exemple":"..."},
-    {"etape":"Motivation (5min)","maitre":"...","eleves":"...","exemple":"..."},
-    {"etape":"Imprégnation/Analyse (15min)","maitre":"Texte support: « ... » + questions","eleves":"...","exemple":"Texte + questions"},
-    {"etape":"Synthèse (10min)","maitre":"...","eleves":"...","exemple":"..."},
-    {"etape":"Evaluation (10min)","maitre":"...3 exercices...","eleves":"...","exemple":"...avec corrigé"}
+    {
+      "etape": "Révision / Rappel (5 min)",
+      "activite_maitre": "Écris ici les 2 à 3 questions précises de rappel posées par le maître",
+      "activite_eleves": "Écris ici les réponses exactes attendues des élèves sur leurs ardoises",
+      "duree": "5 min",
+      "materiel": "Ardoises",
+      "exemple": "Détail concret du rappel"
+    },
+    {
+      "etape": "Imprégnation (5 min)",
+      "activite_maitre": "Présente le texte support intégral au tableau : « ... »",
+      "activite_eleves": "Lisent silencieusement puis à haute voix le texte",
+      "duree": "5 min",
+      "materiel": "Texte au tableau",
+      "exemple": "Texte support complet sur ${disc}"
+    },
+    {
+      "etape": "Analyse / Découverte (15 min)",
+      "activite_maitre": "1. Poser la question X... 2. Demander de manipuler/souligner... 3. Poser la question Y...",
+      "activite_eleves": "1. Répondent... 2. Manipulent sur l'ardoise... 3. Constatent...",
+      "duree": "15 min",
+      "materiel": "Tableau, ardoises",
+      "exemple": "Questions et manipulations guidées"
+    },
+    {
+      "etape": "Synthèse / Règle (10 min)",
+      "activite_maitre": "Pose les questions de récapitulation et fait élaborer le résumé au tableau",
+      "activite_eleves": "Répondent aux questions et recopient le résumé complet dans leurs cahiers",
+      "duree": "10 min",
+      "materiel": "Cahier de leçons",
+      "exemple": "Texte intégral du résumé / de la règle à retenir"
+    },
+    {
+      "etape": "Évaluation (10 min)",
+      "activite_maitre": "Propose les exercices d'évaluation suivants : 1... 2...",
+      "activite_eleves": "Travaillent individuellement dans les cahiers. Corrigé : 1... 2...",
+      "duree": "10 min",
+      "materiel": "Cahier d'évaluation",
+      "exemple": "Exercices et leurs corrigés"
+    }
   ]
-}
-`;
+}`;
 
+    // 4. Appel API Groq avec response_format json_object
     const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
       method: 'POST',
-      headers: { 'Authorization': 'Bearer ' + GROQ_KEY, 'Content-Type': 'application/json' },
+      headers: { 
+        'Authorization': 'Bearer ' + GROQ_KEY, 
+        'Content-Type': 'application/json' 
+      },
       body: JSON.stringify({
-        model: model,
-        temperature: 0.3,
+        model: 'llama-3.3-70b-versatile', // Modèle très performant sur Groq
+        temperature: 0.2,
         max_tokens: 4000,
+        response_format: { type: 'json_object' }, // Garantie un JSON valide sans balises Markdown
         messages: [{ role: 'user', content: prompt }]
       })
     });
 
     const txt = await res.text();
-    if (!res.ok) throw new Error(txt.slice(0, 600));
+    if (!res.ok) throw new Error(`Erreur API Groq (${res.status}): ${txt.slice(0, 500)}`);
 
     const data = JSON.parse(txt);
-    let raw = data.choices[0].message.content;
-    const s = raw.indexOf('{'), e = raw.lastIndexOf('}');
-    if (s >= 0 && e > s) raw = raw.slice(s, e + 1);
-    raw = raw.replace(/```json|```/g, '').trim();
+    let rawContent = data.choices[0].message.content;
+    let fiche = JSON.parse(rawContent);
 
-    const fiche = JSON.parse(raw);
-    fiche.classe = discipline;
-    fiche.niveau = niveau;
+    // 5. Sécurisation et nettoyage de l'objet fiche
+    fiche = {
+      titre: fiche.titre || `${disc} - ${niv}`,
+      cb: fiche.cb || `Compétence de base ${niv}`,
+      palier: fiche.palier || `Palier ${niv}`,
+      oa: fiche.oa || `OA ${disc}`,
+      os: fiche.os || `Au terme de la séance, l'élève sera capable de maîtriser ${disc}`,
+      contenu: fiche.contenu || `Contenu sur ${disc}`,
+      objectif: fiche.objectif || `Objectif de séance sur ${disc}`,
+      moyen_materiel: fiche.moyen_materiel || 'Tableau, ardoises, manuel',
+      moyen_pedagogique: fiche.moyen_pedagogique || 'Interrogatif, observation',
+      documentation: fiche.documentation || `Guide CEB ${niv}`,
+      demarche: Array.isArray(fiche.demarche) ? fiche.demarche : [],
+      discipline: disc,
+      niveau: niv
+    };
 
-    return { statusCode: 200, body: JSON.stringify({ fiche, source_file: `Mirass Docs: ${fiche.source_fichiers || aCharger.map(f=>f.name).join(', ')}` }) };
+    fiche.demarche = fiche.demarche.map(d => ({
+      etape: d.etape || 'Étape',
+      activite_maitre: d.activite_maitre || d.maitre || 'Activité maître',
+      activite_eleves: d.activite_eleves || d.eleves || 'Activité élèves',
+      duree: d.duree || '5 min',
+      materiel: d.materiel || 'Tableau',
+      exemple: d.exemple || `Exemple sur ${disc}`
+    }));
+
+    return { 
+      statusCode: 200, 
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ fiche, source_file: sources.join(', ') || 'Mirass' }) 
+    };
 
   } catch (e) {
-    return { statusCode: 500, body: JSON.stringify({ error: e.message }) };
+    return { 
+      statusCode: 500, 
+      body: JSON.stringify({ error: e.message }) 
+    };
   }
 };
+```

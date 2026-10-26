@@ -2,47 +2,55 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Mirass - Générateur Intelligent</title>
+<title>Mirass - Fiche CEB Complète</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
-<style>:root{--bleu:#1E4D8C;--clair:#E8F0FE;--bord:#B8C6DB}body{margin:0;font-family:system-ui;background:var(--clair)}header{background:var(--bleu);color:#fff;padding:22px;text-align:center}.container{max-width:1100px;margin:20px auto;padding:0 12px}.card{background:#fff;border:1px solid var(--bord);border-radius:16px;padding:18px;margin-bottom:16px}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}input,select{width:100%;padding:11px;border:1px solid var(--bord);border-radius:10px}button.primary{background:var(--bleu);color:#fff;border:0;padding:11px 16px;border-radius:10px;font-weight:700}table{width:100%;border-collapse:collapse;margin-top:10px}th,td{border:1px solid var(--bord);padding:7px;font-size:13px}th{background:var(--bleu);color:#fff}</style>
+<style>:root{--bleu:#1E4D8C;--clair:#E8F0FE;--bord:#B8C6DB}body{margin:0;font-family:system-ui;background:var(--clair)}header{background:var(--bleu);color:#fff;padding:20px;text-align:center}.container{max-width:1200px;margin:16px auto;padding:0 12px}.card{background:#fff;border:1px solid var(--bord);border-radius:14px;padding:16px;margin-bottom:12px}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px}.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}input,select{width:100%;padding:10px;border:1px solid var(--bord);border-radius:8px}button.primary{background:var(--bleu);color:#fff;border:0;padding:10px 14px;border-radius:8px;font-weight:700}table{width:100%;border-collapse:collapse;margin-top:10px}th,td{border:1px solid var(--bord);padding:6px;font-size:12px}th{background:var(--bleu);color:#fff}.entete th{background:#0f2d5c;width:180px;text-align:left}.badge{font-size:10px;background:#E8F0FE;padding:3px 6px;border-radius:10px;border:1px solid var(--bord)}</style>
 </head>
 <body>
-<header><h1>Mirass — Moteur Intelligent</h1><p>Source unique: ton dépôt Mirass • Mistral réfléchit sur tous tes JSON</p></header>
+<header><h1>Mirass - Fiche CEB Complète</h1><p>CB • Palier • OA • OS • Contenu • Moyens • Documentation • Démarche</p></header>
 <div class="container">
 <div class="card">
-<div class="grid2">
-<div><label>Classe / Discipline (libre)</label><input id="classe" placeholder="ex: prehistoire, EDD, grammaire, histoire" value="prehistoire"></div>
-<div><label>Niveau</label><select id="niveau"><option>CE2</option><option>CM2</option><option>CE1</option><option>CM1</option><option>Etape 3</option><option>CP</option></select></div>
-</div>
-<button class="primary" id="btnGen" style="margin-top:12px">Générer avec Mistral Intelligent</button> <span id="status"></span>
-<div id="src" style="margin-top:8px;font-size:11px;color:#555"></div>
+<div class="grid2"><div><label>Discipline</label><input id="classe" value="COD" placeholder="COD, Grammaire, Préhistoire, EDD"></div><div><label>Niveau</label><select id="niveau"><option>CE2</option><option>CM2</option><option>CE1</option><option>CM1</option><option>Etape 3</option></select></div></div>
+<button class="primary" id="btnGen" style="margin-top:10px">Générer fiche complète</button> <span id="status"></span>
 </div>
 <div class="card" id="result" style="display:none">
-<h3 id="titre"></h3><p id="meta" style="font-size:12px;color:#666"></p>
-<table id="tab"><thead><tr><th>Étape</th><th>Activité maître</th><th>Activité élèves</th><th>Durée</th><th>Matériel</th></tr></thead><tbody></tbody></table>
-<button id="btnPdf" style="margin-top:12px">Télécharger PDF tableau</button>
+<h2 id="titre"></h2>
+<table class="entete"><tbody id="enteteBody"></tbody></table>
+<h3>Démarche méthodologique</h3>
+<table id="tab"><thead><tr><th>Etape</th><th>Activité du maître</th><th>Activité des élèves</th><th>Durée</th><th>Matériel</th><th>Exemple concret</th></tr></thead><tbody></tbody></table>
+<button id="btnPdf" style="margin-top:10px">Télécharger PDF complet</button>
 </div>
 </div>
 <script>
 let last=null;
 document.getElementById('btnGen').onclick=async()=>{
  const classe=document.getElementById('classe').value, niveau=document.getElementById('niveau').value;
- document.getElementById('status').textContent='Mistral analyse tous tes JSON Mirass...';
+ document.getElementById('status').textContent='Génération complète...';
  try{
   const r=await fetch('/.netlify/functions/generate',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({classe,niveau})});
   const d=await r.json(); if(!r.ok) throw new Error(d.error);
-  last=d.fiche; document.getElementById('src').textContent='Démarche de: '+(d.fiche.demarche_reference||d.source_file)+' | Fichiers utilisés: '+(d.fiche.source_files_utilises||[]).join(', ');
-  document.getElementById('titre').textContent=d.fiche.titre; document.getElementById('meta').textContent=(d.fiche.objectif||'')+' | '+ (d.fiche.competences||'');
+  last=d.fiche;
+  document.getElementById('titre').textContent=d.fiche.titre;
+  const eb=document.getElementById('enteteBody'); eb.innerHTML='';
+  const rows=[['CB / Compétence de Base',d.fiche.cb],['Palier',d.fiche.palier],['OA',d.fiche.oa],['OS',d.fiche.os],['Contenu',d.fiche.contenu],['Objectif',d.fiche.objectif],['Moyen Matériel',d.fiche.moyen_materiel],['Moyen Pédagogique',d.fiche.moyen_pedagogique],['Documentation',d.fiche.documentation]];
+  rows.forEach(([k,v])=>{const tr=document.createElement('tr'); tr.innerHTML=`<th>${k}</th><td>${v||''}</td>`; eb.appendChild(tr)});
   const tb=document.querySelector('#tab tbody'); tb.innerHTML='';
-  d.fiche.demarche.forEach(x=>{const tr=document.createElement('tr'); tr.innerHTML=`<td>${x.etape}</td><td>${x.activite_maitre}</td><td>${x.activite_eleves}</td><td>${x.duree}</td><td>${x.materiel}</td>`; tb.appendChild(tr)});
-  document.getElementById('result').style.display='block'; document.getElementById('status').textContent='Fiche intelligente générée';
+  (d.fiche.demarche||[]).forEach(x=>{const tr=document.createElement('tr'); tr.innerHTML=`<td>${x.etape}</td><td>${x.activite_maitre}</td><td>${x.activite_eleves}</td><td>${x.duree}</td><td>${x.materiel}</td><td style="font-style:italic;color:#333">${x.exemple||''}</td>`; tb.appendChild(tr)});
+  document.getElementById('result').style.display='block'; document.getElementById('status').textContent='OK - fiche complète';
  }catch(e){document.getElementById('status').textContent='Erreur: '+e.message}
 };
 document.getElementById('btnPdf').onclick=()=>{
- if(!last) return; const {jsPDF}=window.jspdf; const doc=new jsPDF('l','mm','a4');
- doc.text(last.titre||'Fiche Mirass',14,14); const rows=last.demarche.map(r=>[r.etape,r.activite_maitre,r.activite_eleves,r.duree,r.materiel]);
- doc.autoTable({startY:20,head:[['Étape','Maître','Élèves','Durée','Matériel']],body:rows}); doc.save((last.titre||'fiche').replace(/\s+/g,'_')+'.pdf');
+ if(!last) return; const {jsPDF}=window.jspdf; const doc=new jsPDF('p','mm','a4');
+ doc.text(last.titre,10,10);
+ let y=16;
+ const ent=[['CB',last.cb],['Palier',last.palier],['OA',last.oa],['OS',last.os],['Contenu',last.contenu],['Moyen Materiel',last.moyen_materiel],['Moyen Pedagogique',last.moyen_pedagogique],['Documentation',last.documentation],['Objectif',last.objectif]];
+ doc.autoTable({startY:y, head:[['Champ','Valeur']], body:ent, styles:{fontSize:8}, headStyles:{fillColor:[30,77,140]}});
+ y=doc.lastAutoTable.finalY+6;
+ doc.text('Demarche',10,y); y+=4;
+ const rows=last.demarche.map(r=>[r.etape,r.activite_maitre,r.activite_eleves,r.duree,r.materiel,r.exemple||'']);
+ doc.autoTable({startY:y, head:[['Etape','Maitre','Eleves','Duree','Materiel','Exemple']], body:rows, styles:{fontSize:7}, headStyles:{fillColor:[30,77,140]}});
+ doc.save(last.titre.replace(/\s+/g,'_')+'.pdf');
 };
 </script>
 </body>

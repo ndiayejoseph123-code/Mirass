@@ -261,35 +261,65 @@ async function generateFiche() {
   const niveau = $("niveau-select").value;
   const typeVal = $("type-select").value;
 
+  const demarche = disc.demarche_detaillee || {};
+  const etapes = Object.keys(demarche).sort().map(k => demarche[k]);
+  const demarcheTxt = etapes.map((e, i) =>
+    `Étape ${i + 1} — ${e.titre}\n  Part du Maître : ${e.part_maitre}\n  Part des Élèves : ${e.part_eleves}`
+  ).join("\n");
+  const titresEtapes = etapes.map(e => e.titre).join(", ");
+  const rubriques = ((mirData.cadre_fiche_raisonnee || {}).rubriques || [])
+    .map(r => `- ${r.rubrique} : ${r.description}`).join("\n");
+  const sousDomaine = (selectedDomaine === "esvs" && ["CI", "CP", "CE1", "CE2"].includes(niveau))
+    ? "Découverte du monde" : domaine.nom;
+
+  const formatFiche = `FORMAT OBLIGATOIRE (markdown, rien d'autre) :
+
+1) Un premier tableau :
+| Classe | Sous-domaine | Durée |
+|---|---|---|
+| ${niveau} | ${sousDomaine} | ${disc.duree || "45 mn"} |
+
+2) Un titre "## Informations générales" puis un tableau à deux colonnes (Rubrique | Contenu) avec exactement ces lignes :
+DISCIPLINE (${disc.nom}), CB, PALIER (si tu ne le connais pas avec certitude, écris "à préciser selon la progression annuelle"), OA (propre à la leçon), OS (formulé "Au terme de la leçon, l'élève devra être capable de..."), CONTENUS, MOYENS MATÉRIELS, DOCUMENTATION (IO – Décret 79-1165, Guide pédagogique du CEB, Le Miroir Pédagogique (Assane Ndiaye)).
+CB = "${disc.CB || ""}"
+
+3) Un tableau de la démarche à trois colonnes :
+| Étape | Part du Maître | Part des Élèves |
+|---|---|---|
+avec UNE ligne par étape, dans cet ordre exact : ${titresEtapes}.
+Dans chaque cellule, mets le texte sur une seule ligne et sépare les paragraphes ou numéros par <br>. Mets en gras (**...**) les verbes d'action et les mots clés.`;
+
   const typeLabels = {
-    fiche_complete: "Fiche de leçon complète (avec, pour chaque phase, un tableau markdown à deux colonnes : Part du Maître | Activités des Élèves)",
-    resume: "Résumé structuré pour les élèves",
-    qcm: "QCM d'évaluation de 10 questions avec réponses",
-    exercices: "5 exercices pratiques progressifs avec corrigé",
-    plan_cours: "Plan de cours simplifié avec timing"
+    fiche_complete: formatFiche,
+    resume: "Rédige un résumé structuré pour les élèves : titre, 'Je retiens' en 4 à 6 phrases courtes, mots clés en gras.",
+    qcm: "Rédige un QCM d'évaluation de 10 questions (4 choix A/B/C/D) avec les réponses à la fin.",
+    exercices: "Rédige 5 exercices pratiques progressifs avec le corrigé à la fin.",
+    plan_cours: "Rédige un plan de cours simplifié : une ligne par étape de la démarche avec la durée en minutes."
   };
 
-  const prompt = `Tu es un expert en pédagogie sénégalaise, spécialiste du CEB selon les programmes officiels du Ministère de l'Éducation Nationale du Sénégal (IDEN Mbacké).
+  const prompt = `Tu es un conseiller pédagogique sénégalais. Tu prépares une fiche de leçon pour le CEB en respectant STRICTEMENT la démarche officielle du guide "Le Miroir Pédagogique" d'Assane Ndiaye (IDEN Mbacké).
 
-Contexte extrait du guide "Le Miroir" d'Assane Ndiaye :
-- Domaine : ${domaine.nom}
-- Discipline : ${disc.nom}
-- Leçon précise : ${lecon}
-- Niveau : ${niveau}
-- Durée : ${disc.duree || "45mn"}
-- Phases officielles : ${(disc.phases || disc.seances || []).join(", ")}
-- CB : ${disc.CB || ""}
-- OA : ${disc.OA || ""}
+LEÇON : "${lecon}"
+Niveau : ${niveau}
+Domaine : ${domaine.nom}
+Discipline : ${disc.nom}
+Durée : ${disc.duree || "45 mn"}
 
-Génère : ${typeLabels[typeVal]} sur la leçon "${lecon}" pour le niveau ${niveau}.
+DÉMARCHE OFFICIELLE DU MIROIR pour ${disc.nom} (c'est le MODÈLE à suivre : mêmes étapes, même ordre, même style de formulation, mais le contenu doit porter sur la leçon "${lecon}") :
+${demarcheTxt}
 
-Règles :
-- Contenu SPÉCIFIQUE à "${lecon}", avec des exemples concrets.
-- Respecte la démarche pédagogique sénégalaise officielle avec TOUTES les phases listées.
-- Prénoms sénégalais (Fatou, Mamadou, Aïssatou…) et lieux du Sénégal.
-- Objectifs formulés ainsi : "Au terme de la leçon, l'élève devra être capable de..."
-- Précis, concret, directement utilisable par un enseignant.
-- Réponds uniquement en français, en markdown.`;
+Rubriques attendues d'une fiche raisonnée :
+${rubriques}
+
+Consignes du Miroir : ${mirData.instructions_generation || ""}
+
+${typeLabels[typeVal]}
+
+RÈGLES :
+- N'invente pas d'autres étapes que celles du Miroir ci-dessus.
+- Contenu précis et concret sur "${lecon}" (vraies questions, vrais exemples, vrais exercices), pas des généralités.
+- Prénoms et lieux du Sénégal. Pas de numéros de références entre crochets.
+- Réponds uniquement en français.`;
 
   btn.disabled = true;
   btn.textContent = "⏳ Génération en cours…";

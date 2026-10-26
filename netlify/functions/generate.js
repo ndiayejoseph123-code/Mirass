@@ -1,12 +1,43 @@
-// Fonction Netlify : appelle Groq sans exposer la clé dans le navigateur.
-// Clé à mettre dans Netlify > Site configuration > Environment variables : GROQ_API_KEY
-// (optionnel) GROQ_MODEL pour forcer un modèle précis.
+```javascript
 const MODELS = [
   "llama-3.3-70b-versatile",
-  "openai/gpt-oss-120b",
-  "openai/gpt-oss-20b",
   "llama-3.1-8b-instant"
 ];
+
+const SYSTEM_PROMPT = `Tu es un assistant pédagogique expert du Curriculum de l'Éducation de Base (CEB) du Sénégal (niveau CE2).
+
+Ta tâche est de générer des fiches pédagogiques complètes, rigoureuses et conformes au canevas officiel du CEB.
+
+CONSIGNES STRICTES DE FORMATAGE :
+Tu dois IMPÉRATIVEMENT structurer l'intégralité de ta réponse en utilisant exactement les balises suivantes (sans aucun texte d'introduction ni de conclusion) :
+
+#CLASSE: <Classe>
+#DUREE: <Durée>
+#DISCIPLINE: <Discipline>
+#CB: <Compétence de base>
+#PALIER: <Palier>
+#SOUS_DOMAINE: <Sous-domaine>
+#OA: <Objectif d'Apprentissage>
+#OS: <Objectif Spécifique>
+#CONTENUS: <Contenus de la leçon>
+#MOYENS_MATERIELS: <Moyens matériels>
+#MOYENS_PEDAGOGIQUES: <Moyens pédagogiques>
+#DOCUMENTATION: <Documentation de référence>
+#ETAPE1_TITRE: <Titre Étape 1>
+#ETAPE1_MAITRE: <Activités du maître>
+#ETAPE1_ELEVES: <Activités des élèves>
+#ETAPE2_TITRE: <Titre Étape 2>
+#ETAPE2_MAITRE: <Activités du maître>
+#ETAPE2_ELEVES: <Activités des élèves>
+#ETAPE3_TITRE: <Titre Étape 3>
+#ETAPE3_MAITRE: <Activités du maître>
+#ETAPE3_ELEVES: <Activités des élèves>
+#ETAPE4_TITRE: <Titre Étape 4>
+#ETAPE4_MAITRE: <Activités du maître>
+#ETAPE4_ELEVES: <Activités des élèves>
+#ETAPE5_TITRE: <Titre Étape 5>
+#ETAPE5_MAITRE: <Activités du maître>
+#ETAPE5_ELEVES: <Activités des élèves>`;
 
 exports.handler = async (event) => {
   const headers = { "Content-Type": "application/json" };
@@ -15,13 +46,13 @@ exports.handler = async (event) => {
   if (event.httpMethod !== "POST") return reply(405, { error: "Méthode non autorisée" });
   if (!process.env.GROQ_API_KEY) return reply(500, { error: "Clé GROQ_API_KEY absente dans Netlify" });
 
-  let prompt = "";
+  let userPrompt = "";
   try {
-    prompt = String(JSON.parse(event.body || "{}").prompt || "").slice(0, 20000);
+    userPrompt = String(JSON.parse(event.body || "{}").prompt || "").slice(0, 20000);
   } catch (e) {
     return reply(400, { error: "Requête invalide" });
   }
-  if (!prompt) return reply(400, { error: "Prompt vide" });
+  if (!userPrompt) return reply(400, { error: "Prompt vide" });
 
   const list = process.env.GROQ_MODEL ? [process.env.GROQ_MODEL, ...MODELS] : MODELS;
   let lastError = "Aucun modèle disponible";
@@ -36,20 +67,22 @@ exports.handler = async (event) => {
         },
         body: JSON.stringify({
           model,
-          messages: [{ role: "user", content: prompt }],
-          temperature: 0.4,
+          messages: [
+            { role: "system", content: SYSTEM_PROMPT },
+            { role: "user", content: userPrompt }
+          ],
+          temperature: 0.3,
           max_tokens: 4000
         })
       });
       const data = await res.json();
       if (res.ok) {
-        const text = data.choices && data.choices[0] && data.choices[0].message.content;
+        const text = data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content;
         if (text) return reply(200, { text, model });
         lastError = "Réponse vide (" + model + ")";
         continue;
       }
       lastError = ((data.error && data.error.message) || "Erreur Groq " + res.status) + " [" + model + "]";
-      // Modèle inaccessible / retiré : on essaie le suivant. Autre erreur (clé, quota) : on s'arrête.
       const msg = lastError.toLowerCase();
       if (res.status === 404 || msg.includes("model")) continue;
       return reply(502, { error: lastError });
@@ -59,3 +92,4 @@ exports.handler = async (event) => {
   }
   return reply(502, { error: lastError });
 };
+```

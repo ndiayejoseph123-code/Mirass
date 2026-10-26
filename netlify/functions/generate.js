@@ -2,49 +2,56 @@ exports.handler = async (event) => {
   try {
     const { classe, niveau } = JSON.parse(event.body || '{}');
     const KEY = process.env.GROQ_API_KEY;
-    if (!KEY) return { statusCode: 500, body: JSON.stringify({ error: 'GROQ_API_KEY manquante - ta clé doit commencer par gsk_' }) };
+    
+    if (!KEY) throw new Error('GROQ_API_KEY manquante dans Netlify');
+    if (!KEY.startsWith('gsk_')) throw new Error('Ta clé doit commencer par gsk_, pas ' + KEY.slice(0, 5));
 
-    const prompt = `Tu es inspecteur CEB Sénégal. Tu dois créer une fiche RICHE COMPLÈTE pour "${classe}" niveau "${niveau}".
-OBLIGATOIRE JSON VALIDE SEULEMENT, pas de texte avant/après:
-{"titre":"${classe} - ${niveau}","cb":"CB2 Communiquer","palier":"Palier ${niveau}","oa":"OA Maitriser ${classe}","os":"OS Identifier ${classe}","contenu":"${classe}: definition avec exemples Moussa mange une mangue, Aminata achete des beignets","objectif":"Eleve capable d'identifier ${classe}","moyen_materiel":"Tableau, ardoises, corpus 6 phrases","moyen_pedagogique":"Interrogatif, participatif, groupe","documentation":"Guide CEB ${niveau}","demarche":[{"etape":"Revision","activite_maitre":"Rappel sujet verbe","activite_eleves":"Repondent","duree":"5 min","materiel":"Ardoise","exemple":"Le chien aboie"},{"etape":"Motivation","activite_maitre":"Texte support","activite_eleves":"Lis","duree":"5 min","materiel":"Texte","exemple":"Moussa mange une mangue"},{"etape":"Impregnation","activite_maitre":"Question quoi/qui apres verbe pour ${classe}","activite_eleves":"Trouvent ${classe}","duree":"15 min","materiel":"Corpus","exemple":"Mange quoi? mangue=COD"},{"etape":"Evaluation","activite_maitre":"3 phrases a souligner","activite_eleves":"Font","duree":"10 min","materiel":"Cahier","exemple":"Le maitre explique la lecon"}]}`;
+    // Test simple avec 1 modèle
+    const model = 'llama-3.1-8b-instant';
+    const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+      method: 'POST',
+      headers: { 'Authorization': 'Bearer ' + KEY, 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: model,
+        messages: [{ role: 'user', content: `Dis bonjour, tu es Groq ${model}` }],
+        max_tokens: 50
+      })
+    });
 
-    const modeles = ['llama-3.1-8b-instant', 'gemma2-9b-it', 'llama-3.1-70b-versatile'];
+    const txt = await res.text();
 
-    for (const model of modeles) {
-      const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-        method: 'POST',
-        headers: { 'Authorization': 'Bearer ' + KEY, 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          model: model,
-          temperature: 0.4,
-          max_tokens: 2500,
-          messages: [
-            { role: 'system', content: 'Tu es un générateur de fiches CEB. Tu réponds UNIQUEMENT en JSON valide, sans texte autour.' },
-            { role: 'user', content: prompt }
-          ]
-        })
-      });
-
-      const txt = await res.text();
-      if (!res.ok) {
-        if (txt.includes('decommissioned') || txt.includes('does not exist')) continue;
-        // Si erreur d'auth, on arrête et on dit la vraie erreur
-        throw new Error(`Groq erreur avec ${model}: ${txt.slice(0, 300)}`);
-      }
-
-      const data = JSON.parse(txt);
-      let raw = data.choices[0].message.content.replace(/```json|```/g, '').trim();
-      const start = raw.indexOf('{');
-      const end = raw.lastIndexOf('}');
-      if (start >= 0 && end > start) raw = raw.slice(start, end + 1);
-      const fiche = JSON.parse(raw);
-      fiche.classe = classe; fiche.niveau = niveau;
-      return { statusCode: 200, body: JSON.stringify({ fiche, source_file: `Mirass GROQ ${model} - Gratuit` }) };
+    if (!res.ok) {
+      return { statusCode: 500, body: JSON.stringify({ error: `GROQ DIT: Status ${res.status} - ${txt}`, key_prefix: KEY.slice(0, 10) + '...' }) };
     }
 
-    throw new Error('Aucun modèle Groq dispo');
+    // Si Groq marche, on fait la fiche riche
+    const promptFiche = `Fiche CEB riche pour ${classe} ${niveau}. JSON uniquement avec titre, cb, palier, oa, os, contenu avec exemple Moussa mange une mangue, objectif, moyen_materiel, moyen_pedagogique, documentation, demarche 5 etapes.`;
+
+    const res2 = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+      method: 'POST',
+      headers: { 'Authorization': 'Bearer ' + KEY, 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: model,
+        temperature: 0.4,
+        max_tokens: 3000,
+        messages: [{ role: 'user', content: promptFiche }]
+      })
+    });
+
+    const txt2 = await res2.text();
+    if (!res2.ok) return { statusCode: 500, body: JSON.stringify({ error: `GROQ FICHE ERREUR: ${txt2.slice(0, 500)}` }) };
+
+    const data = JSON.parse(txt2);
+    let raw = data.choices[0].message.content;
+    const start = raw.indexOf('{');
+    const end = raw.lastIndexOf('}');
+    if (start >= 0) raw = raw.slice(start, end + 1);
+    const fiche = JSON.parse(raw);
+    fiche.classe = classe; fiche.niveau = niveau;
+
+    return { statusCode: 200, body: JSON.stringify({ fiche, source_file: `Mirass GROQ ${model} OK` }) };
 
   } catch (e) {
-    return { statusCode: 500, body: JSON.stringify({ error: e.message }) };
+    return { statusCode: 500, body: JSON.stringify({ error: 'DEBUG: ' + e.message }) };
   }
 };

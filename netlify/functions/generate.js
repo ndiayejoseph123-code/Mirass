@@ -1,57 +1,57 @@
 exports.handler = async (event) => {
   try {
-    const { classe, niveau } = JSON.parse(event.body || '{}');
     const KEY = process.env.GROQ_API_KEY;
-    
-    if (!KEY) throw new Error('GROQ_API_KEY manquante dans Netlify');
-    if (!KEY.startsWith('gsk_')) throw new Error('Ta clé doit commencer par gsk_, pas ' + KEY.slice(0, 5));
+    if (!KEY) throw new Error('GROQ_API_KEY manquante');
 
-    // Test simple avec 1 modèle
-    const model = 'llama-3.1-8b-instant';
-    const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-      method: 'POST',
-      headers: { 'Authorization': 'Bearer ' + KEY, 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: model,
-        messages: [{ role: 'user', content: `Dis bonjour, tu es Groq ${model}` }],
-        max_tokens: 50
-      })
+    // Demande à Groq quels modèles existent vraiment
+    const res = await fetch('https://api.groq.com/openai/v1/models', {
+      headers: { 'Authorization': 'Bearer ' + KEY }
     });
 
     const txt = await res.text();
-
     if (!res.ok) {
-      return { statusCode: 500, body: JSON.stringify({ error: `GROQ DIT: Status ${res.status} - ${txt}`, key_prefix: KEY.slice(0, 10) + '...' }) };
+      return { statusCode: 500, body: JSON.stringify({ error: `GROQ LISTE ERREUR ${res.status}: ${txt}` }) };
     }
 
-    // Si Groq marche, on fait la fiche riche
-    const promptFiche = `Fiche CEB riche pour ${classe} ${niveau}. JSON uniquement avec titre, cb, palier, oa, os, contenu avec exemple Moussa mange une mangue, objectif, moyen_materiel, moyen_pedagogique, documentation, demarche 5 etapes.`;
+    const data = JSON.parse(txt);
+    const modeles = data.data.map(m => m.id).join(', ');
 
-    const res2 = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+    // Teste le premier modèle de la liste
+    const premierModele = data.data[0]?.id || 'llama-3.3-70b-versatile';
+    
+    const testRes = await fetch('https://api.groq.com/openai/v1/chat/completions', {
       method: 'POST',
       headers: { 'Authorization': 'Bearer ' + KEY, 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        model: model,
-        temperature: 0.4,
-        max_tokens: 3000,
-        messages: [{ role: 'user', content: promptFiche }]
+        model: premierModele,
+        messages: [{ role: 'user', content: 'Dis bonjour en 5 mots' }],
+        max_tokens: 20
       })
     });
 
-    const txt2 = await res2.text();
-    if (!res2.ok) return { statusCode: 500, body: JSON.stringify({ error: `GROQ FICHE ERREUR: ${txt2.slice(0, 500)}` }) };
+    const testTxt = await testRes.text();
 
-    const data = JSON.parse(txt2);
-    let raw = data.choices[0].message.content;
-    const start = raw.indexOf('{');
-    const end = raw.lastIndexOf('}');
-    if (start >= 0) raw = raw.slice(start, end + 1);
-    const fiche = JSON.parse(raw);
-    fiche.classe = classe; fiche.niveau = niveau;
-
-    return { statusCode: 200, body: JSON.stringify({ fiche, source_file: `Mirass GROQ ${model} OK` }) };
+    return {
+      statusCode: 200,
+      body: JSON.stringify({
+        fiche: {
+          titre: `MODELES DISPONIBLES CHEZ TOI`,
+          cb: modeles,
+          palier: `Premier modele testé: ${premierModele}`,
+          oa: `Test Groq: ${testTxt.slice(0, 500)}`,
+          os: 'Copie cette liste et envoie la moi',
+          contenu: `Ta clé gsk_qRkH... marche. Voici tous les modeles Groq dispo aujourd'hui`,
+          objectif: 'On va utiliser le premier modele qui marche',
+          moyen_materiel: modeles,
+          moyen_pedagogique: 'Test auto',
+          documentation: 'console.groq.com/docs',
+          demarche: []
+        },
+        source_file: `Liste modeles Groq`
+      })
+    };
 
   } catch (e) {
-    return { statusCode: 500, body: JSON.stringify({ error: 'DEBUG: ' + e.message }) };
+    return { statusCode: 500, body: JSON.stringify({ error: 'ERREUR: ' + e.message }) };
   }
 };

@@ -3,24 +3,34 @@ exports.handler = async (event) => {
   try {
     const { classe, niveau } = JSON.parse(event.body || '{}');
     const KEY = process.env.MISTRAL_API_KEY;
-    if (!KEY) return { statusCode: 500, body: JSON.stringify({ error: 'MISTRAL_API_KEY manquante dans Netlify' }) };
+    if (!KEY) return { statusCode: 500, body: JSON.stringify({ error: 'MISTRAL_API_KEY manquante' }) };
 
     const gh = await fetch('https://api.github.com/repos/ndiayejoseph123-code/Mirass/contents', { headers: { 'User-Agent': 'Mirass' } });
     const files = await gh.json();
-    const target = (classe || '').toLowerCase();
-    const picked = files.filter(f => f.name.endsWith('.json')).sort((a, b) => {
-      const sa = a.name.toLowerCase().includes(target) ? 1 : 0;
-      const sb = b.name.toLowerCase().includes(target) ? 1 : 0;
-      return sb - sa;
-    }).slice(0, 2);
-
-    const docs = await Promise.all(picked.map(async f => {
+    const jsonFiles = files.filter(f => f.name.endsWith('.json')).slice(0, 5);
+    const docs = await Promise.all(jsonFiles.map(async f => {
       const r = await fetch(f.download_url);
-      return { name: f.name, content: (await r.text()).slice(0, 4000) };
+      return { name: f.name, content: (await r.text()).slice(0, 3000) };
     }));
-    const corpus = docs.map(d => `${d.name}:${d.content}`).join('\n').slice(0, 8000);
+    const corpusStructure = docs.map(d => `FICHIER ${d.name}: structure démarche extraite de ${d.content.slice(0,2000)}`).join('\n').slice(0,7000);
 
-    const prompt = `Tu es Mirass intelligent, expert CEB sénégalais. Tu lis le corpus Mirass et tu appliques sa démarche à la nouvelle leçon. Tu peux créer n'importe quelle fiche même si elle n'existe pas, mais tu restes fidèle à la démarche. Sors uniquement JSON valide: {titre,classe,niveau,objectif,competences,demarche_reference,source_files_utilises,demarche:[{etape,activite_maitre,activite_eleves,duree,materiel}]}`;
+    const systemPrompt = `
+Tu es Mirass. RÈGLE N°1 ABSOLUE: La discipline demandée par l'utilisateur est SACRÉE.
+Si l'utilisateur tape "COD CE2", tu fais une fiche sur COD CE2, PAS sur SIDA.
+Si il tape "prehistoire", tu fais préhistoire, PAS autre chose.
+
+Tu utilises le CORPUS uniquement pour COPIER LA FORME du tableau:
+- les 5 colonnes: Etape, Activité maître, Activité élèves, Durée, Matériel
+- les 5 étapes type: Révision, Motivation, Imprégnation/Analyse, Fixation, Evaluation
+- le style sénégalais CEB
+
+Mais le CONTENU de la leçon = ce que l'utilisateur a tapé.
+
+Interdit de changer de sujet. Si tu ne connais pas le sujet, tu inventes le contenu pédagogique cohérent pour ce sujet, mais tu gardes la forme Mirass.
+
+Sors JSON: {titre:"[CLASSE TAPEÉE] - [NIVEAU]", classe:"${classe}", niveau:"${niveau}", objectif, competences, demarche_reference, demarche:[{etape,activite_maitre,activite_eleves,duree,materiel}]}
+Le titre DOIT contenir exactement le mot tapé par l'utilisateur.
+`;
 
     for (let attempt = 0; attempt < 3; attempt++) {
       const mistral = await fetch('https://api.mistral.ai/v1/chat/completions', {
@@ -28,33 +38,25 @@ exports.handler = async (event) => {
         headers: { 'Authorization': 'Bearer ' + KEY, 'Content-Type': 'application/json' },
         body: JSON.stringify({
           model: 'mistral-tiny-latest',
-          temperature: 0.2,
+          temperature: 0.3,
           max_tokens: 2000,
           response_format: { type: 'json_object' },
           messages: [
-            { role: 'system', content: prompt },
-            { role: 'user', content: `Leçon demandée: ${classe} ${niveau} CORPUS MIRASS: ${corpus}` }
+            { role: 'system', content: systemPrompt },
+            { role: 'user', content: `L'utilisateur a tapé exactement: Classe/Discipline="${classe}" Niveau="${niveau}". Tu DOIS faire une fiche sur "${classe}" et pas sur un autre sujet. Corpus pour la forme seulement: ${corpusStructure}` }
           ]
         })
       });
-
-      if (mistral.status === 429) {
-        if (attempt < 2) { await sleep(2500 + attempt * 2000); continue; }
-        return { statusCode: 429, body: JSON.stringify({ error: 'Mistral saturé, attends 30s et re-clique. Ta clé marche.' }) };
-      }
+      if (mistral.status === 429) { if (attempt < 2) { await sleep(2500); continue; } return { statusCode: 429, body: JSON.stringify({ error: 'Rate limit, attends 20s' }) }; }
       if (!mistral.ok) throw new Error(await mistral.text());
-
       const data = await mistral.json();
-      let raw = (data.choices[0].message.content || '').trim();
-      raw = raw.replace(/```json|```/g, '').trim();
-      if (!raw.endsWith('}')) {
-        const last = raw.lastIndexOf('}');
-        if (last > 0) raw = raw.slice(0, last + 1);
-      }
+      let raw = data.choices[0].message.content.replace(/```json|```/g,'').trim();
+      if (!raw.endsWith('}')) raw = raw.slice(0, raw.lastIndexOf('}')+1);
       const fiche = JSON.parse(raw);
-      return { statusCode: 200, body: JSON.stringify({ fiche, source_file: docs.map(d => d.name).join(', ') }) };
+      fiche.classe = classe; fiche.niveau = niveau; // force le vrai mot
+      if(!fiche.titre.toLowerCase().includes(classe.toLowerCase().slice(0,3))) fiche.titre = `${classe} - ${niveau}`;
+      return { statusCode: 200, body: JSON.stringify({ fiche, source_file: fiche.demarche_reference || docs[0].name }) };
     }
-
   } catch (e) {
     return { statusCode: 500, body: JSON.stringify({ error: e.message }) };
   }

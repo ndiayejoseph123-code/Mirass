@@ -1,0 +1,292 @@
+{
+  "source": "PDF 24 pages Planification des apprentissages CE2 Farare - 1er 2e 3e trimestre - extraction exacte",
+  "corrections_appliquees": [
+    "Semaine 1 Histoire = L'alimentation, la chasse (pas pêche)",
+    "Semaine 2 Histoire = la pêche, la cueillette (PAS feu art)",
+    "Semaine 3 Histoire = l'agriculture, l'élevage",
+    "Semaine 4 Histoire = Le feu, l'art",
+    "Semaine 1 Geographie = moyens orienter mosquee soleil etoile polaire boussole",
+    "Semaine 2 Geographie = points cardinaux est ouest nord sud",
+    "Semaine 3 Geographie = limites decoupage forme contours frontieres",
+    "Semaine 4 Geographie = legende signes couleurs formes symboles",
+    "Semaine 1 IST = organisation corps humain",
+    "Semaine 2 IST = L'oeil et l'oreille",
+    "Semaine 3 IST = Le nez et la langue",
+    "Semaine 4 IST = peau pores poils hygiene",
+    "Francais S1 Com orale = Expliquer une tache",
+    "Francais S2 Com orale = Expliquer utilisation appareil simple / fonctionnement appareil",
+    "Orthographe S1+S2 fusion = Père mère cousin cousine vendeur vendeuse sorcier sorcière instituteur institutrice (PAS marque pluriel)",
+    "Orthographe S3 = marque du pluriel avec S mots en x dictée préparée"
+  ],
+  "semaines": {
+    "S1": {
+      "contenus": {
+        "Histoire": "L'alimentation, la chasse - Découvrir idée progrès à travers activités productives",
+        "Geographie": "Les moyens pour s'orienter : mosquée, soleil, étoile polaire, boussole, etc.",
+        "IST": "L'organisation du corps humain",
+        "Vivre ensemble": "Solidarité, hospitalité, assistance, sens de dignité de l'autre, patriotisme, respect du bien public et du bien privé, respect de l'autre, discrétion",
+        "Vivre milieu": "Le vecteur : l'anophèle - Causes : piqûre moustique infecté, eaux stagnantes - Manifestations : maux tête vomissements - Solutions : moustiquaire imprégnée, insecticide, lutte eaux stagnantes, destruction gîtes larvaires - Traitement : structure médicale",
+        "Communication orale": "Expliquer une tâche - La manière de présenter des idées, articulation, clarté",
+        "Vocabulaire": "Recherches de mots, de sens, de synonymes, de mots de la même famille, d'exemples… (fusion S1-S4)",
+        "Grammaire": "Phrase déclarative, interrogative, exclamative, impérative",
+        "Conjugaison": "Présent-Passé-Futur - Maîtriser notion temps",
+        "Orthographe": "Père, mère, cousin, cousine vendeur, vendeuse, sorcier, sorcière, instituteur, institutrice (fusion S1+S2) - Orthographier nom masculin/féminin",
+        "Graphisme": "i, h - Copie texte intégrant ces lettres",
+        "Production ecrite": "Consolidation acquisitions CE1 Ordre des termes - Produire paragraphe narratif",
+        "Numerique": "Les nombres de 0 à 10000 - Former les nombres",
+        "Geometrie": "Ligne droite, ligne courbe, ligne brisée - Tracer lignes à l'aide règle",
+        "Mesure": "Le mètre - Longueur",
+        "Resolution": "Données numériques - Questions"
+      }
+    },
+    "S2": {
+      "contenus": {
+        "Histoire": "la pêche, la cueillette - Découvrir idée progrès à travers activités culturelles et sociales",
+        "Geographie": "Les points cardinaux : l'est, l'ouest, le nord et le sud - S'orienter à l'aide repère",
+        "IST": "L'œil et l'oreille",
+        "Vivre ensemble": "Solidarité, hospitalité, assistance, sens dignité (suite S1)",
+        "Vivre milieu": "Proposer des mesures contre paludisme (suite)",
+        "Communication orale": "Expliquer l'utilisation d'un appareil simple - le fonctionnement de l'appareil",
+        "Vocabulaire": "Recherches de mots, de sens, de synonymes, de mots de la même famille, d'exemples…",
+        "Grammaire": "Ordre des termes - Identifier termes de la phrase",
+        "Conjugaison": "Être - Conjuguer verbe au présent",
+        "Orthographe": "Père, mère, cousin, cousine vendeur, vendeuse, sorcier, sorcière, instituteur, institutrice (fusion S1+S2) - Orthographier pluriel des noms",
+        "Graphisme": "f, d - Copie texte",
+        "Production ecrite": "Ordre des termes - Produire paragraphe narratif",
+        "Numerique": "Addition, soustraction, sens, technique sans retenue (0-10000)",
+        "Geometrie": "Droite horizontale, droite verticale, droite oblique - Tracer droites",
+        "Mesure": "Le mètre et ses sous-multiples",
+        "Resolution": "Données utiles - Données inutiles"
+      }
+    },
+    "S3": {
+      "contenus": {
+        "Histoire": "l'agriculture, l'élevage",
+        "Geographie": "Limites, découpage, forme, contours, frontières",
+        "IST": "Le nez et la langue",
+        "Vivre ensemble": "Identifier ses principaux devoirs dans vie en commun",
+        "Communication orale": "Expliquer utilisation appareil (suite)",
+        "Vocabulaire": "Utiliser dictionnaire - Recherches mots sens synonymes famille exemples",
+        "Grammaire": "Le verbe - Ordonner termes de la phrase",
+        "Conjugaison": "Avoir - présent",
+        "Orthographe": "La marque du pluriel avec S, les mots en x - Dictée préparée - Orthographier correctement les noms",
+        "Graphisme": "Copie texte",
+        "Production ecrite": "Ordre des termes - paragraphe narratif",
+        "Numerique": "Addition, soustraction, sens, technique avec retenue",
+        "Geometrie": "Droites sécantes, parallèles, perpendiculaires",
+        "Mesure": "Masse - kg, g (début)"
+      }
+    },
+    "S4": {
+      "contenus": {
+        "Histoire": "Le feu, l'art",
+        "Geographie": "Légende, signes, couleurs, formes, symboles - Tracer plan ou carte",
+        "IST": "Les organes de sens : la peau - pores, poils, hygiène",
+        "Vivre ensemble": "Accomplir ses devoirs dans vie en commun - solidarité hospitalité etc",
+        "Vivre milieu": "Sida - Causes objets pointus souillés partage instruments tatouage injection - Manifestations diarrhée prolongée perte poids boutons - Prévention ne pas toucher sang mains nues ne pas jouer objets tranchants",
+        "Communication orale": "Expliquer utilisation appareil simple (suite)",
+        "Grammaire": "Sujet, verbe et complément du verbe - Reconnaitre et employer correctement termes phrase",
+        "Conjugaison": "Verbes usuels : Chanter, copier, balayer… présent",
+        "Orthographe": "Dictée préparée - révision",
+        "Numerique": "La multiplication - sens",
+        "Geometrie": "Angle droit, angle obtus, angle aigu - Construire angles droits",
+        "Mesure": "Masse suite",
+        "Resolution": "Problèmes addition énoncés",
+        "Production ecrite": "Paragraphe narratif - révision"
+      }
+    },
+    "S5": {
+      "contenus": {
+        "Histoire": "Habillement, habitat",
+        "Geographie": "Éléments significatifs : ville, village, fleuve, mer, lac, parc - Situer élément sur plan ou carte",
+        "IST": "Le squelette, les articulations, les muscles, les mouvements",
+        "Vivre ensemble": "Identifier ses droits dans vie en commun - Liberté expression opinion action sécurité éducation information respect dignité",
+        "Communication orale": "Donner des informations tirées de sa lecture",
+        "Vocabulaire": "Mots adaptés à la carte d'invitation - lexique précis",
+        "Grammaire": "Employer le complément d'objet COD COI",
+        "Conjugaison": "Verbes d'actions au présent - aller venir Faire dire courir Prendre apprendre comprendre Ecrire lire finir",
+        "Orthographe": "Accord - orthographier correctement",
+        "Numerique": "Soustraction sans retenue - Opérations 0-10000",
+        "Geometrie": "Angle droit équerre"
+      }
+    },
+    "S6": {
+      "periode": "P2",
+      "dates_reference": "24-28 Nov",
+      "contenus": {
+        "Histoire": "Médecine, religion - progrès",
+        "Geographie": "Plaine, colline, montagne, plateau, dune, vallée, cuvette",
+        "IST": "L'alimentation, les dents",
+        "Vivre ensemble": "Bénéficier de ses droits - Droits et devoirs",
+        "Orthographe": "m devant p/b",
+        "Lecture": "Poésie",
+        "Production ecrits": "Lettre amicale",
+        "Numerique": "Soustraction avec retenue",
+        "Mesure": "Contenance L, cL"
+      }
+    },
+    "S7": {
+      "periode": "P2",
+      "dates_reference": "01-05 Déc",
+      "contenus": {
+        "Histoire": "Colonisation",
+        "Geographie": "Mer, lac, fleuve, marigot, rivière, bassin de rétention",
+        "IST": "Animaux domestiques/sauvages",
+        "Grammaire": "Adjectif qualificatif",
+        "Conjugaison": "Futur être/avoir",
+        "Vocabulaire": "Contraires",
+        "Geometrie": "Carré, rectangle",
+        "Numerique": "Multiplication : sens",
+        "Vivre milieu": "Hygiène - révision paludisme"
+      }
+    },
+    "S8": {
+      "periode": "P2 Eval",
+      "dates_reference": "08-12 Déc",
+      "contenus": {
+        "Evaluation": "EVALUATION P1 + Composition - Toutes matières - CEB Blanc P1"
+      }
+    },
+    "S9": {
+      "periode": "P3 Jan-Fév",
+      "dates_reference": "05-09 Jan",
+      "contenus": {
+        "Geographie": "Région Fatick - relief, cours d'eau",
+        "IST": "Alimentation équilibrée",
+        "Grammaire": "Sujet/verbe",
+        "Orthographe": "Accord nom/adjectif",
+        "Lecture": "Documentaire",
+        "Mesure": "Monnaie F CFA",
+        "Numerique": "Tables multiplication 2,3,4,5"
+      }
+    },
+    "S10": {
+      "periode": "P3",
+      "dates_reference": "12-16 Jan",
+      "contenus": {
+        "Histoire": "Indépendance Sénégal",
+        "Vivre milieu": "Métiers",
+        "Conjugaison": "Présent 1er groupe",
+        "Vocabulaire": "Famille mots",
+        "Production ecrits": "Récit court",
+        "Numerique": "Multiplication à 1 chiffre",
+        "Resolution problemes": "Problèmes multiplication"
+      }
+    },
+    "S11": {
+      "periode": "P3",
+      "dates_reference": "19-23 Jan",
+      "contenus": {
+        "Geographie": "Fleuves Sénégal - découverte",
+        "IST": "Eau : états",
+        "Vivre ensemble": "Solidarité",
+        "Orthographe": "Pluriel noms -s/-x",
+        "Grammaire": "Pronom",
+        "Lecture": "Théâtre",
+        "Geometrie": "Triangle, cercle",
+        "Numerique": "Division : partage"
+      }
+    },
+    "S12": {
+      "periode": "P3",
+      "dates_reference": "26-30 Jan",
+      "contenus": {
+        "Histoire": "Personnages historiques Sénégal",
+        "Geographie": "Fleuves Sénégal suite",
+        "Conjugaison": "Imparfait 1er groupe",
+        "Production ecrits": "Description personne",
+        "Mesure": "Temps heure, minute",
+        "Numerique": "Nombres 0-10 000 intro"
+      }
+    },
+    "S13": {
+      "periode": "P4 Fév-Mars",
+      "dates_reference": "09-13 Fév",
+      "contenus": {
+        "Geographie": "Climat - pluie, vents, température",
+        "IST": "Hygiène corporelle",
+        "Orthographe": "Accord verbe/sujet",
+        "Vocabulaire": "Homonymes",
+        "Lecture": "Journal",
+        "Geometrie": "Solides cube, pavé",
+        "Numerique": "Comparaison <10 000"
+      }
+    },
+    "S14": {
+      "periode": "P4",
+      "dates_reference": "16-20 Fév",
+      "contenus": {
+        "Histoire": "Carte Sénégal",
+        "Vivre milieu": "Transport",
+        "Grammaire": "Complément",
+        "Conjugaison": "Futur 1er groupe",
+        "Production ecrits": "Invitation",
+        "Mesure": "Périmètre carré/rectangle",
+        "Numerique": "Addition/Soustraction <10 000"
+      }
+    },
+    "S15": {
+      "periode": "P4 Eval",
+      "dates_reference": "23-27 Fév",
+      "contenus": {
+        "Evaluation": "EVALUATION P2 + Composition"
+      }
+    },
+    "S16": {
+      "periode": "P5 Mars-Mai",
+      "dates_reference": "09-13 Mars",
+      "contenus": {
+        "Geographie": "Population",
+        "IST": "Écosystème",
+        "Orthographe": "Féminin -e",
+        "Grammaire": "Phrase interrogative/négative",
+        "Numerique": "Multiplication par 10,100",
+        "Resolution problemes": "2 opérations"
+      }
+    },
+    "S17": {
+      "periode": "P5",
+      "dates_reference": "16-20 Mars",
+      "contenus": {
+        "Histoire": "Organisations village",
+        "Vivre ensemble": "Environnement",
+        "Conjugaison": "Passé composé être/avoir",
+        "Lecture": "Conte traditionnel sérère",
+        "Geometrie": "Symétrie",
+        "Numerique": "Division avec reste"
+      }
+    },
+    "S18": {
+      "periode": "P5",
+      "dates_reference": "23-27 Mars",
+      "contenus": {
+        "Geographie": "Activités économiques",
+        "IST": "Électricité simple",
+        "Vocabulaire": "Préfixe/suffixe",
+        "Production ecrits": "Compte rendu sortie",
+        "Mesure": "Aire introduction",
+        "Numerique": "Nombres décimaux intro (0,1)"
+      }
+    },
+    "S19": {
+      "periode": "P6 Mai-Juin",
+      "dates_reference": "04-08 Mai",
+      "contenus": {
+        "Histoire": "Fêtes nationales",
+        "IST": "Révision générale",
+        "Orthographe": "Révision générale",
+        "Grammaire": "Révision",
+        "Conjugaison": "Tous temps étudiés",
+        "Numerique": "Fractions simples 1/2, 1/4",
+        "Resolution problemes": "Monnaie et mesure"
+      }
+    },
+    "S20": {
+      "periode": "P6 Eval",
+      "dates_reference": "11-15 Mai",
+      "contenus": {
+        "Evaluation": "EVALUATION FINALE + CEB Blanc"
+      }
+    }
+  }
+}

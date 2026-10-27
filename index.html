@@ -3,274 +3,213 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>CE2 Farare - Année complète S1 à S20 | Groq + Mirass</title>
+<title>CE2 Farare - Toute l'année S1 à S20 - Sans IA</title>
 <style>
-:root{--bg:#f6f3eb;--card:#fff;--line:#e8e2d2;--ink:#1a1a18;--muted:#8a867d;--green:#2e7d32;--yellow:#f9a825;--radius:16px}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu;line-height:1.5}
-.header{position:sticky;top:0;z-index:10;background:rgba(246,243,235,0.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
-.wrap{max-width:1150px;margin:0 auto;padding:18px}
-.h1{font-weight:900;font-size:22px}
-.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
-.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px}
-.input{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:10px;font-size:14px}
-.btn{padding:10px 14px;border-radius:10px;border:1px solid var(--ink);background:var(--ink);color:#fff;font-weight:700;cursor:pointer}
-.table{width:100%;border-collapse:collapse}
+:root{--bg:#f6f3eb;--card:#fff;--line:#e8e2d2;--ink:#1a1a18;--muted:#8a867d;--green:#0a7a42;--yellow:#f9a825}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,Segoe UI,Roboto; line-height:1.5}
+.wrap{max-width:1000px;margin:0 auto;padding:20px}
+h1{font-size:24px;font-weight:900;margin:0}
+.mono{font-family:ui-monospace,Menlo,monospace}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;margin-top:16px}
+.input{padding:10px 12px;border:1px solid var(--line);border-radius:10px;font-size:14px}
+.btn{padding:10px 16px;border-radius:10px;border:1px solid var(--ink);background:var(--ink);color:#fff;font-weight:700;cursor:pointer}
+.table{width:100%;border-collapse:collapse;margin-top:10px}
 .table th,.table td{border:1px solid var(--line);padding:8px 10px;text-align:left;font-size:13px}
-.table th{background:#faf7ef;font-size:11px;text-transform:uppercase;letter-spacing:0.05em}
-.badge{display:inline-block;padding:3px 8px;border-radius:999px;background:#1a1a18;color:#fff;font-size:10px;font-weight:700}
-.grid{display:grid;grid-template-columns:1fr;gap:18px}
-@media(min-width:900px){.grid{grid-template-columns:1.3fr 0.7fr}}
-.alert{padding:10px 12px;border-radius:10px;border:1px solid #f9a825;background:#fff8e1;font-size:12px}
+.table th{background:#faf7ef;font-size:11px;text-transform:uppercase}
+.badge{display:inline-block;padding:4px 10px;border-radius:999px;background:var(--ink);color:#fff;font-size:11px;font-weight:700}
+.badge.green{background:var(--green)}
+.badge.yellow{background:var(--yellow);color:#000}
+.alert{padding:12px;border-radius:10px;background:#fff8e1;border:1px solid var(--yellow);font-size:13px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px}
+@media(max-width:700px){.grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
-<div class="header"><div class="wrap" style="display:flex;justify-content:space-between;align-items:center">
-<div><div class="h1">📚 CE2 Farare - Année complète S1 → S20</div><div class="mono" style="font-size:11px;color:var(--muted)">Source unique = JSON Mirass • Anti-hallucination • Jusqu'à fin d'année</div></div>
-<div><span class="badge">Groq + Mirass</span></div>
-</div></div>
-
 <div class="wrap">
-<div class="grid">
-<div style="display:flex;flex-direction:column;gap:16px">
+<h1>📚 CE2 Farare - Toute l'année S1 → S20</h1>
+<div class="mono" style="font-size:12px;color:var(--muted)">Tu mets la date, ça te dit tes cours. Source = tes 24 pages + emploi du temps officiel. Sans IA, sans hallucination.</div>
 
 <div class="card">
-<h3 style="margin:0 0 8px">1️⃣ Clé Groq (optionnel)</h3>
-<input id="groqKey" class="input" type="password" placeholder="gsk_... (vide = mode local sans IA)">
-<div style="margin-top:8px;display:flex;gap:8px">
-<button id="btnLoad" class="btn">Recharger JSON depuis GitHub</button>
-<span id="loadStatus" class="mono" style="font-size:11px;color:var(--muted)"></span>
-</div>
-</div>
-
-<div class="card">
-<h3 style="margin:0 0 8px">2️⃣ Mets juste la date</h3>
-<div style="display:flex;gap:10px;flex-wrap:wrap">
-<input id="dateInput" class="input" type="date" style="max-width:200px">
-<button id="btnGo" class="btn">Quels cours j'ai ?</button>
-<button id="btnPdf" class="btn" style="background:#fff;color:var(--ink)">PDF</button>
+<div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+<input id="dateInput" class="input" type="date" style="min-width:180px">
+<button id="btnGo" class="btn">Voir mes cours</button>
+<button id="btnPdf" class="btn" style="background:#fff;color:var(--ink)">Imprimer / PDF</button>
+<span id="status" class="mono" style="font-size:11px;color:var(--muted)"></span>
 </div>
 <div id="result"></div>
 </div>
 
 <div class="card">
-<h4 style="margin:0 0 6px">Réponse Groq (si clé)</h4>
-<pre id="groqResp" style="background:#faf7ef;border:1px solid var(--line);border-radius:10px;padding:10px;min-height:60px;font-size:11px;white-space:pre-wrap">En attente...</pre>
-</div>
-
-</div>
-
-<div style="display:flex;flex-direction:column;gap:16px">
-<div class="card" style="background:#1a1a18;color:#f6f3ee">
-<h3 style="margin:0 0 10px">🛡️ Règles & S20</h3>
-<ul class="mono" style="font-size:11px;line-height:1.4;margin:0;padding-left:16px">
-<li>Lundi jamais Géo/Géométrie, Mardi jamais Numérique</li>
-<li>Mercredi 11h30 = Vocabulaire, Jeudi 11h30 = Calcul mental</li>
-<li>Samedi/Dimanche = pas de cours</li>
-<li>Fusion S1+S2 Orthographe, Histoire S2 = pêche/cueillette</li>
-<li>Calcul automatique Semaine : 19 Oct = S1, 26 Oct = S2 ... jusqu'à S20 Mai</li>
-</ul>
-<pre id="weekInfo" style="margin-top:10px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:10px;font-size:10px"></pre>
-</div>
-<div class="card">
-<h4 style="margin:0">📅 Correspondance dates → Semaines</h4>
-<table class="table" style="margin-top:8px"><tr><th>Semaine</th><th>Dates réf</th><th>Période</th></tr>
-<tr><td>S1</td><td>21-25 Oct</td><td>P1</td></tr>
-<tr><td>S2</td><td>26-31 Oct</td><td>P1 validée</td></tr>
-<tr><td>S3</td><td>03-07 Nov</td><td>P1</td></tr>
-<tr><td>S4</td><td>10-14 Nov</td><td>P1</td></tr>
-<tr><td>S5</td><td>17-21 Nov</td><td>P2</td></tr>
-<tr><td>S6</td><td>24-28 Nov</td><td>P2</td></tr>
-<tr><td>S7</td><td>01-05 Déc</td><td>P2</td></tr>
-<tr><td>S8</td><td>Eval P1</td><td></td></tr>
-<tr><td>S9-S12</td><td>Jan</td><td>P3</td></tr>
-<tr><td>S13-S15</td><td>Fév</td><td>P4</td></tr>
-<tr><td>S16-S18</td><td>Mars</td><td>P5</td></tr>
-<tr><td>S19-S20</td><td>Mai</td><td>P6 Finale</td></tr>
+<h3 style="margin:0">Correspondance année complète</h3>
+<div class="mono" style="font-size:11px;color:var(--muted)">Début effectif = 19-20 Oct 2026 (diagnostic). 19 Oct = S1</div>
+<table class="table" style="margin-top:8px">
+<tr><th>Semaine</th><th>Dates 2026-2027</th><th>Trimestre</th><th>Contenu clé</th></tr>
+<tr><td>S1</td><td>20-25 Oct 2026</td><td>P1</td><td>Alimentation chasse / 0-10000 / Père mère...</td></tr>
+<tr><td>S2</td><td>27 Oct - 1 Nov</td><td>P1 validée</td><td>Pêche cueillette / Points cardinaux / Œil oreille</td></tr>
+<tr><td>S3</td><td>3-8 Nov</td><td>P1</td><td>Agriculture élevage / Limites / Nez langue</td></tr>
+<tr><td>S4</td><td>10-15 Nov</td><td>P1</td><td>Feu art / Légende carte / Peau</td></tr>
+<tr><td>S5-S7</td><td>17 Nov - 6 Déc</td><td>P2</td><td>Habillement habitat / Relief / Squelette / Soustraction</td></tr>
+<tr><td>S8</td><td>8-13 Déc</td><td>Eval P1</td><td>Composition</td></tr>
+<tr><td>S9-S12</td><td>5-31 Jan</td><td>P3</td><td>Région Fatick / Indépendance / Tables multiplication</td></tr>
+<tr><td>S13-S15</td><td>9-28 Fév</td><td>P4</td><td>Climat / Hygiène / Périmètre</td></tr>
+<tr><td>S16-S18</td><td>9-28 Mar</td><td>P5</td><td>Population / Écosystème / Décimaux</td></tr>
+<tr><td>S19</td><td>4-9 Mai</td><td>P6</td><td>Fractions / Révision</td></tr>
+<tr><td>S20</td><td>11-16 Mai</td><td>Finale</td><td>CEB Blanc</td></tr>
 </table>
 </div>
+
+<div class="card">
+<h3 style="margin:0 0 8px">Règles que tu m'as imposées (respectées)</h3>
+<div class="grid mono" style="font-size:12px">
+<div>✅ Lundi jamais Géographie ni Géométrie</div>
+<div>✅ Mardi jamais Numérique</div>
+<div>✅ Mercredi 11h30-13h = Vocabulaire (90 min)</div>
+<div>✅ Jeudi 11h30-13h = Calcul mental / Problème</div>
+<div>✅ Samedi/Dimanche = pas de cours</div>
+<div>✅ Pas EPS ni Religion (tu ne les fais pas)</div>
+<div>✅ Orthographe S1+S2 fusionnée = Père mère...</div>
+<div>✅ Histoire S2 = pêche cueillette (pas feu art)</div>
+</div>
 </div>
 
-</div>
 </div>
 
 <script>
-// EDT de base (même que final)
-const EDT_BASE = {
-  "Lundi": {"8h00-9h00":"Activités numériques","9h00-10h00":"Conjugaison","10h00-11h00":"Histoire","11h30-13h00":"Lecture / Expression orale"},
-  "Mardi": {"8h00-9h00":"Activités de mesure","9h00-10h00":"Grammaire","10h00-11h00":"Géographie","11h30-13h00":"Inter-classes"},
+const EDT = {
+  "Lundi": {"8h00-9h00":"Activités numériques","9h00-10h00":"Conjugaison","10h00-11h00":"Histoire","11h30-13h00":"Lecture / Expression orale (90 min)"},
+  "Mardi": {"8h00-9h00":"Activités de mesure","9h00-10h00":"Grammaire","10h00-11h00":"Géographie","11h30-13h00":"Révision / Inter-classes (90 min)"},
   "Mercredi": {"8h00-9h00":"Activités numériques","9h00-10h00":"Orthographe","10h00-11h00":"IST","11h30-13h00":"Vocabulaire (90 min)"},
-  "Jeudi": {"8h00-9h00":"Activités géométriques","9h00-10h00":"Lecture","10h00-11h00":"Vivre dans son milieu","11h30-13h00":"Calcul mental / Problème du jour"},
-  "Vendredi": {"8h00-9h00":"Résolution de problème","9h00-10h30":"Production d'écrits","10h30-11h00":"Vivre ensemble","11h30-13h00":"Révision / Evaluation hebdo"}
+  "Jeudi": {"8h00-9h00":"Activités géométriques","9h00-10h00":"Lecture","10h00-11h00":"Vivre dans son milieu","11h30-13h00":"Calcul mental / Problème du jour (90 min)"},
+  "Vendredi": {"8h00-9h00":"Résolution de problème","9h00-10h30":"Production d'écrits (90 min)","10h30-11h00":"Vivre ensemble (30 min)","11h30-13h00":"Révision / Évaluation hebdo (90 min)"}
 };
 
-// Planification complète S1-S20 (extrait résumé, anti-hallucination)
-let PLANIF = {
-  "S1":{"Histoire":"L'alimentation, la chasse","Geographie":"Moyens s'orienter mosquée soleil boussole","IST":"Organisation corps humain","Numerique":"Nombres 0-1000","Mesure":"Le mètre","Orthographe":"Père mère cousin... (fusion)","Grammaire":"Phrase déclarative interrogative","Conjugaison":"Présent-Passé-Futur","Vocabulaire":"Recherches mots sens synonymes"},
-  "S2":{"Histoire":"la pêche, la cueillette (PAS Le feu l'art S4)","Geographie":"Points cardinaux est ouest nord sud","IST":"L'œil et l'oreille (PAS nez langue S3)","Numerique":"Addition soustraction sans retenue 0-10000","Geometrie":"Droite horizontale verticale oblique","Mesure":"Le mètre et sous-multiples","Orthographe":"Père mère cousin... fusion S1+S2 PAS marque pluriel S3","Grammaire":"Ordre des termes","Conjugaison":"Être","Vocabulaire":"Recherches mots sens synonymes famille","Vivre milieu":"Paludisme anophèle causes manifestations solutions","Resolution":"Données utiles inutiles"},
-  "S3":{"Histoire":"Le feu, l'art","Geographie":"Limites découpage forme contours frontières","IST":"Le nez et la langue","Numerique":"Addition sans retenue <1000","Mesure":"Masse kg g","Orthographe":"Marque pluriel avec s","Grammaire":"Le verbe Sujet verbe complément","Conjugaison":"Avoir","Vocabulaire":"Ordre alphabétique dictionnaire"},
-  "S4":{"Histoire":"Anciens royaumes Sénégal","Geographie":"Tracer plan carte","IST":"Peau pores poils hygiène","Numerique":"Addition avec retenue","Resolution":"Addition énoncés","Orthographe":"a/à et/est","Production":"Paragraphe narratif"},
-  "S5":{"Histoire":"Habillement habitat","Geographie":"Éléments significatifs ville village fleuve","IST":"Squelette articulations muscles","Grammaire":"Déterminant","Conjugaison":"Verbes 1er groupe présent","Vocabulaire":"Synonymes","Geometrie":"Angle droit équerre","Numerique":"Soustraction sans retenue"},
-  "S6":{"Histoire":"Médecine religion","Geographie":"Plaine colline montagne plateau","IST":"Alimentation dents","Orthographe":"m devant p/b","Numerique":"Soustraction avec retenue","Mesure":"Contenance L cL","Production":"Lettre amicale"},
-  "S7":{"Histoire":"Colonisation","Geographie":"Mer lac fleuve marigot","IST":"Animaux domestiques sauvages","Grammaire":"Adjectif qualificatif","Conjugaison":"Futur être avoir","Vocabulaire":"Contraires","Geometrie":"Carré rectangle","Numerique":"Multiplication sens"},
-  "S8":{"Evaluation":"EVALUATION P1 + Composition"},
-  "S9":{"Geographie":"Région Fatick","IST":"Alimentation équilibrée","Grammaire":"Sujet verbe","Orthographe":"Accord nom adjectif","Mesure":"Monnaie F CFA","Numerique":"Tables multiplication 2 3 4 5"},
-  "S10":{"Histoire":"Indépendance Sénégal","Vivre milieu":"Métiers","Conjugaison":"Présent 1er groupe","Vocabulaire":"Famille mots","Production":"Récit court","Numerique":"Multiplication à 1 chiffre","Resolution":"Multiplication"},
-  "S11":{"Geographie":"Fleuves Sénégal","IST":"Eau états","Vivre ensemble":"Solidarité","Orthographe":"Pluriel noms -s -x","Grammaire":"Pronom","Geometrie":"Triangle cercle","Numerique":"Division partage"},
-  "S12":{"Histoire":"Personnages historiques","Geographie":"Fleuves Sénégal suite","Conjugaison":"Imparfait 1er groupe","Production":"Description personne","Mesure":"Temps heure minute","Numerique":"Nombres 0-10000 intro"},
-  "S13":{"Geographie":"Climat","IST":"Hygiène corporelle","Orthographe":"Accord verbe sujet","Vocabulaire":"Homonymes","Geometrie":"Solides cube pavé","Numerique":"Comparaison <10000"},
-  "S14":{"Histoire":"Carte Sénégal","Vivre milieu":"Transport","Grammaire":"Complément","Conjugaison":"Futur 1er groupe","Production":"Invitation","Mesure":"Périmètre carré rectangle","Numerique":"Addition Soustraction <10000"},
-  "S15":{"Evaluation":"EVALUATION P2 + Composition"},
-  "S16":{"Geographie":"Population","IST":"Écosystème","Orthographe":"Féminin -e","Grammaire":"Phrase interrogative négative","Numerique":"Multiplication par 10 100","Resolution":"2 opérations"},
-  "S17":{"Histoire":"Organisations village","Vivre ensemble":"Environnement","Conjugaison":"Passé composé être avoir","Geometrie":"Symétrie","Numerique":"Division avec reste"},
-  "S18":{"Geographie":"Activités économiques","IST":"Électricité simple","Vocabulaire":"Préfixe suffixe","Production":"Compte rendu sortie","Mesure":"Aire introduction","Numerique":"Nombres décimaux 0,1"},
-  "S19":{"Histoire":"Fêtes nationales","Orthographe":"Révision générale","Grammaire":"Révision","Conjugaison":"Tous temps","Numerique":"Fractions 1/2 1/4","Resolution":"Monnaie mesure"},
-  "S20":{"Evaluation":"EVALUATION FINALE + CEB Blanc"}
-};
-
-let FULL_JSON = null;
+let PLANIF = {}; // sera chargé depuis JSON
+let PLANIF_FULL_RAW = null;
 
 function getWeekFromDate(dateStr){
-  const d = new Date(dateStr + "T12:00:00");
-  // Début année scolaire = 19 Oct 2026 = S1
+  const d = new Date(dateStr+"T12:00:00");
   const start = new Date("2026-10-19T12:00:00");
-  const diffDays = Math.floor((d - start) / (1000*60*60*24));
-  if(diffDays < 0) return "S1";
-  const weekNum = Math.floor(diffDays / 7) + 1;
-  if(weekNum > 20) return "S20";
-  if(weekNum < 1) return "S1";
-  // Ajuster pour évaluations
-  return "S"+weekNum;
+  const diff = Math.floor((d - start)/86400000);
+  if(diff < 0) return "S1";
+  let w = Math.floor(diff/7)+1;
+  if(w>20) w=20;
+  if(w<1) w=1;
+  return "S"+w;
+}
+function getDayFr(dateStr){
+  const days=["Dimanche","Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi"];
+  return days[new Date(dateStr+"T12:00:00").getDay()];
+}
+function findContenu(matiere, semaineContenus){
+  if(!semaineContenus) return "—";
+  if(semaineContenus.Evaluation) return semaineContenus.Evaluation;
+  const k=matiere.toLowerCase();
+  if(k.includes("numérique")||k.includes("numerique")) return semaineContenus.Numerique||semaineContenus["Activités numériques"]||"";
+  if(k.includes("conjugaison")) return semaineContenus.Conjugaison||"";
+  if(k.includes("histoire")) return semaineContenus.Histoire||"";
+  if(k.includes("orthographe")) return semaineContenus.Orthographe||"";
+  if(k.includes("géographie")||k.includes("geographie")) return semaineContenus.Geographie||"";
+  if(k.includes("grammaire")) return semaineContenus.Grammaire||"";
+  if(k.includes("ist")) return semaineContenus.IST||"";
+  if(k.includes("vocabulaire")) return semaineContenus.Vocabulaire||"";
+  if(k.includes("géométrique")||k.includes("geometrie")) return semaineContenus.Geometrie||semaineContenus["Activités géométriques"]||"";
+  if(k.includes("mesure")) return semaineContenus.Mesure||semaineContenus["Activités de mesure"]||"";
+  if(k.includes("vivre")&&k.includes("milieu")) return semaineContenus["Vivre milieu"]||semaineContenus["Vivre dans son milieu"]||"";
+  if(k.includes("résolution")||k.includes("resolution")) return semaineContenus["Resolution problemes"]||semaineContenus.Resolution||"";
+  if(k.includes("calcul mental")) return semaineContenus["Calcul mental"]||semaineContenus["Calcul mental / Problème"]||"";
+  if(k.includes("lecture")) return semaineContenus.Lecture||semaineContenus["Lecture / Expression orale"]||"";
+  if(k.includes("vivre ensemble")) return semaineContenus["Vivre ensemble"]||"";
+  if(k.includes("production")) return semaineContenus["Production ecrite"]||semaineContenus["Production d'écrits"]||"";
+  if(k.includes("révision")||k.includes("evaluation")||k.includes("inter-classe")) return semaineContenus.Evaluation||"Révision hebdo";
+  return Object.values(semaineContenus)[0]||"";
 }
 
-function getDayNameFr(dateStr){
-  const d = new Date(dateStr + "T12:00:00");
-  const days = ["Dimanche","Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi"];
-  return days[d.getDay()];
-}
-
-function findContenu(discipline, semaine){
-  const s = PLANIF[semaine] || PLANIF["S2"];
-  const k = discipline.toLowerCase();
-  if(s.Evaluation) return s.Evaluation;
-  if(k.includes("numérique")||k.includes("numerique")) return s.Numerique||"Voir S"+semaine;
-  if(k.includes("conjugaison")) return s.Conjugaison||"";
-  if(k.includes("histoire")) return s.Histoire||"";
-  if(k.includes("orthographe")) return s.Orthographe||"";
-  if(k.includes("géographie")||k.includes("geographie")) return s.Geographie||"";
-  if(k.includes("grammaire")) return s.Grammaire||"";
-  if(k.includes("ist")) return s.IST||"";
-  if(k.includes("vocabulaire")) return s.Vocabulaire||"";
-  if(k.includes("géométrique")||k.includes("geometrie")) return s.Geometrie||"";
-  if(k.includes("mesure")) return s.Mesure||"";
-  if(k.includes("vivre")&&k.includes("milieu")) return s["Vivre milieu"]||s.Vivre||"";
-  if(k.includes("résolution")||k.includes("resolution")||(k.includes("problème")&&!k.includes("calcul"))) return s.Resolution||s["Resolution"]||"";
-  if(k.includes("calcul mental")) return s["Calcul mental"]||s.Resolution||"";
-  if(k.includes("lecture")) return s.Lecture||"";
-  if(k.includes("vivre ensemble")) return s["Vivre ensemble"]||"";
-  if(k.includes("production")) return s.Production||s["Production ecrits"]||"";
-  return s[Object.keys(s)[0]]||"Voir planif";
-}
-
-function renderDay(dateStr){
-  const dayName = getDayNameFr(dateStr);
-  const semaine = getWeekFromDate(dateStr);
-  const resDiv = document.getElementById("result");
-  const weekInfo = document.getElementById("weekInfo");
-  weekInfo.textContent = `Date: ${dateStr} = ${dayName} => ${semaine}\nCalcul: début 19 Oct 2026 = S1\nEDT utilisé: ${EDT_BASE[dayName] ? JSON.stringify(EDT_BASE[dayName]) : "Week-end"}\nContenus ${semaine}: ${JSON.stringify(PLANIF[semaine]||{}, null, 2)}`;
-
-  if(dayName==="Samedi"||dayName==="Dimanche"){
-    resDiv.innerHTML = `<div class="alert" style="margin-top:12px">📴 <b>${dayName} ${dateStr} (${semaine})</b> - Week-end, pas de cours.</div>`;
-    return {dayName, semaine, edtDay: null};
-  }
-  const edtDay = EDT_BASE[dayName];
-  if(!edtDay){ resDiv.innerHTML = `<div class="alert">Pas d'EDT pour ${dayName}</div>`; return; }
-  let html = `<div style="margin-top:12px"><div style="display:flex;gap:8px;flex-wrap:wrap"><span class="badge">${dayName} ${dateStr}</span><span class="badge" style="background:var(--green)">${semaine}</span><span class="badge" style="background:var(--yellow);color:#000">${FULL_JSON ? "Source JSON complet" : "Source démo intégrée"}</span></div><table class="table" style="margin-top:8px"><tr><th>Horaire</th><th>Discipline</th><th>Contenu exact ${semaine} (année complète)</th></tr>`;
-  for(const [horaire, mat] of Object.entries(edtDay)){
-    const contenu = findContenu(mat, semaine);
-    html += `<tr><td class="mono">${horaire}</td><td><b>${mat}</b></td><td>${contenu}</td></tr>`;
-  }
-  html += `</table></div>`;
-  resDiv.innerHTML = html;
-  return {dayName, semaine, edtDay};
-}
-
-async function loadFullJson(){
-  const status = document.getElementById("loadStatus");
+async function loadJson(){
+  const status=document.getElementById("status");
   try{
-    // Essaie d'abord planification année complète
-    const r1 = await fetch("./planification_ce2_annee_complete.json");
-    if(r1.ok){
-      const j = await r1.json();
+    // Essaie fichier corrigé complet
+    let r = await fetch("./planification_ce2_annee_complete_CORRIGEE.json");
+    if(!r.ok) r = await fetch("./planification_ce2_annee_complete.json");
+    if(r.ok){
+      const j = await r.json();
+      PLANIF_FULL_RAW = j;
+      // Convertit en format simple semaines -> contenus
       if(j.semaines){
-        // Convertit en format simplifié PLANIF
         for(const [semaine, obj] of Object.entries(j.semaines)){
-          const c = obj.contenus;
-          PLANIF[semaine] = {
-            Histoire: c.Histoire||"",
-            Geographie: c.Geographie||"",
-            IST: c.IST||"",
-            Numerique: c.Numerique||c.Numerique,
-            Geometrie: c.Geometrie||"",
-            Mesure: c.Mesure||"",
-            Orthographe: c.Orthographe||"",
-            Grammaire: c.Grammaire||"",
-            Conjugaison: c.Conjugaison||"",
-            Vocabulaire: c.Vocabulaire||"",
-            "Vivre milieu": c["Vivre milieu"]||c["Vivre milieu"]||"",
-            Resolution: c["Resolution problemes"]||c.Resolution||"",
-            "Calcul mental": c["Calcul mental"]||"",
-            Evaluation: c.Evaluation||""
-          };
+          PLANIF[semaine] = obj.contenus || obj;
         }
-        FULL_JSON = j;
-        status.textContent = "✅ Année complète S1-S20 chargée depuis GitHub (planification_ce2_annee_complete.json)";
+        status.textContent = `✅ Année complète chargée : ${Object.keys(PLANIF).length} semaines depuis JSON`;
         return;
       }
     }
-    // Sinon essaie ancien S1S2
-    const r2 = await fetch("./planification_ce2_s1_s2.json");
-    if(r2.ok){ status.textContent="Ancien S1-S2 trouvé, mais utilise le nouveau complet si dispo"; }
-  }catch(e){ status.textContent="Mode démo S1-S20 intégré (JSON complet non trouvé localement)"; }
+  }catch(e){ status.textContent="Mode démo intégré (JSON non trouvé, utilise données intégrées)"; }
+
+  // Fallback démo intégrée S1-S20 (résumé corrigé d'après tes 24 pages)
+  PLANIF = {
+    "S1":{"Histoire":"L'alimentation, la chasse","Geographie":"Moyens orienter : mosquée, soleil, étoile polaire, boussole","IST":"Organisation corps humain","Numerique":"Nombres 0 à 10000","Geometrie":"Ligne droite, courbe, brisée","Mesure":"Le mètre","Orthographe":"Père, mère, cousin, cousine vendeur, vendeuse... (fusion S1+S2)","Grammaire":"Phrase déclarative, interrogative, exclamative, impérative","Conjugaison":"Présent-Passé-Futur","Vocabulaire":"Recherches mots sens synonymes famille","Vivre milieu":"Paludisme anophèle - causes manifestations solutions","Communication orale":"Expliquer une tâche"},
+    "S2":{"Histoire":"la pêche, la cueillette (PAS Le feu l'art)","Geographie":"Points cardinaux : est, ouest, nord, sud","IST":"L'œil et l'oreille (PAS nez langue)","Numerique":"Addition soustraction sans retenue (0-10000)","Geometrie":"Droite horizontale, verticale, oblique","Mesure":"Le mètre et ses sous-multiples","Orthographe":"Père, mère, cousin... (fusion S1+S2) - PAS marque pluriel S3","Grammaire":"Ordre des termes","Conjugaison":"Être","Vocabulaire":"Recherches mots sens synonymes famille","Vivre milieu":"Paludisme suite","Resolution problemes":"Données utiles inutiles","Communication orale":"Fonctionnement appareil"},
+    "S3":{"Histoire":"l'agriculture, l'élevage","Geographie":"Limites, découpage, forme, contours, frontières","IST":"Le nez et la langue","Numerique":"Addition soustraction avec retenue","Geometrie":"Droites sécantes, parallèles, perpendiculaires","Orthographe":"Marque du pluriel avec S, mots en x","Grammaire":"Le verbe","Conjugaison":"Avoir"},
+    "S4":{"Histoire":"Le feu, l'art","Geographie":"Légende, signes, couleurs, formes, symboles","IST":"Peau : pores, poils, hygiène","Numerique":"Multiplication sens","Geometrie":"Angle droit, obtus, aigu","Vivre milieu":"Sida causes manifestations prévention","Orthographe":"a/à et/est","Production ecrite":"Paragraphe narratif"},
+    "S5":{"Histoire":"Habillement, habitat","Geographie":"Éléments significatifs ville village fleuve mer lac","IST":"Squelette articulations muscles mouvements","Numerique":"Soustraction sans retenue","Geometrie":"Angle droit équerre","Grammaire":"Complément d'objet COD COI","Conjugaison":"Verbes 1er groupe présent","Vocabulaire":"Synonymes"},
+    "S6":{"Histoire":"Médecine, religion","Geographie":"Plaine colline montagne plateau dune vallée cuvette","IST":"Alimentation dents","Numerique":"Soustraction avec retenue","Mesure":"Contenance L cL","Orthographe":"m devant p/b","Production ecrite":"Lettre amicale"},
+    "S7":{"Histoire":"Colonisation","Geographie":"Mer lac fleuve marigot rivière","IST":"Animaux domestiques sauvages","Numerique":"Multiplication sens","Geometrie":"Carré rectangle","Grammaire":"Adjectif qualificatif","Conjugaison":"Futur être avoir","Vocabulaire":"Contraires"},
+    "S8":{"Evaluation":"EVALUATION P1 + Composition - Toutes matières"},
+    "S9":{"Geographie":"Région Fatick","IST":"Alimentation équilibrée","Grammaire":"Sujet verbe","Orthographe":"Accord nom adjectif","Mesure":"Monnaie F CFA","Numerique":"Tables multiplication 2 3 4 5"},
+    "S10":{"Histoire":"Indépendance Sénégal","Vivre milieu":"Métiers","Conjugaison":"Présent 1er groupe","Vocabulaire":"Famille mots","Production ecrite":"Récit court","Numerique":"Multiplication à 1 chiffre","Resolution problemes":"Multiplication"},
+    "S11":{"Geographie":"Fleuves Sénégal","IST":"Eau états","Vivre ensemble":"Solidarité","Orthographe":"Pluriel noms -s -x","Grammaire":"Pronom","Geometrie":"Triangle cercle","Numerique":"Division partage"},
+    "S12":{"Histoire":"Personnages historiques","Geographie":"Fleuves Sénégal suite","Conjugaison":"Imparfait 1er groupe","Production ecrite":"Description personne","Mesure":"Temps heure minute","Numerique":"Nombres 0-10000 intro"},
+    "S13":{"Geographie":"Climat pluie vents température","IST":"Hygiène corporelle","Orthographe":"Accord verbe sujet","Vocabulaire":"Homonymes","Geometrie":"Solides cube pavé","Numerique":"Comparaison <10000"},
+    "S14":{"Histoire":"Carte Sénégal","Vivre milieu":"Transport","Grammaire":"Complément","Conjugaison":"Futur 1er groupe","Production ecrite":"Invitation","Mesure":"Périmètre carré rectangle","Numerique":"Addition Soustraction <10000"},
+    "S15":{"Evaluation":"EVALUATION P2 + Composition"},
+    "S16":{"Geographie":"Population","IST":"Écosystème","Orthographe":"Féminin -e","Grammaire":"Phrase interrogative négative","Numerique":"Multiplication par 10 100","Resolution problemes":"2 opérations"},
+    "S17":{"Histoire":"Organisations village","Vivre ensemble":"Environnement","Conjugaison":"Passé composé être avoir","Geometrie":"Symétrie","Numerique":"Division avec reste"},
+    "S18":{"Geographie":"Activités économiques","IST":"Électricité simple","Vocabulaire":"Préfixe suffixe","Production ecrite":"Compte rendu sortie","Mesure":"Aire introduction","Numerique":"Nombres décimaux 0,1"},
+    "S19":{"Histoire":"Fêtes nationales","Orthographe":"Révision générale","Grammaire":"Révision","Conjugaison":"Tous temps","Numerique":"Fractions 1/2 1/4","Resolution problemes":"Monnaie mesure"},
+    "S20":{"Evaluation":"EVALUATION FINALE + CEB Blanc"}
+  };
+  status.textContent = "Mode démo S1-S20 intégré (24 pages) - Mets le JSON complet dans le dépôt pour mise à jour auto";
 }
 
-async function callGroq(dateStr, dayName, semaine, edtDay){
-  const key = document.getElementById("groqKey").value.trim();
-  const groqDiv = document.getElementById("groqResp");
-  if(!key){ groqDiv.textContent="Pas de clé Groq - tableau local affiché ci-dessus. Mets ta clé gsk_... pour activer l'IA qui vérifie anti-hallucination."; return; }
-  groqDiv.textContent="Appel Groq llama3-70b-8192...";
-  const prompt = `Tu es assistant CE2 Farare année complète. Utilise UNIQUEMENT JSON fournis. Ne hallucine jamais.
+function render(dateStr){
+  const dayName = getDayFr(dateStr);
+  const semaine = getWeekFromDate(dateStr);
+  const res = document.getElementById("result");
+  if(dayName==="Samedi"||dayName==="Dimanche"){
+    res.innerHTML = `<div class="alert" style="margin-top:12px">📴 <b>${dayName} ${dateStr} (${semaine})</b> - Week-end, pas de cours. Repos.</div>`;
+    return;
+  }
+  const edtDay = EDT[dayName];
+  const cont = PLANIF[semaine];
+  if(!edtDay){ res.innerHTML = `<div class="alert">Pas d'EDT pour ${dayName}</div>`; return; }
+  if(!cont){ res.innerHTML = `<div class="alert">Semaine ${semaine} non trouvée dans planification. Vérifie ton JSON.</div>`; return; }
 
-PLANIF complète S1-S20: ${JSON.stringify(PLANIF)}
-EDT: ${JSON.stringify(EDT_BASE)}
-Date: ${dateStr} = ${dayName} = ${semaine}
-EDT du jour: ${JSON.stringify(edtDay)}
-
-Règles: Lundi jamais Géo/Géométrie, Mardi jamais Numérique, Mercredi 11h30 Vocabulaire, Jeudi 11h30 Calcul mental, Samedi Dimanche pas cours. Fusion S1+S2 Orthographe etc.
-
-Réponds tableau: Horaire | Discipline | Contenu exact ${semaine}.`;
-  try{
-    const res = await fetch("https://api.groq.com/openai/v1/chat/completions",{method:"POST",headers:{"Content-Type":"application/json","Authorization":"Bearer "+key},body:JSON.stringify({model:"llama3-70b-8192",messages:[{role:"system",content:"Assistant CEB anti-hallucination année complète"},{role:"user",content:prompt}],temperature:0.1,max_tokens:1500})});
-    const data = await res.json();
-    groqDiv.textContent = data.choices?.[0]?.message?.content || JSON.stringify(data,null,2);
-  }catch(e){ groqDiv.textContent="Erreur Groq: "+e.message; }
+  let html = `<div style="margin-top:14px"><div style="display:flex;gap:8px;flex-wrap:wrap"><span class="badge">${dayName} ${dateStr}</span><span class="badge green">${semaine}</span><span class="badge yellow">${cont.Evaluation ? "Évaluation" : "Cours normaux"}</span></div>`;
+  if(cont.Evaluation){
+    html += `<div class="alert" style="margin-top:10px"><b>${cont.Evaluation}</b> - Semaine ${semaine}</div>`;
+  } else {
+    html += `<table class="table"><tr><th>Horaire</th><th>Discipline</th><th>Contenu exact - Colonne Contenu ${semaine}</th></tr>`;
+    for(const [horaire, mat] of Object.entries(edtDay)){
+      const c = findContenu(mat, cont);
+      html += `<tr><td class="mono">${horaire}</td><td><b>${mat}</b></td><td>${c}</td></tr>`;
+    }
+    html += `</table>`;
+  }
+  html += `<div class="mono" style="font-size:10px;color:var(--muted);margin-top:8px">Source: ${PLANIF_FULL_RAW ? "planification_ce2_annee_complete_CORRIGEE.json" : "données intégrées 24 pages"} - Anti-hallucination : contenu pris uniquement colonne Contenu</div></div>`;
+  res.innerHTML = html;
 }
 
-document.getElementById("btnGo").addEventListener("click", async ()=>{
-  const d = document.getElementById("dateInput").value;
-  if(!d){ alert("Mets une date"); return; }
-  const info = renderDay(d);
-  if(info && info.edtDay) await callGroq(d, info.dayName, info.semaine, info.edtDay);
-});
-document.getElementById("btnLoad").addEventListener("click", async ()=>{
-  const url = prompt("URL GitHub raw de planification_ce2_annee_complete.json ou laisse vide pour recharger local","https://raw.githubusercontent.com/ndiayejoseph123-code/Mirass/main/planification_ce2_annee_complete.json");
-  if(url){ try{ const r=await fetch(url); const j=await r.json(); FULL_JSON=j; document.getElementById("loadStatus").textContent="Chargé depuis "+url; }catch(e){ alert("Erreur: "+e.message); } } else { loadFullJson(); }
+document.getElementById("btnGo").addEventListener("click", ()=>{
+  const d=document.getElementById("dateInput").value;
+  if(!d){ alert("Choisis une date"); return; }
+  render(d);
 });
 document.getElementById("btnPdf").addEventListener("click", ()=>window.print());
-document.getElementById("groqKey").addEventListener("change", e=>localStorage.setItem("groqKey", e.target.value));
-(() => {
-  const k=localStorage.getItem("groqKey"); if(k) document.getElementById("groqKey").value=k;
-  const today=new Date().toISOString().split("T")[0]; document.getElementById("dateInput").value=today;
-  loadFullJson().then(()=>renderDay(today));
+
+(async()=>{
+  const today=new Date().toISOString().split("T")[0];
+  document.getElementById("dateInput").value=today;
+  await loadJson();
+  render(today);
 })();
 </script>
 </body>

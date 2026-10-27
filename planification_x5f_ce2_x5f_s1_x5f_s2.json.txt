@@ -1,0 +1,50 @@
+{
+  "source": "Planification 24 pages - 1er trimestre + Guide CEB annuel",
+  "periode": "Trimestre 1 - Octobre-Novembre",
+  "semaines": {
+    "Semaine 1": {
+      "dates": "21-25 Oct 2024 (exemple)",
+      "contenus": {
+        "Histoire": "L'alimentation, la chasse",
+        "Geographie": "Les moyens pour s'orienter : mosquee, soleil, etoile polaire, boussole",
+        "IST": "L'organisation du corps humain",
+        "Vivre ensemble": "Solidarite, hospitalite, assistance, respect bien public/prive, discretion",
+        "Vivre milieu": "Paludisme vecteur anophele causes piqures eaux stagnantes manifestations maux de tete vomissements solutions moustiquaire impregnee",
+        "Communication orale": "La maniere de presenter des idees, articulation, clarte",
+        "Vocabulaire": "Recherches de mots, sens, synonymes, mots meme famille",
+        "Grammaire": "Phrase declarative, interrogative, exclamative, imperative",
+        "Conjugaison": "Present-Passe-Futur",
+        "Orthographe": "Pere, mere, cousin, cousine vendeur, vendeuse, sorcier, sorciere, instituteur, institutrice (fusion S1+S2)",
+        "Graphisme": "i, h copie texte",
+        "Production ecrits": "Consolidation acquisitions CE1 Ordre des termes - Produire un paragraphe narratif (fusion S1+S2)",
+        "Numerique": "Les nombres de 0 a 10000",
+        "Geometrie": "Ligne droite, ligne courbe, ligne brisee",
+        "Mesure": "Le metre",
+        "Resolution problemes": "Donnees numeriques Questions"
+      }
+    },
+    "Semaine 2": {
+      "dates": "26-31 Oct 2026 - Semaine validee ensemble",
+      "contenus": {
+        "Histoire": "la peche, la cueillette (PAS Le feu l'art qui est S4)",
+        "Geographie": "Les points cardinaux : l'est, l'ouest, le nord et le sud",
+        "IST": "L'oeil et l'oreille (PAS le nez et la langue qui est S3)",
+        "Vivre ensemble": "Solidarite, hospitalite, assistance, sens dignite, patriotisme, respect bien public/prive (fusion S1+S2)",
+        "Vivre milieu": "Paludisme suite - meme contenu S1 (vecteur anophele)",
+        "Communication orale": "le fonctionnement de l'appareil - Expliquer l'utilisation d'un appareil simple",
+        "Vocabulaire": "Recherches de mots, de sens, de synonymes, de mots de la meme famille, d'exemples (fusion S1-S4)",
+        "Grammaire": "Ordre des termes (S2)",
+        "Conjugaison": "Etre - Conjuguer au present",
+        "Orthographe": "Pere, mere, cousin, cousine vendeur, vendeuse, sorcier, sorciere, instituteur, institutrice (fusion S1+S2) - PAS marque du pluriel qui est S3",
+        "Graphisme": "f, d copie texte",
+        "Production ecrits": "Consolidation + Produire un paragraphe narratif (fusion S1+S2)",
+        "Numerique": "Addition, soustraction, sens, technique sans retenue (nombres 0 a 10000)",
+        "Geometrie": "Droite horizontale, droite verticale, droite oblique",
+        "Mesure": "Le metre et ses sous-multiples",
+        "Resolution problemes": "Donnees utiles - Donnees inutiles",
+        "Calcul mental": "Donnees utiles - Donnees inutiles (si deplace Jeudi)"
+      },
+      "notes_fusion": "Certaines cases fusionnent 2 semaines: Orthographe S1+S2 meme contenu, Vocabulaire S1-S4 meme contenu, etc."
+    }
+  }
+}

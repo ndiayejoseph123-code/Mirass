@@ -1,0 +1,149 @@
+{
+  "ecole": "Farare - Ndiob - Diakhao",
+  "classe": "CE2",
+  "annee": "2024/2025",
+  "quantum": "26h30 / semaine",
+  "regles": {
+    "lundi_jamais": [
+      "Geographie",
+      "Geometrie"
+    ],
+    "mardi_jamais": [
+      "Numerique"
+    ],
+    "mercredi_11h30_13h": "Vocabulaire",
+    "jeudi_11h30_13h": "Calcul mental / Probleme du jour",
+    "pas_de_cours": [
+      "Samedi",
+      "Dimanche"
+    ],
+    "enseignements_non_assures": [
+      "EPS",
+      "Education religieuse"
+    ]
+  },
+  "horaires": {
+    "Lundi": {
+      "8h00-9h00": {
+        "matiere": "Activites numeriques",
+        "duree": "60 min"
+      },
+      "9h00-10h00": {
+        "matiere": "Conjugaison",
+        "duree": "60 min"
+      },
+      "10h00-11h00": {
+        "matiere": "Histoire",
+        "duree": "60 min"
+      },
+      "11h00-11h30": {
+        "matiere": "Recreation",
+        "duree": "30 min"
+      },
+      "11h30-13h00": {
+        "matiere": "Lecture / Expression orale",
+        "duree": "90 min"
+      }
+    },
+    "Mardi": {
+      "8h00-9h00": {
+        "matiere": "Activites de mesure",
+        "duree": "60 min"
+      },
+      "9h00-10h00": {
+        "matiere": "Grammaire",
+        "duree": "60 min"
+      },
+      "10h00-11h00": {
+        "matiere": "Geographie",
+        "duree": "60 min"
+      },
+      "11h00-11h30": {
+        "matiere": "Recreation",
+        "duree": "30 min"
+      },
+      "11h30-13h00": {
+        "matiere": "EPS - Supprime - Remplace par Inter-classes / Revision",
+        "duree": "90 min",
+        "note": "Tu ne fais pas EPS"
+      },
+      "15h00-16h30": {
+        "matiere": "Remediation / Arts - Chant Dessin",
+        "duree": "90 min",
+        "note": "Double flux original 16h-18h corrige en 15h-16h30"
+      }
+    },
+    "Mercredi": {
+      "8h00-9h00": {
+        "matiere": "Activites numeriques",
+        "duree": "60 min"
+      },
+      "9h00-10h00": {
+        "matiere": "Orthographe",
+        "duree": "60 min"
+      },
+      "10h00-11h00": {
+        "matiere": "IST",
+        "duree": "60 min"
+      },
+      "11h00-11h30": {
+        "matiere": "Recreation",
+        "duree": "30 min"
+      },
+      "11h30-13h00": {
+        "matiere": "Vocabulaire",
+        "duree": "90 min",
+        "correction": "Anciennement Calcul mental - deplace au Jeudi"
+      }
+    },
+    "Jeudi": {
+      "8h00-9h00": {
+        "matiere": "Activites geometriques",
+        "duree": "60 min"
+      },
+      "9h00-10h00": {
+        "matiere": "Lecture",
+        "duree": "60 min"
+      },
+      "10h00-11h00": {
+        "matiere": "Vivre dans son milieu",
+        "duree": "60 min"
+      },
+      "11h00-11h30": {
+        "matiere": "Recreation",
+        "duree": "30 min"
+      },
+      "11h30-13h00": {
+        "matiere": "Calcul mental / Probleme du jour",
+        "duree": "90 min",
+        "correction": "Echange avec Vocabulaire"
+      },
+      "15h00-16h30": {
+        "matiere": "Remediation / Theatre Poesie",
+        "duree": "90 min"
+      }
+    },
+    "Vendredi": {
+      "8h00-9h00": {
+        "matiere": "Resolution de probleme",
+        "duree": "60 min"
+      },
+      "9h00-10h30": {
+        "matiere": "Production d'ecrits",
+        "duree": "90 min"
+      },
+      "10h30-11h00": {
+        "matiere": "Vivre ensemble",
+        "duree": "30 min"
+      },
+      "11h00-11h30": {
+        "matiere": "Recreation",
+        "duree": "30 min"
+      },
+      "11h30-13h00": {
+        "matiere": "Revision / Evaluation hebdo",
+        "duree": "90 min"
+      }
+    }
+  }
+}
